@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Surplus Allocation Projection — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>Surplus Allocation Projection</h1>
+          <div class="muted">Home / Impact Lab / Fiscal model / Surplus projection</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="surplus-projection">
+
+<div class="card">
+  <div class="kicker">What this is</div>
+  <h2>Surplus Allocation Projection (line-item driven)</h2>
+  
+<p>This page projects what happens <b>after WMR reaches primary surplus</b>:</p>
+<ul>
+  <li>How big the surplus is each year (from line items),</li>
+  <li>How it is allocated by rule (debt paydown / People’s Wealth Fund / reinvestment),</li>
+  <li>And how that accelerates debt reduction.</li>
+</ul>
+<div class="callout"><b>Unbiased rule:</b> allocations are published and the math is visible. Change requires public amendment to rules.</div>
+<p>
+Data: <a href="/data/finance/budget_line_items_scaffold.json"><b>budget_line_items_scaffold.json</b></a> •
+<a href="/data/finance/fiscal_and_debt_model_scaffold.json"><b>fiscal_and_debt_model_scaffold.json</b></a>
+</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Interactive projection</div>
+  <h2>Surplus + allocation over time</h2>
+  
+<div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;">
+  <div>
+    <label class="muted"><b>Band</b></label><br>
+    <select id="band" style="padding:8px;">
+      <option value="low">low</option>
+      <option value="base" selected>base</option>
+      <option value="high">high</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Show years</b></label><br>
+    <select id="years" style="padding:8px;">
+      <option value="10" selected>10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+    </select>
+  </div>
+</div>
+<div id="summary" class="callout" style="margin-top:12px;">Loading…</div>
+<div id="table" class="note" style="margin-top:12px;">Loading…</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">How it ties together</div>
+  <h2>End-to-end chain</h2>
+  
+<ol>
+  <li><b>Budget Line Items</b> phase in and improve the primary balance.</li>
+  <li>When primary balance turns surplus, <b>Surplus Allocation Rules</b> activate.</li>
+  <li>Debt paydown becomes mechanical; People’s Wealth Fund grows; reinvestment continues.</li>
+</ol>
+<p>
+Links:
+<a href="/pages/budget-line-items.html"><b>Budget Line Items</b></a> •
+<a href="/pages/surplus-allocation.html"><b>Surplus Allocation Rules</b></a> •
+<a href="/pages/national-debt-paydown.html"><b>National Debt Paydown</b></a>
+</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="surplus-projection" />
+    <input type="hidden" name="page_title" value="Surplus Allocation Projection" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const yearsEl = document.getElementById('years');
+  const summary = document.getElementById('summary');
+  const table = document.getElementById('table');
+
+  const fiscal = await (await fetch('/data/finance/fiscal_and_debt_model_scaffold.json')).json();
+  const li = await (await fetch('/data/finance/budget_line_items_scaffold.json')).json();
+
+  function fmtB(n){
+    const x = Number(n);
+    const sign = x < 0 ? '-' : '';
+    const a = Math.abs(x);
+    return sign + '$' + (a/1e9).toFixed(0) + 'B';
+  }
+  function fmtT(n){
+    const x = Number(n);
+    const sign = x < 0 ? '-' : '';
+    const a = Math.abs(x);
+    return sign + '$' + (a/1e12).toFixed(2) + 'T';
+  }
+  function pct(x){ return (x*100).toFixed(1) + '%'; }
+
+  const sp = fiscal.starting_point_placeholders || {};
+  const gdp0 = sp.nominal_gdp_usd_saar_q3_2025 || 27_000_000_000_000;
+  const debt0 = sp.gross_federal_debt_usd_sep30_2025 || 27_000_000_000_000;
+
+  function rampFactor(item, y){
+    const r = item.ramp || {};
+    if(r.kind === 'linear'){
+      const s = r.start_year || 1;
+      const e = r.end_year || s;
+      if(y <= s) return 0;
+      if(y >= e) return 1;
+      return (y - s) / (e - s);
+    }
+    if(r.kind === 's_curve'){
+      const m = r.midpoint_year || 8;
+      const k = r.steepness || 0.6;
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    if(r.kind === 'front_load'){
+      const years = (r.years || []);
+      if(years.length === 0) return 0;
+      const maxY = Math.max(...years);
+      if(y <= 1) return 0;
+      if(y >= maxY) return 1;
+      return Math.min(1, y / maxY);
+    }
+    return 1;
+  }
+
+  function lineItemEffect(band, year){
+    let sum = 0;
+    for(const item of li.wmr.items){
+      const steady = item.annual_steady_state_usd[band];
+      const f = rampFactor(item, year);
+      sum += steady * f;
+    }
+    return sum; // positive improves primary balance
+  }
+
+  function simulateAlloc(band, years){
+    const shares = (fiscal.wmr.rules.surplus_allocation_framework && fiscal.wmr.rules.surplus_allocation_framework.default_shares)
+      ? fiscal.wmr.rules.surplus_allocation_framework.default_shares[band]
+      : (li.wmr.surplus_allocation_defaults ? li.wmr.surplus_allocation_defaults[band] : {debt_paydown:0.6,peoples_wealth_fund:0.25,reinvestment:0.15});
+
+    const r_sq = sp.interest_rate_effective[band];
+    const r_w = Math.max(0, r_sq - fiscal.wmr.mechanisms.interest_rate_risk_premium_reduction[band]);
+
+    const sq_real = fiscal.status_quo.assumptions.real_gdp_growth[band];
+    const sq_inf = fiscal.status_quo.assumptions.inflation[band];
+    const w_uplift = fiscal.wmr.mechanisms.net_growth_uplift_from_infrastructure[band];
+    const w_real = sq_real + w_uplift;
+    const w_inf = sq_inf;
+
+    const prim0 = sp.primary_deficit_status_quo_usd[band];
+
+    let debt = debt0;
+    let gdp = gdp0;
+    let pwf = 0; // people's wealth fund cumulative (not invested modeling yet)
+    const rows = [];
+
+    for(let t=1;t<=years;t++){
+      const interest = debt * r_w;
+      const improvement = lineItemEffect(band, t);
+      const prim = prim0 * (1 + 0.01*(t-1)) - improvement; // deficit positive, surplus negative
+      let surplus = 0;
+      let pay=0,pwfAdd=0,reinv=0;
+
+      if(prim < 0){
+        surplus = -prim;
+        pay = surplus * shares.debt_paydown;
+        pwfAdd = surplus * shares.peoples_wealth_fund;
+        reinv = surplus * shares.reinvestment;
+
+        debt = debt - pay; // apply paydown BEFORE adding interest & other flow? We'll apply after interest for simplicity:
+        // We'll apply paydown after debt update below; here we store pay.
+      }
+
+      // Update debt with primary + interest then subtract paydown (if any)
+      debt = debt + prim + interest;
+      if(pay>0) debt = debt - pay;
+
+      // Update GDP
+      gdp = gdp * (1 + w_real + w_inf);
+
+      // PWF accumulation
+      pwf += pwfAdd;
+
+      rows.push({
+        year:t,
+        primary_balance:-prim, // positive means surplus; negative means deficit
+        surplus:surplus,
+        debt_paydown:pay,
+        pwf_add:pwfAdd,
+        reinvest:reinv,
+        debt:debt,
+        debt_to_gdp:debt/gdp,
+        pwf_total:pwf
+      });
+    }
+    return {shares, rows};
+  }
+
+  function render(){
+    const band = bandEl.value;
+    const N = Number(yearsEl.value);
+    const sim = simulateAlloc(band, N);
+    const rows = sim.rows;
+    const shares = sim.shares;
+
+    // Find first surplus year
+    const first = rows.find(r => r.surplus > 0);
+    const last = rows[rows.length-1];
+
+    summary.innerHTML =
+      `<b>Allocation shares (band: ${band})</b><br>`
+      + `Debt paydown: <b>${(shares.debt_paydown*100).toFixed(0)}%</b> • `
+      + `People’s Wealth Fund: <b>${(shares.peoples_wealth_fund*100).toFixed(0)}%</b> • `
+      + `Reinvestment: <b>${(shares.reinvestment*100).toFixed(0)}%</b><br>`
+      + (first ? `First surplus year: <b>${first.year}</b> (surplus ${fmtB(first.surplus)})<br>` : `First surplus year: <b>not reached</b> in ${N} years<br>`)
+      + `End of window (year ${N}): debt/GDP <b>${pct(last.debt_to_gdp)}</b> • People’s Wealth Fund total <b>${fmtT(last.pwf_total)}</b>`;
+
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Year</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Primary balance</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Surplus</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Debt paydown</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">PWF add</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Reinvest</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Debt/GDP</th>'
+      + '</tr></thead><tbody>';
+
+    for(const r of rows){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${r.year}</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.primary_balance)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.surplus)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.debt_paydown)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.pwf_add)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.reinvest)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${pct(r.debt_to_gdp)}</b></td>`
+        + '</tr>';
+    }
+
+    html += '</tbody></table>';
+    table.innerHTML = html;
+  }
+
+  bandEl.addEventListener('change', render);
+  yearsEl.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const yearsEl = document.getElementById('years');
+  const summary = document.getElementById('summary');
+  const table = document.getElementById('table');
+
+  const fiscal = await (await fetch('/data/finance/fiscal_and_debt_model_scaffold.json')).json();
+  const li = await (await fetch('/data/finance/budget_line_items_scaffold.json')).json();
+
+  function fmtB(n){
+    const x = Number(n);
+    const sign = x < 0 ? '-' : '';
+    const a = Math.abs(x);
+    return sign + '$' + (a/1e9).toFixed(0) + 'B';
+  }
+  function fmtT(n){
+    const x = Number(n);
+    const sign = x < 0 ? '-' : '';
+    const a = Math.abs(x);
+    return sign + '$' + (a/1e12).toFixed(2) + 'T';
+  }
+  function pct(x){ return (x*100).toFixed(1) + '%'; }
+
+  const sp = fiscal.starting_point_placeholders || {};
+  const gdp0 = sp.nominal_gdp_usd_saar_q3_2025 || 27_000_000_000_000;
+  const debt0 = sp.gross_federal_debt_usd_sep30_2025 || 27_000_000_000_000;
+
+  function rampFactor(item, y){
+    const r = item.ramp || {};
+    if(r.kind === 'linear'){
+      const s = r.start_year || 1;
+      const e = r.end_year || s;
+      if(y <= s) return 0;
+      if(y >= e) return 1;
+      return (y - s) / (e - s);
+    }
+    if(r.kind === 's_curve'){
+      const m = r.midpoint_year || 8;
+      const k = r.steepness || 0.6;
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    if(r.kind === 'front_load'){
+      const years = (r.years || []);
+      if(years.length === 0) return 0;
+      const maxY = Math.max(...years);
+      if(y <= 1) return 0;
+      if(y >= maxY) return 1;
+      return Math.min(1, y / maxY);
+    }
+    return 1;
+  }
+
+  function lineItemEffect(band, year){
+    let sum = 0;
+    for(const item of li.wmr.items){
+      const steady = item.annual_steady_state_usd[band];
+      const f = rampFactor(item, year);
+      sum += steady * f;
+    }
+    return sum; // positive improves primary balance
+  }
+
+  function simulateAlloc(band, years){
+    const shares = (fiscal.wmr.rules.surplus_allocation_framework && fiscal.wmr.rules.surplus_allocation_framework.default_shares)
+      ? fiscal.wmr.rules.surplus_allocation_framework.default_shares[band]
+      : (li.wmr.surplus_allocation_defaults ? li.wmr.surplus_allocation_defaults[band] : {debt_paydown:0.6,peoples_wealth_fund:0.25,reinvestment:0.15});
+
+    const r_sq = sp.interest_rate_effective[band];
+    const r_w = Math.max(0, r_sq - fiscal.wmr.mechanisms.interest_rate_risk_premium_reduction[band]);
+
+    const sq_real = fiscal.status_quo.assumptions.real_gdp_growth[band];
+    const sq_inf = fiscal.status_quo.assumptions.inflation[band];
+    const w_uplift = fiscal.wmr.mechanisms.net_growth_uplift_from_infrastructure[band];
+    const w_real = sq_real + w_uplift;
+    const w_inf = sq_inf;
+
+    const prim0 = sp.primary_deficit_status_quo_usd[band];
+
+    let debt = debt0;
+    let gdp = gdp0;
+    let pwf = 0; // people's wealth fund cumulative (not invested modeling yet)
+    const rows = [];
+
+    for(let t=1;t<=years;t++){
+      const interest = debt * r_w;
+      const improvement = lineItemEffect(band, t);
+      const prim = prim0 * (1 + 0.01*(t-1)) - improvement; // deficit positive, surplus negative
+      let surplus = 0;
+      let pay=0,pwfAdd=0,reinv=0;
+
+      if(prim < 0){
+        surplus = -prim;
+        pay = surplus * shares.debt_paydown;
+        pwfAdd = surplus * shares.peoples_wealth_fund;
+        reinv = surplus * shares.reinvestment;
+
+        debt = debt - pay; // apply paydown BEFORE adding interest & other flow? We'll apply after interest for simplicity:
+        // We'll apply paydown after debt update below; here we store pay.
+      }
+
+      // Update debt with primary + interest then subtract paydown (if any)
+      debt = debt + prim + interest;
+      if(pay>0) debt = debt - pay;
+
+      // Update GDP
+      gdp = gdp * (1 + w_real + w_inf);
+
+      // PWF accumulation
+      pwf += pwfAdd;
+
+      rows.push({
+        year:t,
+        primary_balance:-prim, // positive means surplus; negative means deficit
+        surplus:surplus,
+        debt_paydown:pay,
+        pwf_add:pwfAdd,
+        reinvest:reinv,
+        debt:debt,
+        debt_to_gdp:debt/gdp,
+        pwf_total:pwf
+      });
+    }
+    return {shares, rows};
+  }
+
+  function render(){
+    const band = bandEl.value;
+    const N = Number(yearsEl.value);
+    const sim = simulateAlloc(band, N);
+    const rows = sim.rows;
+    const shares = sim.shares;
+
+    // Find first surplus year
+    const first = rows.find(r => r.surplus > 0);
+    const last = rows[rows.length-1];
+
+    summary.innerHTML =
+      `<b>Allocation shares (band: ${band})</b><br>`
+      + `Debt paydown: <b>${(shares.debt_paydown*100).toFixed(0)}%</b> • `
+      + `People’s Wealth Fund: <b>${(shares.peoples_wealth_fund*100).toFixed(0)}%</b> • `
+      + `Reinvestment: <b>${(shares.reinvestment*100).toFixed(0)}%</b><br>`
+      + (first ? `First surplus year: <b>${first.year}</b> (surplus ${fmtB(first.surplus)})<br>` : `First surplus year: <b>not reached</b> in ${N} years<br>`)
+      + `End of window (year ${N}): debt/GDP <b>${pct(last.debt_to_gdp)}</b> • People’s Wealth Fund total <b>${fmtT(last.pwf_total)}</b>`;
+
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Year</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Primary balance</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Surplus</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Debt paydown</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">PWF add</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Reinvest</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Debt/GDP</th>'
+      + '</tr></thead><tbody>';
+
+    for(const r of rows){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${r.year}</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.primary_balance)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.surplus)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.debt_paydown)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.pwf_add)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(r.reinvest)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${pct(r.debt_to_gdp)}</b></td>`
+        + '</tr>';
+    }
+
+    html += '</tbody></table>';
+    table.innerHTML = html;
+  }
+
+  bandEl.addEventListener('change', render);
+  yearsEl.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>

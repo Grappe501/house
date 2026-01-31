@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QoLI: AI Domain Breakdown — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>QoLI: AI Domain Breakdown</h1>
+          <div class="muted">Home / Impact Lab / QoLI / AI domain breakdown</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="qoli-ai-domain-breakdown">
+
+<div class="card">
+  <div class="kicker">What you’re seeing</div>
+  <h2>Per-domain breakdown by horizon</h2>
+  
+<p>This page decomposes the AI-adjusted QoLI projections into domains, so readers can see <b>what changes</b> and <b>why</b>.</p>
+<div class="callout">Next: connect each domain delta to specific pillar levers (education, housing, health, justice, food).</div>
+<p>
+  <a href="/pages/qoli-ai-multiplier.html"><b>Back to AI multiplier totals</b></a> •
+  <a href="/pages/ai-and-automation.html"><b>AI & Automation pillar</b></a>
+</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Domain deltas</div>
+  <h2>Status quo vs WMR (1/5/10/20/50)</h2>
+  
+<div id="ai-domain-table" class="note">Loading…</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="qoli-ai-domain-breakdown" />
+    <input type="hidden" name="page_title" value="QoLI: AI Domain Breakdown" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const el = document.getElementById('ai-domain-table');
+  try{
+    const res = await fetch('/data/qoli/outputs/base_working_family_ai_adjusted.json');
+    const j = await res.json();
+    const sq = j.scenarios.status_quo.horizons;
+    const w = j.scenarios.wmr.horizons;
+
+    const horizons = ['1','5','10','20','50'];
+    const domainKeys = Object.keys(w['1'].domains_adjusted);
+
+    function fmt(x){ return (Math.round(x*100)/100).toFixed(2); }
+
+    let html = '<table style="width:100%; border-collapse:collapse;">';
+    html += '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Domain</th>';
+    for(const h of horizons){
+      html += `<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">${h}y Δ (WMR - SQ)</th>`;
+    }
+    html += '</tr></thead><tbody>';
+
+    for(const d of domainKeys){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${d.replaceAll('_',' ')}</b></td>`;
+      for(const h of horizons){
+        const dv = w[h].domains_adjusted[d] - sq[h].domains_adjusted[d];
+        html += `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(dv)}</td>`;
+      }
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+
+    html += '<div class="note" style="margin-top:10px;">'
+      + 'Interpretation: positive deltas mean the WMR rules convert automation pressure into shared gains (dividend + transition), '
+      + 'while status quo concentrates benefits and increases instability.'
+      + '</div>';
+
+    el.innerHTML = html;
+  }catch(e){
+    el.textContent = 'Unable to load domain deltas. Make sure /data/qoli/outputs/base_working_family_ai_adjusted.json exists.';
+  }
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const el = document.getElementById('ai-domain-table');
+  try{
+    const res = await fetch('/data/qoli/outputs/base_working_family_ai_adjusted.json');
+    const j = await res.json();
+    const sq = j.scenarios.status_quo.horizons;
+    const w = j.scenarios.wmr.horizons;
+
+    const horizons = ['1','5','10','20','50'];
+    const domainKeys = Object.keys(w['1'].domains_adjusted);
+
+    function fmt(x){ return (Math.round(x*100)/100).toFixed(2); }
+
+    let html = '<table style="width:100%; border-collapse:collapse;">';
+    html += '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Domain</th>';
+    for(const h of horizons){
+      html += `<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">${h}y Δ (WMR - SQ)</th>`;
+    }
+    html += '</tr></thead><tbody>';
+
+    for(const d of domainKeys){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${d.replaceAll('_',' ')}</b></td>`;
+      for(const h of horizons){
+        const dv = w[h].domains_adjusted[d] - sq[h].domains_adjusted[d];
+        html += `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(dv)}</td>`;
+      }
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+
+    html += '<div class="note" style="margin-top:10px;">'
+      + 'Interpretation: positive deltas mean the WMR rules convert automation pressure into shared gains (dividend + transition), '
+      + 'while status quo concentrates benefits and increases instability.'
+      + '</div>';
+
+    el.innerHTML = html;
+  }catch(e){
+    el.textContent = 'Unable to load domain deltas. Make sure /data/qoli/outputs/base_working_family_ai_adjusted.json exists.';
+  }
+})();
+</script>
+
+</body>
+</html>

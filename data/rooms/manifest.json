@@ -1,0 +1,356 @@
+{
+  "version": 3,
+  "title": "The House We Live In",
+  "rooms": [
+    {
+      "id": 1,
+      "title": "Threshold / Invitation",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 260,
+      "mood": {
+        "light": "dim",
+        "warmth": "cool",
+        "geometry": "open"
+      },
+      "body": "/data/rooms/room001.html",
+      "audio": ""
+    },
+    {
+      "id": 2,
+      "title": "Name the Weight",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 240,
+      "mood": {
+        "light": "neutral",
+        "warmth": "cool",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room002.html",
+      "audio": ""
+    },
+    {
+      "id": 3,
+      "title": "Shared Experience",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 240,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room003.html",
+      "audio": ""
+    },
+    {
+      "id": 4,
+      "title": "Quiet Cost",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Compression",
+      "word_target": 140,
+      "mood": {
+        "light": "dark",
+        "warmth": "cool",
+        "geometry": "tight"
+      },
+      "body": "/data/rooms/room004.html",
+      "audio": ""
+    },
+    {
+      "id": 5,
+      "title": "Breath",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Silence",
+      "word_target": 90,
+      "mood": {
+        "light": "dark",
+        "warmth": "neutral",
+        "geometry": "tight"
+      },
+      "body": "/data/rooms/room005.html",
+      "audio": ""
+    },
+    {
+      "id": 6,
+      "title": "Effort \u2260 Outcome",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 240,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room006.html",
+      "audio": ""
+    },
+    {
+      "id": 7,
+      "title": "Time Scarcity",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Compression",
+      "word_target": 160,
+      "mood": {
+        "light": "dim",
+        "warmth": "cool",
+        "geometry": "tight"
+      },
+      "body": "/data/rooms/room007.html",
+      "audio": ""
+    },
+    {
+      "id": 8,
+      "title": "Invisible Tradeoffs",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 230,
+      "mood": {
+        "light": "neutral",
+        "warmth": "cool",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room008.html",
+      "audio": ""
+    },
+    {
+      "id": 9,
+      "title": "Personalization Trap",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room009.html",
+      "audio": ""
+    },
+    {
+      "id": 10,
+      "title": "Silence Reset",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Silence",
+      "word_target": 80,
+      "mood": {
+        "light": "dim",
+        "warmth": "neutral",
+        "geometry": "tight"
+      },
+      "body": "/data/rooms/room010.html",
+      "audio": ""
+    },
+    {
+      "id": 11,
+      "title": "Stress as Signal",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 240,
+      "mood": {
+        "light": "neutral",
+        "warmth": "cool",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room011.html",
+      "audio": ""
+    },
+    {
+      "id": 12,
+      "title": "Shared Load",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 230,
+      "mood": {
+        "light": "neutral",
+        "warmth": "warm",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room012.html",
+      "audio": ""
+    },
+    {
+      "id": 13,
+      "title": "Quiet Anger Validated",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Compression",
+      "word_target": 150,
+      "mood": {
+        "light": "dim",
+        "warmth": "cool",
+        "geometry": "tight"
+      },
+      "body": "/data/rooms/room013.html",
+      "audio": ""
+    },
+    {
+      "id": 14,
+      "title": "No Villains",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "open"
+      },
+      "body": "/data/rooms/room014.html",
+      "audio": ""
+    },
+    {
+      "id": 15,
+      "title": "Breathing Space",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Expansion",
+      "word_target": 280,
+      "mood": {
+        "light": "bright",
+        "warmth": "warm",
+        "geometry": "open"
+      },
+      "body": "/data/rooms/room015.html",
+      "audio": ""
+    },
+    {
+      "id": 16,
+      "title": "Structure Exists",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 230,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room016.html",
+      "audio": ""
+    },
+    {
+      "id": 17,
+      "title": "Rules Changed Quietly",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 220,
+      "mood": {
+        "light": "dim",
+        "warmth": "cool",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room017.html",
+      "audio": ""
+    },
+    {
+      "id": 18,
+      "title": "Not a Conspiracy",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 210,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room018.html",
+      "audio": ""
+    },
+    {
+      "id": 19,
+      "title": "Weight Is Shared",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 240,
+      "mood": {
+        "light": "neutral",
+        "warmth": "warm",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room019.html",
+      "audio": ""
+    },
+    {
+      "id": 20,
+      "title": "Pause Room",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Silence",
+      "word_target": 90,
+      "mood": {
+        "light": "dim",
+        "warmth": "neutral",
+        "geometry": "tight"
+      },
+      "body": "/data/rooms/room020.html",
+      "audio": ""
+    },
+    {
+      "id": 21,
+      "title": "Understanding Is Possible",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Expansion",
+      "word_target": 280,
+      "mood": {
+        "light": "bright",
+        "warmth": "neutral",
+        "geometry": "open"
+      },
+      "body": "/data/rooms/room021.html",
+      "audio": ""
+    },
+    {
+      "id": 22,
+      "title": "We Can Learn This",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 240,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "/data/rooms/room022.html",
+      "audio": ""
+    },
+    {
+      "id": 23,
+      "title": "No Rush",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Flow",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "warm",
+        "geometry": "open"
+      },
+      "body": "/data/rooms/room023.html",
+      "audio": ""
+    },
+    {
+      "id": 24,
+      "title": "House Is Ours",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Expansion",
+      "word_target": 300,
+      "mood": {
+        "light": "bright",
+        "warmth": "warm",
+        "geometry": "open"
+      },
+      "body": "/data/rooms/room024.html",
+      "audio": ""
+    },
+    {
+      "id": 25,
+      "title": "End-State Breath",
+      "act": "Act I \u2014 Recognition (WHY)",
+      "archetype": "Silence",
+      "word_target": 100,
+      "mood": {
+        "light": "dim",
+        "warmth": "neutral",
+        "geometry": "open"
+      },
+      "body": "/data/rooms/room025.html",
+      "audio": ""
+    }
+  ]
+}

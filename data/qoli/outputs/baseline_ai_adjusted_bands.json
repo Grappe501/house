@@ -1,0 +1,794 @@
+{
+  "meta": {
+    "generated_from": "baseline.json",
+    "ai_rules_version": "0.1-scaffold"
+  },
+  "baseline": {
+    "timepoint": "1",
+    "hh_type": "renter",
+    "range": "base",
+    "scenario": "status_quo"
+  },
+  "scenarios": {
+    "status_quo": {
+      "description": "High capture: productivity gains concentrate; displacement shocks households; weak protections.",
+      "horizons": {
+        "1": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 35,
+              "automation_pressure": 20
+            },
+            "domains_adjusted": {
+              "income_work": 36.0,
+              "affordability": 38.1,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 45.7,
+              "time_stress": 37.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 37.2,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 54.91,
+            "delta_vs_baseline": -1.99
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 45,
+              "automation_pressure": 30
+            },
+            "domains_adjusted": {
+              "income_work": 32.5,
+              "affordability": 36.9,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 45.2,
+              "time_stress": 35.2,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 36.4,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 53.97,
+            "delta_vs_baseline": -2.93
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 55,
+              "automation_pressure": 40
+            },
+            "domains_adjusted": {
+              "income_work": 29.0,
+              "affordability": 35.7,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 44.7,
+              "time_stress": 32.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 35.6,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 53.02,
+            "delta_vs_baseline": -3.88
+          }
+        },
+        "5": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 55,
+              "automation_pressure": 35
+            },
+            "domains_adjusted": {
+              "income_work": 30.75,
+              "affordability": 36.3,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 44.95,
+              "time_stress": 33.95,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 35.6,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 53.45,
+            "delta_vs_baseline": -3.45
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 65,
+              "automation_pressure": 50
+            },
+            "domains_adjusted": {
+              "income_work": 25.5,
+              "affordability": 34.5,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 44.2,
+              "time_stress": 30.200000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 34.8,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 52.08,
+            "delta_vs_baseline": -4.82
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 75,
+              "automation_pressure": 65
+            },
+            "domains_adjusted": {
+              "income_work": 23.0,
+              "affordability": 32.7,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 43.45,
+              "time_stress": 26.450000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 34.0,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 51.01,
+            "delta_vs_baseline": -5.89
+          }
+        },
+        "10": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 70,
+              "automation_pressure": 50
+            },
+            "domains_adjusted": {
+              "income_work": 25.5,
+              "affordability": 34.5,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 44.2,
+              "time_stress": 30.200000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 34.4,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 52.03,
+            "delta_vs_baseline": -4.87
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 80,
+              "automation_pressure": 70
+            },
+            "domains_adjusted": {
+              "income_work": 23.0,
+              "affordability": 32.1,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 43.2,
+              "time_stress": 25.200000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 33.6,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 50.73,
+            "delta_vs_baseline": -6.17
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 90,
+              "automation_pressure": 85
+            },
+            "domains_adjusted": {
+              "income_work": 23.0,
+              "affordability": 30.3,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 42.45,
+              "time_stress": 22.700000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 32.8,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 50.08,
+            "delta_vs_baseline": -6.82
+          }
+        },
+        "20": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 80,
+              "automation_pressure": 65
+            },
+            "domains_adjusted": {
+              "income_work": 23.0,
+              "affordability": 32.7,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 43.45,
+              "time_stress": 26.450000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 33.6,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 50.97,
+            "delta_vs_baseline": -5.93
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 90,
+              "automation_pressure": 85
+            },
+            "domains_adjusted": {
+              "income_work": 23.0,
+              "affordability": 30.3,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 42.45,
+              "time_stress": 22.700000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 32.8,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 50.08,
+            "delta_vs_baseline": -6.82
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 98,
+              "automation_pressure": 95
+            },
+            "domains_adjusted": {
+              "income_work": 23.0,
+              "affordability": 29.1,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 41.95,
+              "time_stress": 22.700000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 32.16,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 49.82,
+            "delta_vs_baseline": -7.08
+          }
+        },
+        "50": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 85,
+              "automation_pressure": 70
+            },
+            "domains_adjusted": {
+              "income_work": 23.0,
+              "affordability": 32.1,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 43.2,
+              "time_stress": 25.200000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 33.2,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 50.69,
+            "delta_vs_baseline": -6.21
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 95,
+              "automation_pressure": 92
+            },
+            "domains_adjusted": {
+              "income_work": 23.0,
+              "affordability": 29.46,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 42.1,
+              "time_stress": 22.700000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 32.4,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 49.91,
+            "delta_vs_baseline": -6.99
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 100,
+              "automation_pressure": 99
+            },
+            "domains_adjusted": {
+              "income_work": 23.0,
+              "affordability": 28.62,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 41.75,
+              "time_stress": 22.700000000000003,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 32.0,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 49.73,
+            "delta_vs_baseline": -7.17
+          }
+        }
+      }
+    },
+    "wmr": {
+      "description": "Shared gains: productivity dividend + retraining + anti-monopoly + strong privacy.",
+      "horizons": {
+        "1": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 35,
+              "automation_pressure": 20
+            },
+            "domains_adjusted": {
+              "income_work": 47.4,
+              "affordability": 43.3,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 47.7,
+              "time_stress": 46.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 42.1,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 58.52,
+            "delta_vs_baseline": 1.62
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 45,
+              "automation_pressure": 30
+            },
+            "domains_adjusted": {
+              "income_work": 49.6,
+              "affordability": 44.7,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 48.2,
+              "time_stress": 48.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 42.7,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 59.27,
+            "delta_vs_baseline": 2.37
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 55,
+              "automation_pressure": 40
+            },
+            "domains_adjusted": {
+              "income_work": 51.8,
+              "affordability": 46.1,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 48.7,
+              "time_stress": 50.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 43.3,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 60.01,
+            "delta_vs_baseline": 3.11
+          }
+        },
+        "5": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 55,
+              "automation_pressure": 35
+            },
+            "domains_adjusted": {
+              "income_work": 50.7,
+              "affordability": 45.4,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 48.45,
+              "time_stress": 49.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 43.3,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 59.67,
+            "delta_vs_baseline": 2.77
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 65,
+              "automation_pressure": 50
+            },
+            "domains_adjusted": {
+              "income_work": 54.0,
+              "affordability": 47.5,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 49.2,
+              "time_stress": 52.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 43.9,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 60.76,
+            "delta_vs_baseline": 3.86
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 75,
+              "automation_pressure": 65
+            },
+            "domains_adjusted": {
+              "income_work": 57.3,
+              "affordability": 49.6,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 49.95,
+              "time_stress": 55.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 44.5,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 61.84,
+            "delta_vs_baseline": 4.94
+          }
+        },
+        "10": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 70,
+              "automation_pressure": 50
+            },
+            "domains_adjusted": {
+              "income_work": 54.0,
+              "affordability": 47.5,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 49.2,
+              "time_stress": 52.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 44.2,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 60.79,
+            "delta_vs_baseline": 3.89
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 80,
+              "automation_pressure": 70
+            },
+            "domains_adjusted": {
+              "income_work": 58.0,
+              "affordability": 50.3,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 50.2,
+              "time_stress": 56.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 44.8,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 62.17,
+            "delta_vs_baseline": 5.27
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 90,
+              "automation_pressure": 85
+            },
+            "domains_adjusted": {
+              "income_work": 58.0,
+              "affordability": 52.4,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 50.95,
+              "time_stress": 57.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 45.4,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 62.66,
+            "delta_vs_baseline": 5.76
+          }
+        },
+        "20": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 80,
+              "automation_pressure": 65
+            },
+            "domains_adjusted": {
+              "income_work": 57.3,
+              "affordability": 49.6,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 49.95,
+              "time_stress": 55.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 44.8,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 61.87,
+            "delta_vs_baseline": 4.97
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 90,
+              "automation_pressure": 85
+            },
+            "domains_adjusted": {
+              "income_work": 58.0,
+              "affordability": 52.4,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 50.95,
+              "time_stress": 57.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 45.4,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 62.66,
+            "delta_vs_baseline": 5.76
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 98,
+              "automation_pressure": 95
+            },
+            "domains_adjusted": {
+              "income_work": 58.0,
+              "affordability": 53.8,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 51.45,
+              "time_stress": 57.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 45.88,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 62.93,
+            "delta_vs_baseline": 6.03
+          }
+        },
+        "50": {
+          "low": {
+            "ai_inputs": {
+              "capability_index": 85,
+              "automation_pressure": 70
+            },
+            "domains_adjusted": {
+              "income_work": 58.0,
+              "affordability": 50.3,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 50.2,
+              "time_stress": 56.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 45.1,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 62.2,
+            "delta_vs_baseline": 5.3
+          },
+          "base": {
+            "ai_inputs": {
+              "capability_index": 95,
+              "automation_pressure": 92
+            },
+            "domains_adjusted": {
+              "income_work": 58.0,
+              "affordability": 53.38,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 51.300000000000004,
+              "time_stress": 57.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 45.7,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 62.84,
+            "delta_vs_baseline": 5.94
+          },
+          "high": {
+            "ai_inputs": {
+              "capability_index": 100,
+              "automation_pressure": 99
+            },
+            "domains_adjusted": {
+              "income_work": 58.0,
+              "affordability": 54.36,
+              "housing": 100,
+              "health": 62.0,
+              "education": 60.0,
+              "safety_justice": 51.650000000000006,
+              "time_stress": 57.7,
+              "infrastructure_access": 77.5,
+              "democratic_agency": 46.0,
+              "_meta": {
+                "base_income": 75000,
+                "burden_fraction": 0.688,
+                "hh_type": "renter",
+                "range": "base"
+              }
+            },
+            "qoli_adjusted": 63.02,
+            "delta_vs_baseline": 6.12
+          }
+        }
+      }
+    }
+  }
+}

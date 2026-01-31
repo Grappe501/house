@@ -1,0 +1,285 @@
+{
+  "meta": {
+    "version": "0.2-horizon-paths",
+    "notes": [
+      "Ledger shows annualized national-level costs and savings channels. Placeholder values until researched.",
+      "We keep categories symmetric for status quo vs WMR to avoid narrative bias.",
+      "v0.2 adds growth rates and investment ramps to compute horizon-specific annual paths and cumulative totals.",
+      "Investment ramps are explicit add-ons; they allow short-term cost increases while long-run growth is lower."
+    ],
+    "horizons_years": [
+      1,
+      5,
+      10,
+      20,
+      50
+    ],
+    "bands": [
+      "low",
+      "base",
+      "high"
+    ]
+  },
+  "categories": [
+    {
+      "key": "healthcare",
+      "name": "Healthcare system costs"
+    },
+    {
+      "key": "education",
+      "name": "Education and skills system costs"
+    },
+    {
+      "key": "housing",
+      "name": "Housing stability & homelessness costs"
+    },
+    {
+      "key": "utilities",
+      "name": "Energy/water/broadband burden and outages"
+    },
+    {
+      "key": "transport",
+      "name": "Transportation burden and congestion"
+    },
+    {
+      "key": "justice",
+      "name": "Crime/incarceration and spillover costs"
+    },
+    {
+      "key": "admin_overhead",
+      "name": "Administrative complexity and compliance overhead"
+    },
+    {
+      "key": "interest",
+      "name": "Debt interest costs"
+    }
+  ],
+  "status_quo": {
+    "description": "Continuation scenario. Costs generally grow faster than wages in essentials; interest burden rises.",
+    "annual_cost_usd_by_category": {
+      "healthcare": {
+        "low": 4800000000000.0,
+        "base": 5300000000000.0,
+        "high": 6100000000000.0
+      },
+      "education": {
+        "low": 1700000000000.0,
+        "base": 2000000000000.0,
+        "high": 2500000000000.0
+      },
+      "housing": {
+        "low": 250000000000.0,
+        "base": 400000000000.0,
+        "high": 700000000000.0
+      },
+      "utilities": {
+        "low": 550000000000.0,
+        "base": 750000000000.0,
+        "high": 1100000000000.0
+      },
+      "transport": {
+        "low": 1100000000000.0,
+        "base": 1350000000000.0,
+        "high": 1800000000000.0
+      },
+      "justice": {
+        "low": 300000000000.0,
+        "base": 380000000000.0,
+        "high": 550000000000.0
+      },
+      "admin_overhead": {
+        "low": 450000000000.0,
+        "base": 600000000000.0,
+        "high": 850000000000.0
+      },
+      "interest": {
+        "low": 700000000000.0,
+        "base": 1000000000000.0,
+        "high": 1600000000000.0
+      }
+    }
+  },
+  "wmr": {
+    "description": "Reform scenario. Some categories rise short-term due to investment, then decline as cost curves bend and productivity rises.",
+    "annual_cost_usd_by_category": {
+      "healthcare": {
+        "low": 4600000000000.0,
+        "base": 4800000000000.0,
+        "high": 5200000000000.0
+      },
+      "education": {
+        "low": 1600000000000.0,
+        "base": 1800000000000.0,
+        "high": 2100000000000.0
+      },
+      "housing": {
+        "low": 220000000000.0,
+        "base": 300000000000.0,
+        "high": 450000000000.0
+      },
+      "utilities": {
+        "low": 550000000000.0,
+        "base": 720000000000.0,
+        "high": 950000000000.0
+      },
+      "transport": {
+        "low": 1150000000000.0,
+        "base": 1400000000000.0,
+        "high": 1900000000000.0
+      },
+      "justice": {
+        "low": 280000000000.0,
+        "base": 330000000000.0,
+        "high": 450000000000.0
+      },
+      "admin_overhead": {
+        "low": 380000000000.0,
+        "base": 450000000000.0,
+        "high": 600000000000.0
+      },
+      "interest": {
+        "low": 650000000000.0,
+        "base": 900000000000.0,
+        "high": 1300000000000.0
+      }
+    },
+    "investment_notes": {
+      "transport": "short-term increases reflect phased build and fleet modernization",
+      "utilities": "front-loaded upgrades reduce outages and long-run burden",
+      "admin_overhead": "simplification reduces recurring compliance drag"
+    },
+    "investment_ramps_usd": {
+      "transport": {
+        "years": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "annual_additional": {
+          "low": 20000000000.0,
+          "base": 50000000000.0,
+          "high": 100000000000.0
+        }
+      },
+      "utilities": {
+        "years": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "annual_additional": {
+          "low": 10000000000.0,
+          "base": 30000000000.0,
+          "high": 70000000000.0
+        }
+      },
+      "housing": {
+        "years": [
+          1,
+          2,
+          3
+        ],
+        "annual_additional": {
+          "low": 10000000000.0,
+          "base": 20000000000.0,
+          "high": 50000000000.0
+        }
+      }
+    }
+  },
+  "growth_rates_annual": {
+    "status_quo": {
+      "healthcare": {
+        "low": 0.05,
+        "base": 0.065,
+        "high": 0.08
+      },
+      "education": {
+        "low": 0.03,
+        "base": 0.04,
+        "high": 0.055
+      },
+      "housing": {
+        "low": 0.05,
+        "base": 0.07,
+        "high": 0.095
+      },
+      "utilities": {
+        "low": 0.03,
+        "base": 0.045,
+        "high": 0.065
+      },
+      "transport": {
+        "low": 0.025,
+        "base": 0.04,
+        "high": 0.06
+      },
+      "justice": {
+        "low": 0.02,
+        "base": 0.03,
+        "high": 0.045
+      },
+      "admin_overhead": {
+        "low": 0.03,
+        "base": 0.045,
+        "high": 0.065
+      },
+      "interest": {
+        "low": 0.03,
+        "base": 0.055,
+        "high": 0.08
+      }
+    },
+    "wmr": {
+      "healthcare": {
+        "low": 0.03,
+        "base": 0.04,
+        "high": 0.055
+      },
+      "education": {
+        "low": 0.02,
+        "base": 0.03,
+        "high": 0.045
+      },
+      "housing": {
+        "low": 0.02,
+        "base": 0.035,
+        "high": 0.055
+      },
+      "utilities": {
+        "low": 0.02,
+        "base": 0.03,
+        "high": 0.045
+      },
+      "transport": {
+        "low": 0.02,
+        "base": 0.03,
+        "high": 0.05
+      },
+      "justice": {
+        "low": 0.01,
+        "base": 0.02,
+        "high": 0.035
+      },
+      "admin_overhead": {
+        "low": 0.01,
+        "base": 0.02,
+        "high": 0.035
+      },
+      "interest": {
+        "low": 0.02,
+        "base": 0.04,
+        "high": 0.065
+      }
+    }
+  }
+}

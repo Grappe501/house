@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "version": "0.1-line-items",
+    "notes": [
+      "This file decomposes WMR fiscal effects into explicit line items with ramps.",
+      "Values are placeholders until replaced with sourced estimates.",
+      "All items are annual effects on the primary balance (exclude interest). Positive = improves balance (more revenue or less spending). Negative = worsens balance (new spending or tax cuts)."
+    ],
+    "bands": [
+      "low",
+      "base",
+      "high"
+    ],
+    "years": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+    ]
+  },
+  "status_quo": {
+    "primary_deficit_start_usd": {
+      "low": 900000000000.0,
+      "base": 1300000000000.0,
+      "high": 2100000000000.0
+    },
+    "primary_deficit_growth_per_year": {
+      "low": 0.01,
+      "base": 0.02,
+      "high": 0.03
+    }
+  },
+  "wmr": {
+    "items": [
+      {
+        "key": "healthcare_cost_curve",
+        "name": "Healthcare cost curve reduction (net federal budget impact)",
+        "type": "savings",
+        "ramp": {
+          "kind": "s_curve",
+          "midpoint_year": 7,
+          "steepness": 0.7
+        },
+        "annual_steady_state_usd": {
+          "low": 250000000000.0,
+          "base": 450000000000.0,
+          "high": 800000000000.0
+        },
+        "notes": "Represents reduced federal spending growth from a universal system and admin simplification. Replace with CMS/NHEA/CBO-based estimate."
+      },
+      {
+        "key": "admin_simplification",
+        "name": "Administrative simplification (program + compliance overhead)",
+        "type": "savings",
+        "ramp": {
+          "kind": "linear",
+          "start_year": 1,
+          "end_year": 6
+        },
+        "annual_steady_state_usd": {
+          "low": 80000000000.0,
+          "base": 150000000000.0,
+          "high": 260000000000.0
+        },
+        "notes": "Consolidation, plain-language rules, automation of filing/eligibility, reduced middlemen."
+      },
+      {
+        "key": "fraud_waste",
+        "name": "Fraud/waste reduction (targeted, evidence-based)",
+        "type": "savings",
+        "ramp": {
+          "kind": "linear",
+          "start_year": 2,
+          "end_year": 8
+        },
+        "annual_steady_state_usd": {
+          "low": 40000000000.0,
+          "base": 90000000000.0,
+          "high": 180000000000.0
+        },
+        "notes": "Audits + system design changes; must avoid harming legitimate recipients."
+      },
+      {
+        "key": "extraction_tax_shift",
+        "name": "Shift revenue from wages to extraction/monopoly rents",
+        "type": "revenue",
+        "ramp": {
+          "kind": "linear",
+          "start_year": 2,
+          "end_year": 10
+        },
+        "annual_steady_state_usd": {
+          "low": 180000000000.0,
+          "base": 360000000000.0,
+          "high": 650000000000.0
+        },
+        "notes": "Excess margin / monopoly rent capture; depends on anti-avoidance design."
+      },
+      {
+        "key": "financial_transaction_levy",
+        "name": "Financial transaction micro-levy",
+        "type": "revenue",
+        "ramp": {
+          "kind": "linear",
+          "start_year": 1,
+          "end_year": 4
+        },
+        "annual_steady_state_usd": {
+          "low": 40000000000.0,
+          "base": 70000000000.0,
+          "high": 140000000000.0
+        },
+        "notes": "Tiny fee on trades; reduces HFT churn and funds public goods."
+      },
+      {
+        "key": "ai_productivity_levy",
+        "name": "AI productivity levy (share automation gains)",
+        "type": "revenue",
+        "ramp": {
+          "kind": "s_curve",
+          "midpoint_year": 12,
+          "steepness": 0.5
+        },
+        "annual_steady_state_usd": {
+          "low": 120000000000.0,
+          "base": 260000000000.0,
+          "high": 520000000000.0
+        },
+        "notes": "Grows as AI-driven productivity increases; funds People\u2019s Wealth Fund + stabilizers."
+      },
+      {
+        "key": "productivity_investment",
+        "name": "Productivity infrastructure investment (transport/utilities/broadband)",
+        "type": "cost",
+        "ramp": {
+          "kind": "front_load",
+          "years": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "annual_steady_state_usd": {
+          "low": -120000000000.0,
+          "base": -220000000000.0,
+          "high": -380000000000.0
+        },
+        "notes": "Explicit cost: capital + ops. Negative because it worsens the primary balance in early years."
+      },
+      {
+        "key": "transition_admin",
+        "name": "Transition administration & implementation costs",
+        "type": "cost",
+        "ramp": {
+          "kind": "linear",
+          "start_year": 1,
+          "end_year": 5
+        },
+        "annual_steady_state_usd": {
+          "low": -25000000000.0,
+          "base": -50000000000.0,
+          "high": -90000000000.0
+        },
+        "notes": "Systems build, training, migration, public dashboards."
+      }
+    ],
+    "surplus_allocation_defaults": {
+      "low": {
+        "debt_paydown": 0.45,
+        "peoples_wealth_fund": 0.35,
+        "reinvestment": 0.2
+      },
+      "base": {
+        "debt_paydown": 0.6,
+        "peoples_wealth_fund": 0.25,
+        "reinvestment": 0.15
+      },
+      "high": {
+        "debt_paydown": 0.75,
+        "peoples_wealth_fund": 0.15,
+        "reinvestment": 0.1
+      }
+    }
+  }
+}

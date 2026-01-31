@@ -1,0 +1,205 @@
+{
+  "domain_key": "democratic_agency",
+  "domain_name": "Democratic Agency",
+  "notes": "Scaffold metrics for civic power, corruption resistance, and responsiveness. Replace placeholders with best-guess estimates + logic + ranges.",
+  "timepoints": {
+    "1": {
+      "status_quo": {
+        "participation_index": {
+          "base": 45,
+          "low": 40,
+          "high": 50,
+          "assumption": "Participation remains suppressed by cynicism, barriers, and low trust.",
+          "mechanism": "Complex systems and money influence reduce perceived impact.",
+          "rationale": "People disengage when outcomes feel predetermined."
+        },
+        "corruption_visibility_index": {
+          "base": 40,
+          "low": 35,
+          "high": 45,
+          "assumption": "Transparency remains partial; procurement opacity persists.",
+          "mechanism": "Lobbying and contracting information remains hard to audit.",
+          "rationale": "Opacity enables capture."
+        },
+        "money_influence_index": {
+          "base": 65,
+          "low": 60,
+          "high": 70,
+          "assumption": "High dependence on donor class continues.",
+          "mechanism": "Campaign finance structures reward concentrated wealth.",
+          "rationale": "Money buys access when systems allow it."
+        }
+      },
+      "wmr": {
+        "participation_index": {
+          "base": 55,
+          "low": 50,
+          "high": 60,
+          "assumption": "Local-first power and simplified civic systems increase participation.",
+          "mechanism": "Decisions become closer to daily life and more visible.",
+          "rationale": "People engage when their voice has clear impact."
+        },
+        "corruption_visibility_index": {
+          "base": 70,
+          "low": 65,
+          "high": 75,
+          "assumption": "Audit-by-default laws and machine-readable budgets/contract logs.",
+          "mechanism": "Transparency becomes a system requirement, not optional.",
+          "rationale": "Visibility deters corruption and enables citizen oversight."
+        },
+        "money_influence_index": {
+          "base": 45,
+          "low": 40,
+          "high": 50,
+          "assumption": "Public financing and contribution-based systems de-emphasize donor control.",
+          "mechanism": "Lower dependence on private fundraising reduces capture.",
+          "rationale": "When elections don\u2019t require donor pipelines, money loses leverage."
+        }
+      }
+    },
+    "5": {
+      "status_quo": {
+        "participation_index": {
+          "base": 44,
+          "low": 38,
+          "high": 50
+        },
+        "corruption_visibility_index": {
+          "base": 39,
+          "low": 33,
+          "high": 45
+        },
+        "money_influence_index": {
+          "base": 66,
+          "low": 60,
+          "high": 72
+        }
+      },
+      "wmr": {
+        "participation_index": {
+          "base": 62,
+          "low": 56,
+          "high": 68
+        },
+        "corruption_visibility_index": {
+          "base": 78,
+          "low": 72,
+          "high": 84
+        },
+        "money_influence_index": {
+          "base": 38,
+          "low": 32,
+          "high": 44
+        }
+      }
+    },
+    "10": {
+      "status_quo": {
+        "participation_index": {
+          "base": 43,
+          "low": 36,
+          "high": 50
+        },
+        "corruption_visibility_index": {
+          "base": 38,
+          "low": 30,
+          "high": 46
+        },
+        "money_influence_index": {
+          "base": 68,
+          "low": 62,
+          "high": 74
+        }
+      },
+      "wmr": {
+        "participation_index": {
+          "base": 70,
+          "low": 64,
+          "high": 76
+        },
+        "corruption_visibility_index": {
+          "base": 85,
+          "low": 80,
+          "high": 90
+        },
+        "money_influence_index": {
+          "base": 30,
+          "low": 25,
+          "high": 35
+        }
+      }
+    },
+    "20": {
+      "status_quo": {
+        "participation_index": {
+          "base": 42,
+          "low": 34,
+          "high": 50
+        },
+        "corruption_visibility_index": {
+          "base": 36,
+          "low": 28,
+          "high": 44
+        },
+        "money_influence_index": {
+          "base": 70,
+          "low": 64,
+          "high": 76
+        }
+      },
+      "wmr": {
+        "participation_index": {
+          "base": 78,
+          "low": 72,
+          "high": 84
+        },
+        "corruption_visibility_index": {
+          "base": 90,
+          "low": 85,
+          "high": 95
+        },
+        "money_influence_index": {
+          "base": 25,
+          "low": 20,
+          "high": 30
+        }
+      }
+    },
+    "50": {
+      "status_quo": {
+        "participation_index": {
+          "base": 40,
+          "low": 32,
+          "high": 48
+        },
+        "corruption_visibility_index": {
+          "base": 34,
+          "low": 26,
+          "high": 42
+        },
+        "money_influence_index": {
+          "base": 72,
+          "low": 66,
+          "high": 78
+        }
+      },
+      "wmr": {
+        "participation_index": {
+          "base": 85,
+          "low": 78,
+          "high": 92
+        },
+        "corruption_visibility_index": {
+          "base": 95,
+          "low": 90,
+          "high": 98
+        },
+        "money_influence_index": {
+          "base": 20,
+          "low": 15,
+          "high": 25
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QoLI Confidence Bands — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>QoLI Confidence Bands</h1>
+          <div class="muted">Home / Impact Lab / QoLI / Confidence bands</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="qoli-confidence-bands">
+
+<div class="card">
+  <div class="kicker">What this is</div>
+  <h2>Confidence bands (low / base / high) across horizons</h2>
+  
+<p>We show uncertainty instead of hiding it. These bands vary the AI inputs and re-run the transparent rules.</p>
+<div class="callout">
+Baseline is defined in <a href="/data/qoli/outputs/baseline.json"><b>baseline.json</b></a>.
+</div>
+<p>
+  Data: <a href="/data/qoli/outputs/baseline_ai_adjusted_bands.json"><b>baseline_ai_adjusted_bands.json</b></a><br>
+  Inputs: <a href="/data/ai/ai_capability_scenarios.json"><b>ai_capability_scenarios.json</b></a>
+</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Bands view</div>
+  <h2>QoLI by horizon (low/base/high)</h2>
+  
+<div id="bands-table" class="note">Loading…</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Interpretation</div>
+  <h2>How to read low/base/high</h2>
+  
+<ul>
+  <li><b>Low</b> = slower capability and lower automation pressure</li>
+  <li><b>High</b> = faster capability and higher automation pressure</li>
+  <li>Under WMR, stability increases across bands because gains are shared and transitions are funded.</li>
+  <li>Under status quo, volatility increases as pressure rises.</li>
+</ul>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="qoli-confidence-bands" />
+    <input type="hidden" name="page_title" value="QoLI Confidence Bands" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const el = document.getElementById('bands-table');
+  try{
+    const res = await fetch('/data/qoli/outputs/baseline_ai_adjusted_bands.json');
+    const j = await res.json();
+    const horizons = ['1','5','10','20','50'];
+
+    function row(label, scenKey, bandKey){
+      let html = `<tr><td style="padding:8px; border-bottom:1px solid #eee;"><b>${label}</b></td>`;
+      for(const h of horizons){
+        const v = j.scenarios[scenKey].horizons[h][bandKey].qoli_adjusted;
+        html += `<td style="padding:8px; border-bottom:1px solid #eee;">${v.toFixed(2)}</td>`;
+      }
+      html += '</tr>';
+      return html;
+    }
+
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Scenario / band</th>';
+    for(const h of horizons){
+      html += `<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">${h}y</th>`;
+    }
+    html += '</tr></thead><tbody>';
+
+    html += row('Status quo (low)','status_quo','low');
+    html += row('Status quo (base)','status_quo','base');
+    html += row('Status quo (high)','status_quo','high');
+    html += row('WMR (low)','wmr','low');
+    html += row('WMR (base)','wmr','base');
+    html += row('WMR (high)','wmr','high');
+
+    html += '</tbody></table>';
+
+    html += '<div class="note" style="margin-top:10px;">'
+      + 'Baseline is the 1-year renter/base status quo snapshot (see baseline.json).'
+      + '</div>';
+
+    el.innerHTML = html;
+  }catch(e){
+    el.textContent = 'Unable to load confidence bands output.';
+  }
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const el = document.getElementById('bands-table');
+  try{
+    const res = await fetch('/data/qoli/outputs/baseline_ai_adjusted_bands.json');
+    const j = await res.json();
+    const horizons = ['1','5','10','20','50'];
+
+    function row(label, scenKey, bandKey){
+      let html = `<tr><td style="padding:8px; border-bottom:1px solid #eee;"><b>${label}</b></td>`;
+      for(const h of horizons){
+        const v = j.scenarios[scenKey].horizons[h][bandKey].qoli_adjusted;
+        html += `<td style="padding:8px; border-bottom:1px solid #eee;">${v.toFixed(2)}</td>`;
+      }
+      html += '</tr>';
+      return html;
+    }
+
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Scenario / band</th>';
+    for(const h of horizons){
+      html += `<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">${h}y</th>`;
+    }
+    html += '</tr></thead><tbody>';
+
+    html += row('Status quo (low)','status_quo','low');
+    html += row('Status quo (base)','status_quo','base');
+    html += row('Status quo (high)','status_quo','high');
+    html += row('WMR (low)','wmr','low');
+    html += row('WMR (base)','wmr','base');
+    html += row('WMR (high)','wmr','high');
+
+    html += '</tbody></table>';
+
+    html += '<div class="note" style="margin-top:10px;">'
+      + 'Baseline is the 1-year renter/base status quo snapshot (see baseline.json).'
+      + '</div>';
+
+    el.innerHTML = html;
+  }catch(e){
+    el.textContent = 'Unable to load confidence bands output.';
+  }
+})();
+</script>
+
+</body>
+</html>

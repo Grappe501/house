@@ -1,0 +1,82 @@
+{
+  "notes": "Government funding scaffold. Replace with research-backed budgets later. Goal: transparent categories and flows.",
+  "principles": [
+    "Tax work less, tax extraction more",
+    "Make payment simple and visible",
+    "Use automatic mechanisms where possible (no fear-based bureaucracy)",
+    "Tie revenue sources to public goods (education/health/infrastructure)"
+  ],
+  "revenue_streams": [
+    {
+      "name": "Income tax (simplified bands)",
+      "type": "broad_base",
+      "who_pays": "individuals",
+      "why": "baseline funding with progressive design"
+    },
+    {
+      "name": "Payroll / participation contribution",
+      "type": "broad_base",
+      "who_pays": "workers + employers",
+      "why": "ties to People\u2019s Wealth Fund and retirement security"
+    },
+    {
+      "name": "Value-added/extraction tax",
+      "type": "anti-extraction",
+      "who_pays": "monopoly rents and excess margin sectors",
+      "why": "targets capture rather than production"
+    },
+    {
+      "name": "Carbon/energy externality fee (rebated)",
+      "type": "externality",
+      "who_pays": "pollution-intensive processes",
+      "why": "prices true costs while protecting households"
+    },
+    {
+      "name": "Financial transaction micro-levy",
+      "type": "financial",
+      "who_pays": "high-frequency financial activity",
+      "why": "reduces destabilizing speculation and funds public goods"
+    },
+    {
+      "name": "AI productivity levy (to People\u2019s Wealth Fund)",
+      "type": "ai",
+      "who_pays": "AI-driven productivity gains",
+      "why": "shares gains from automation"
+    },
+    {
+      "name": "Land value / vacancy tax (local)",
+      "type": "local",
+      "who_pays": "speculative holding",
+      "why": "de-incentivizes hoarding, funds local services"
+    },
+    {
+      "name": "Sin/harms taxes (limited)",
+      "type": "behavioral",
+      "who_pays": "harmful products",
+      "why": "not central; avoid regressive dependence"
+    }
+  ],
+  "where_money_is_generated": [
+    "Private sector production and services",
+    "Human labor + entrepreneurship",
+    "Automation and AI productivity",
+    "Natural resources (managed with public benefit rules)",
+    "Land and location value (community-created value)"
+  ],
+  "how_capitalism_works_under_wmr": [
+    "Markets allocate and innovate; extraction is capped",
+    "Competition is protected by anti-monopoly enforcement",
+    "Workers gain bargaining power via universal floors and dividend",
+    "Public infrastructure lowers business input costs",
+    "Capital can earn returns, but cannot buy the rules of society"
+  ],
+  "collection_institutions_scaffold": {
+    "option": "No IRS as we know it (scaffold)",
+    "replacement": "National Revenue Service focused on automatic withholding, simple filing, open dashboards, and narrow audits",
+    "public_protections": [
+      "no surprise retroactive penalties without due process",
+      "plain-language rules",
+      "right to see and correct records"
+    ]
+  }
+}
