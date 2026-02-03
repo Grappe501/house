@@ -4,9 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>The House We Live In — Reader</title>
-  <link rel="stylesheet" href="/assets/css/house-reader.css" />
+  <!-- Use relative paths so local file-open works -->
+  <link rel="stylesheet" href="../../../assets/css/house-reader.css" />
 </head>
-<body class="reduce-motion-off">
+<body class="reduce-motion-off" data-root="../../../">
   <header class="hr-header">
     <button class="hr-btn" id="btnMap" aria-label="Open House Map">Map</button>
     <div class="hr-title">
@@ -14,6 +15,8 @@
       <div class="hr-room" id="roomLabel">Room 001</div>
     </div>
     <div class="hr-actions">
+      <button class="hr-btn hr-btn-small" id="fontDown" aria-label="Decrease font size">A−</button>
+      <button class="hr-btn hr-btn-small" id="fontUp" aria-label="Increase font size">A+</button>
       <button class="hr-btn" id="btnBookmark" aria-label="Bookmark this Room">Bookmark</button>
       <button class="hr-btn" id="btnNotes" aria-label="Toggle Notes">Notes</button>
       <button class="hr-btn" id="btnAudio" aria-label="Audio">Listen</button>
@@ -64,6 +67,6 @@
     </div>
   </div>
 
-  <script src="/assets/js/house-reader.js"></script>
+  <script src="../../../assets/js/house-reader.js"></script>
 </body>
 </html>

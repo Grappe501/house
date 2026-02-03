@@ -1,0 +1,30 @@
+{
+  "voice_profile": {
+    "style": "calm older southern male",
+    "notes": "Primary delivery is prerecorded talk track per room for consistent voice. TTS fallback is device-dependent.",
+    "tts_fallback": {
+      "rate": 0.9,
+      "pitch": 0.84,
+      "volume": 0.98,
+      "lang": "en-US",
+      "voice_match": [
+        "male",
+        "en-US",
+        "David",
+        "George",
+        "Matthew"
+      ],
+      "preferred_voice_storage_key": "house_narrator_voice_v1"
+    }
+  },
+  "rooms": {
+    "room001": {
+      "title": "Arrival",
+      "audio": {
+        "ambience": "/assets/audio/room001_hum.wav",
+        "talktrack": "/assets/audio/room001_talktrack.mp3"
+      },
+      "transcript": "/data/rooms/room001_talktrack.txt"
+    }
+  }
+}

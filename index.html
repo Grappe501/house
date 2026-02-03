@@ -2,115 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home — Working Majority Republic</title>
-  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
-  <link rel="stylesheet" href="/assets/styles.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>The House We Live In</title>
+  <meta name="description" content="An interactive book of rooms, rules, and the quiet cost of cooperation." />
+  <link rel="stylesheet" href="./assets/css/house-reader.css" />
+  <link rel="stylesheet" href="./assets/css/house-landing.css" />
+  <link rel="stylesheet" href="./assets/css/house-launch-v2.css" />
 </head>
-<body>
-  <header>
-    <div class="wrap">
-      <div class="brand">
-        <div class="badge" aria-hidden="true"></div>
-        <div>
-          <div class="kicker">Working Majority Republic</div>
-          <h1>Home</h1>
-          <div class="muted">A people-first constitutional model: democracy without money-rule, capitalism without extraction.</div>
-        </div>
-      </div>
+<body class="landing launch">
+  <div class="landing-noise" aria-hidden="true"></div>
+
+  <header class="launch-top">
+    <div class="launch-brand">
+      <div class="launch-eyebrow">Interactive Book</div>
+      <h1 class="launch-title">The House We Live In</h1>
+      <p class="launch-sub">Rooms, rules, and the quiet cost of cooperation.</p>
     </div>
+    <nav class="launch-nav" aria-label="Primary">
+      <a class="launch-link" href="./pages/book/house-reader/index.html">Enter</a>
+      <a class="launch-link" href="./pages/book/house-reader/master-plan.html">Master Plan</a>
+      <a class="launch-link" href="./pages/book/house-reader/reader.html">Reader</a>
+      <a class="launch-link" href="./pages/wmr/index.html">Working Majority Republic</a>
+    </nav>
   </header>
 
-  <main class="wrap" data-page-slug="home">
-    
-<div class="grid">
-  <div class="card hero">
-    <div class="kicker">Purpose</div>
-    <p><b>Working Majority Republic</b> is a draft constitutional and policy model designed to protect the working majority, keep markets and entrepreneurship alive, and remove the structural pathways that let money dominate democracy.</p>
-    <div class="callout">
-      <b>Working premise:</b> democracy cannot survive when most people live in precarity. We rebuild institutions so ordinary people cannot be economically exploited or politically outspent.
-    </div>
-
-    <h2>Start here</h2>
-    <div class="sectionlinks">
-      <a href="/pages/vision.html"><b>Future Vision</b><br><span class="muted">What life looks like, and the “two futures” comparison.</span></a>
-      <a href="/pages/model-overview.html"><b>The Model</b><br><span class="muted">Institutions, rights, economy, justice, and power limits.</span></a>
-      <a href="/pages/roadmap.html"><b>Pragmatic Roadmap</b><br><span class="muted">How we get there without a constitutional convention.</span></a>
-      <a href="/pages/impact-lab.html"><b>Impact Lab</b><br><span class="muted">Deep drill-down pages by domain (status quo vs reform).</span></a>
-    </div>
-
-    <h2>Build status</h2>
-    <ul>
-      <li>Current build focuses on: democracy design, anti-corruption, economic citizenship (education/healthcare), monopoly/wealth constraints, defense reform, immigration & labor standards, community safety, justice/prisons, digital civil rights, retirement, poverty floor, food security, and housing/homeownership.</li>
-      <li>Next queued expansions: predatory finance & junk fees → public banking option → housing supply mechanics (in that order).</li>
-    </ul>
-  </div>
-
-  <div class="card side">
-    <div class="kicker">How to use this site</div>
-    <p>Each topic lives on its own drill-down page. For now, pages don’t cross-navigate to each other—this keeps reading clean while we expand.</p>
-    <div class="pills">
-      <span class="pill">Draft</span>
-      <span class="pill">Living document</span>
-      <span class="pill">People-first</span>
-      <span class="pill">Anti-capture</span>
-      <span class="pill">Pro-democracy</span>
-    </div>
-
-    <hr/>
-
-    <div class="kicker">Comments</div>
-    <p class="note">Comments are collected via Netlify Forms and reviewed before publication. For now, submissions are stored for later curation and display.</p>
-    <div class="btnrow">
-      <a class="btn" href="/pages/moderation.html">Moderation workflow</a>
-      <a class="btn" href="/pages/scope.html">Future scope map</a>
-    </div>
-  </div>
-</div>
-
-
-<div class="card">
-  <div class="kicker">Thoughts & comments (moderated)</div>
-  <h3>Leave a comment on this page</h3>
-  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
-
-  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
-    <input type="hidden" name="form-name" value="thoughts" />
-    <p style="display:none;">
-      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-    </p>
-    <input type="hidden" name="page_slug" value="home" />
-    <input type="hidden" name="page_title" value="Home" />
-    <input type="hidden" name="submitted_at" value="" />
-
-    <div class="grid">
-      <div class="card compact half" style="background:transparent;border:none;padding:0;">
-        <label class="note">Name (optional)</label>
-        <input name="name" placeholder="Your name" />
+  <main class="launch-main">
+    <section class="launch-hero">
+      <div class="launch-heroCard">
+        <div class="launch-badgeRow">
+          <span class="launch-badge">Launch</span>
+          <span class="launch-badge launch-badgeMuted">Premium entry experience</span>
+        </div>
+        <p class="launch-contractTitle">A psychological contract</p>
+        <p class="launch-contract">
+          You are not here to be convinced. You are here to <em>notice</em>.
+          You’ll be offered doors. You’ll be thanked for taking them.
+          Nothing will be demanded. And still—something will be asked of you.
+        </p>
+        <div class="launch-ctaRow">
+          <a class="launch-btn launch-btnPrimary" id="rootEnter" href="./pages/book/house-reader/reader.html">Enter the House</a>
+          <a class="launch-btn" id="rootContinue" href="./pages/book/house-reader/reader.html" hidden>Continue</a>
+          <a class="launch-btn launch-btnGhost" href="./pages/book/house-reader/master-plan.html">Explore the Plan</a>
+        </div>
+        <div class="launch-micro">
+          <span id="rootProgressLabel" class="launch-progressLabel" hidden></span>
+          <span class="launch-dot" aria-hidden="true"></span>
+          <span class="launch-muted">Best experienced with headphones. Silence counts as text.</span>
+        </div>
       </div>
-      <div class="card compact half" style="background:transparent;border:none;padding:0;">
-        <label class="note">Email (optional, never published)</label>
-        <input name="email" type="email" placeholder="you@example.com" />
-      </div>
-    </div>
 
-    <label class="note">Message</label>
-    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
-
-    <button type="submit">Submit for review</button>
-  </form>
-</div>
-
-
+      <aside class="launch-side">
+        <div class="launch-sideCard">
+          <p class="launch-sideTitle">Two projects, one thesis</p>
+          <ul class="launch-list">
+            <li><span class="launch-k">The House</span><span class="launch-v">A felt experience of systems.</span></li>
+            <li><span class="launch-k">WMR</span><span class="launch-v">A constitutional model in daylight.</span></li>
+          </ul>
+        </div>
+        <div class="launch-sideCard launch-sideCardDim">
+          <p class="launch-sideTitle">Start here</p>
+          <div class="launch-miniRow">
+            <a class="launch-miniLink" href="./pages/book/house-reader/index.html">Book Landing</a>
+            <a class="launch-miniLink" href="./pages/book/house-reader/master-plan.html#tracker">Build Tracker</a>
+          </div>
+        </div>
+      </aside>
+    </section>
   </main>
 
-  <footer>
-    <div class="wrap">
-      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
-      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
-    </div>
+  <footer class="launch-foot">
+    <span class="launch-faint">© The House We Live In</span>
   </footer>
 
-  <script src="/assets/site.js"></script>
+  <script>
+  (function(){
+    const KEY = "hr_room_index";
+    function pad3(n){ n=Number(n)||0; return String(n).padStart(3,"0"); }
+    function getProgress(){ try{ const v=Number(localStorage.getItem(KEY)); return (Number.isFinite(v)&&v>0)?v:null; }catch(e){ return null; } }
+    const idx = getProgress();
+    const btnC = document.getElementById("rootContinue");
+    const btnE = document.getElementById("rootEnter");
+    const lbl = document.getElementById("rootProgressLabel");
+    if(idx && btnC && btnE){
+      btnC.hidden = false;
+      btnC.href = "./pages/book/house-reader/reader.html#room="+idx;
+      btnE.textContent = "Start at Room 001";
+      btnE.href = "./pages/book/house-reader/reader.html#room=1";
+      if(lbl){ lbl.hidden=false; lbl.textContent = "Continue at Room "+pad3(idx); }
+    }
+  })();
+  </script>
 </body>
 </html>

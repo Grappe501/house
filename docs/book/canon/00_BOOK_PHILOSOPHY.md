@@ -15,3 +15,8 @@ Never shame. Never urgency panic. Never recruitment before readiness.
 Truth over persuasion.
 Clarity over volume.
 Repair over revolt.
+
+## Master Build Lockbox
+
+To ensure we never lose the underlying architecture notes, see:
+- [Master Build: Lockbox](09_MASTER_BUILD_LOCKBOX.md)

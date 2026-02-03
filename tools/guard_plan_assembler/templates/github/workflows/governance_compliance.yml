@@ -1,0 +1,59 @@
+name: governance-compliance
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  governance-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout downstream repo
+        uses: actions/checkout@v4
+
+      - name: Read governance lock
+        id: lock
+        shell: bash
+        run: |
+          if [ ! -f governance.lock.json ]; then
+            echo "Missing governance.lock.json"
+            exit 1
+          fi
+          GOV_REF=$(node -e "console.log(require('./governance.lock.json').governance_ref || '')")
+          GOV_REPO=$(node -e "console.log(require('./governance.lock.json').governance_repo || '')")
+          GOV_PROFILE=$(node -e "console.log(require('./governance.lock.json').profile || 'hybrid-app')")
+          if [ -z "$GOV_REF" ] || [ -z "$GOV_REPO" ]; then
+            echo "governance_ref or governance_repo missing in governance.lock.json"
+            exit 1
+          fi
+          echo "gov_ref=$GOV_REF" >> $GITHUB_OUTPUT
+          echo "gov_repo=$GOV_REPO" >> $GITHUB_OUTPUT
+          echo "gov_profile=$GOV_PROFILE" >> $GITHUB_OUTPUT
+
+      - name: Checkout governance repo at pinned ref
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.lock.outputs.gov_repo }}
+          ref: ${{ steps.lock.outputs.gov_ref }}
+          path: _governance
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install governance deps
+        working-directory: _governance
+        run: npm ci
+
+      - name: Run downstream compliance check
+        working-directory: _governance
+        run: node scripts/downstream_check.js --downstream-root $GITHUB_WORKSPACE --profile ${{ steps.lock.outputs.gov_profile }}
+
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governance-downstream-check-report
+          path: _governance/build/reports/downstream_check.json

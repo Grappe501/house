@@ -101,6 +101,34 @@ async function renderRoom(){
 
   bindGlossary();
   saveLocal();
+
+  // Inject end-of-room "Continue" block inside reader
+  const existingEndcap = els.roomContent.querySelector('.hr-endcap');
+  if(existingEndcap) existingEndcap.remove();
+  const nextExists = state.roomIndex < state.manifest.rooms.length - 1;
+  const prevExists = state.roomIndex > 0;
+  const endcap = document.createElement('div');
+  endcap.className = 'hr-endcap';
+  const nextRoom = nextExists ? state.manifest.rooms[state.roomIndex+1] : null;
+  endcap.innerHTML = `
+    <div class="hr-endcap__row">
+      <div>
+        <div class="hr-endcap__meta">End of Room ${pad3(room.id)}</div>
+        <div class="hr-endcap__title">${nextExists ? `Next: Room ${pad3(nextRoom.id)} · ${nextRoom.archetype}` : 'You’ve reached the last available room.'}</div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <button class="hr-btn" ${prevExists ? '' : 'disabled style="opacity:.5; cursor:not-allowed"'} id="endPrev">← Previous</button>
+        <button class="hr-endcap__btn" ${nextExists ? '' : 'disabled style="opacity:.5; cursor:not-allowed"'} id="endNext">${nextExists ? 'Continue →' : '—'}</button>
+      </div>
+    </div>
+  `;
+  els.roomContent.appendChild(endcap);
+  endcap.querySelector('#endPrev')?.addEventListener('click', prev);
+  endcap.querySelector('#endNext')?.addEventListener('click', next);
+
+  // Reset scroll to top for new room
+  window.scrollTo({top:0, behavior:'instant'});
+
 }
 
 function renderMap(){
@@ -159,7 +187,7 @@ function addSwipe(){
 
 async function init(){
   loadLocal();
-  const manifest = await fetch('/data/rooms/manifest.json', {cache:'no-cache'}).then(r=>r.json());
+  const manifest = await fetch('../../data/rooms/manifest.json', {cache:'no-cache'}).then(r=>r.json());
   state.manifest = manifest;
   if(state.roomIndex >= manifest.rooms.length) state.roomIndex = 0;
 
