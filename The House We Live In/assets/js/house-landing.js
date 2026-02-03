@@ -1,0 +1,1 @@
+(()=>{try{const v=localStorage.getItem('hr_room_index');if(v==null)return;const n=String((parseInt(v,10)||0)+1).padStart(3,'0');const c=document.querySelector('[data-continue-cta]');if(!c)return;const b=(c.getAttribute('href')||'./reader.html').split('#')[0];c.href=b+'#room='+n;c.textContent='Continue at Room '+n;c.hidden=false}catch(e){}})();

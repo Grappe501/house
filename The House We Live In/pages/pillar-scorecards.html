@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pillar Scorecards — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>Pillar Scorecards</h1>
+          <div class="muted">Home / Impact Lab / Trajectories / Pillar Scorecards</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="pillar_scorecards">
+
+<div class="card">
+  <div class="kicker">Purpose</div>
+  <h2>Pillar scorecards over time</h2>
+  
+<p>Each pillar gets an explainable score (0–100) at <b>1 / 5 / 10 / 20 / 50</b> years.</p>
+<p><b>Status quo</b> is shown beside the <b>WMR path</b> using the selected scenario parameters.</p>
+<div class="callout"><b>Tip:</b> Run <a href="/pages/household-impact.html"><b>Household Impact</b></a> in observed mode first to ground housing and mobility with real ACS distributions.</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Controls</div>
+  <h2>Scenario + pillar selection</h2>
+  
+<label class="muted"><b>Pillar</b></label><br>
+<select id="pillarSelect" style="padding:8px;">
+  <option value="housing">Housing & Homeownership</option>
+  <option value="mobility">Mobility, Time, and Transportation</option>
+  <option value="health">Health, Stress, and Care</option>
+  <option value="education">Education & Skills</option>
+  <option value="democracy">Democracy & Accountability</option>
+  <option value="economy">Capitalism for the 90%</option>
+  <option value="safety">Safety, Justice, and Prisons</option>
+  <option value="ai">AI & Technology Futures</option>
+</select>
+
+<div class="note" style="margin-top:10px;">
+  <b>Scenario:</b> <span id="scenarioLabel">Loading…</span> • <a href="/pages/scenario-panel.html"><b>Adjust</b></a>
+</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Scorecard</div>
+  <h2>Timeline scores</h2>
+  
+<div id="pillarTable" class="note">Loading…</div>
+<div id="pillarDrivers" class="note" style="margin-top:10px;">Drivers: loading…</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Assumptions</div>
+  <h2>What drives these scores</h2>
+  
+<p>Every pillar score is built from:</p>
+<ul>
+  <li><b>Observed indicators</b> (when wired) — shown with source tags</li>
+  <li><b>Transform</b> formula — explicit mapping to a score</li>
+  <li><b>Scenario parameters</b> — targets that scale change over time</li>
+  <li><b>Phase curve</b> — how change is phased (linear interpolation between anchors)</li>
+</ul>
+<p class="muted">Many indicators are still placeholders. Housing + mobility can be grounded today via ACS distributions.</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="pillar_scorecards" />
+    <input type="hidden" name="page_title" value="Pillar Scorecards" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const horizons = [1,5,10,20,50];
+
+  const eng = await (await fetch('/data/trajectories/pillar_engine_v57.json')).json();
+
+  // Load scenario (V56)
+  let scenario = null;
+  try{ scenario = JSON.parse(localStorage.getItem("wmr_scenario_v56")||"null"); }catch(e){}
+  if(!scenario || !scenario.params){
+    scenario = { preset:"moderate", params: (await (await fetch('/data/trajectories/trajectory_engine_v56.json')).json()).scenarios.moderate.params };
+  }
+
+  // Proxies (V54 export)
+  let proxy = null;
+  try{ proxy = JSON.parse(localStorage.getItem("wmr_qol_proxies_v54")||"null"); }catch(e){}
+
+  const pillarSelect = document.getElementById('pillarSelect');
+  const scenarioLabel = document.getElementById('scenarioLabel');
+  const tableEl = document.getElementById('pillarTable');
+  const driversEl = document.getElementById('pillarDrivers');
+
+  function clamp(x,a,b){ return Math.max(a, Math.min(b, x)); }
+
+  function fractionFromAnchors(anchors, h){
+    const a = anchors.slice().sort((x,y)=>x.h-y.h);
+    if(h <= a[0].h) return a[0].f;
+    if(h >= a[a.length-1].h) return a[a.length-1].f;
+    for(let i=0;i<a.length-1;i++){
+      const lo=a[i], hi=a[i+1];
+      if(h>=lo.h && h<=hi.h){
+        const t=(h-lo.h)/(hi.h-lo.h);
+        return lo.f + t*(hi.f - lo.f);
+      }
+    }
+    return 1.0;
+  }
+
+  function fmt(x){ return (Math.round(Number(x)*10)/10).toFixed(1); }
+  function pct(x){ return (Number(x)*100).toFixed(0)+'%'; }
+
+  function getPillar(key){
+    return eng.pillars.find(p=>p.key===key);
+  }
+
+  function observedValue(obsPath){
+    // obsPath like "wmr_qol_proxies_v54.rent_burden_30_plus"
+    if(!obsPath) return null;
+    const parts = obsPath.split('.');
+    const root = parts.shift();
+    let obj = null;
+    if(root === "wmr_qol_proxies_v54") obj = proxy;
+    // could add baselines snapshot later
+    if(!obj) return null;
+    for(const p of parts){
+      if(obj && Object.prototype.hasOwnProperty.call(obj,p)){
+        obj = obj[p];
+      } else return null;
+    }
+    return obj;
+  }
+
+  function computeStatusQuoScore(pillar, h){
+    // conservative placeholder: mild trend by pillar type
+    const t = Math.log(1+h)/Math.log(51);
+    if(pillar.key==="housing" || pillar.key==="mobility"){
+      // if observed, compute from observed burdens
+      if(pillar.key==="housing" && proxy){
+        const rb30 = proxy.rent_burden_30_plus;
+        const rb50 = proxy.rent_burden_50_plus;
+        if(rb30!=null && rb50!=null){
+          return clamp(90 - rb30*80 - rb50*40, 10, 90);
+        }
+      }
+      if(pillar.key==="mobility" && proxy){
+        const cm30 = proxy.commute_over_30;
+        const cm60 = proxy.commute_over_60;
+        if(cm30!=null && cm60!=null){
+          return clamp(92 - cm30*70 - cm60*55, 15, 92);
+        }
+      }
+      return 45 + 10*t;
+    }
+    if(pillar.key==="health") return 40 + 8*t;
+    if(pillar.key==="education") return 45 + 7*t;
+    if(pillar.key==="democracy") return 35 + 6*t;
+    if(pillar.key==="economy") return 42 + 9*t;
+    if(pillar.key==="safety") return 38 + 8*t;
+    if(pillar.key==="ai") return 44 + 6*t;
+    return 45 + 8*t;
+  }
+
+  function computeWMRScore(pillar, h){
+    const f = fractionFromAnchors(pillar.phase_curve.anchors, h);
+
+    if(pillar.key==="housing"){
+      let rb30 = proxy ? proxy.rent_burden_30_plus : null;
+      let rb50 = proxy ? proxy.rent_burden_50_plus : null;
+      // If we have observed burdens, reduce them with scenario rent reduction target
+      if(rb30!=null && rb50!=null){
+        const target = scenario.params.rent_burden_reduction_50y ?? 0.55;
+        const reduced30 = rb30*(1 - target*f);
+        const reduced50 = rb50*(1 - target*f*0.8);
+        return clamp((90 - reduced30*80 - reduced50*40) + 10, 0, 100);
+      }
+      // fallback: generic improvement curve + homeownership access
+      const base = 55 + 28*f;
+      const ho = (pillar.scenario_params.homeownership_access_gain_50y?.default ?? 0.35) * 100 * f;
+      return clamp(base + ho*0.15, 0, 100);
+    }
+
+    if(pillar.key==="mobility"){
+      let cm30 = proxy ? proxy.commute_over_30 : null;
+      let cm60 = proxy ? proxy.commute_over_60 : null;
+      if(cm30!=null && cm60!=null){
+        const target = scenario.params.commute_burden_reduction_50y ?? 0.45;
+        const reduced30 = cm30*(1 - target*f);
+        const reduced60 = cm60*(1 - target*f*0.85);
+        return clamp((92 - reduced30*70 - reduced60*55) + 8, 0, 100);
+      }
+      const base = 58 + 30*f;
+      const cov = (pillar.scenario_params.universal_transport_coverage_50y?.default ?? 0.45) * 100 * f;
+      return clamp(base + cov*0.12, 0, 100);
+    }
+
+    if(pillar.key==="health"){
+      const gain = scenario.params.health_access_gain_50y ?? 0.55;
+      return clamp(55 + gain*100*f, 0, 100);
+    }
+    if(pillar.key==="education"){
+      const gain = scenario.params.education_gain_50y ?? 0.48;
+      return clamp(52 + gain*100*f, 0, 100);
+    }
+    if(pillar.key==="democracy"){
+      const gain = scenario.params.democracy_trust_gain_50y ?? 0.35;
+      return clamp(50 + gain*100*f, 0, 100);
+    }
+    if(pillar.key==="economy"){
+      return clamp(55 + 30*f, 0, 100);
+    }
+    if(pillar.key==="safety"){
+      return clamp(50 + 35*f, 0, 100);
+    }
+    if(pillar.key==="ai"){
+      return clamp(48 + 38*f, 0, 100);
+    }
+    return clamp(55 + 30*f, 0, 100);
+  }
+
+  function render(){
+    const pillar = getPillar(pillarSelect.value);
+    scenarioLabel.innerHTML = `<b>${scenario.preset}</b> (stored)`;
+
+    const rows = horizons.map(h=>{
+      const sq = computeStatusQuoScore(pillar, h);
+      const w = computeWMRScore(pillar, h);
+      return {h, sq, w, delta: w - sq};
+    });
+
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Horizon</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Status quo</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ</th>'
+      + '</tr></thead><tbody>';
+
+    for(const r of rows){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${r.h}y</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(r.sq)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(r.w)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmt(r.delta)}</b></td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+    tableEl.innerHTML = html;
+
+    // Drivers
+    let d = `<div class="note"><b>Pillar:</b> ${pillar.name}<br>`;
+    d += `<b>Dimension links:</b> ${pillar.dimension_links.join(', ')}<br>`;
+    d += `<b>Observed grounding:</b> ${(pillar.key==="housing"||pillar.key==="mobility") && proxy ? "Yes (ACS-derived proxies)" : "No (placeholder)" }<br>`;
+    d += `<b>Phase curve:</b> anchors at 1/5/10/20/50 years</div>`;
+
+    d += '<div class="callout"><b>Indicators</b><br>';
+    for(const ind of pillar.indicators){
+      const val = observedValue(ind.observed_from);
+      d += `<b>${ind.label}</b>: ${val==null ? "<span class='muted'>n/a</span>" : fmt(val)} <span class="muted">(${ind.source})</span><br>`;
+    }
+    d += '</div>';
+
+    d += '<div class="callout"><b>Transform</b><br><span class="muted">'+pillar.transforms.pillar_score.notes+'</span><br><code>'+pillar.transforms.pillar_score.formula+'</code></div>';
+
+    // Scenario levers summary
+    d += '<div class="callout"><b>Scenario levers</b><br>';
+    const p = scenario.params;
+    if(pillar.key==="housing"){
+      d += `Rent burden reduction target (50y): <b>${pct(p.rent_burden_reduction_50y ?? 0.55)}</b><br>`;
+      d += `Homeownership access gain (50y): <b>${pct(pillar.scenario_params.homeownership_access_gain_50y.default)}</b> <span class="muted">(pillar default)</span><br>`;
+    } else if(pillar.key==="mobility"){
+      d += `Commute reduction target (50y): <b>${pct(p.commute_burden_reduction_50y ?? 0.45)}</b><br>`;
+      d += `Universal transport coverage (50y): <b>${pct(pillar.scenario_params.universal_transport_coverage_50y.default)}</b> <span class="muted">(pillar default)</span><br>`;
+    } else if(pillar.key==="health"){
+      d += `Health access gain (50y): <b>${pct(p.health_access_gain_50y ?? 0.55)}</b><br>`;
+    } else if(pillar.key==="education"){
+      d += `Education gain (50y): <b>${pct(p.education_gain_50y ?? 0.48)}</b><br>`;
+    } else if(pillar.key==="democracy"){
+      d += `Democracy trust gain (50y): <b>${pct(p.democracy_trust_gain_50y ?? 0.35)}</b><br>`;
+    } else {
+      d += `<span class="muted">This pillar uses internal placeholder parameters for now.</span>`;
+    }
+    d += '</div>';
+
+    driversEl.innerHTML = d;
+  }
+
+  pillarSelect.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const horizons = [1,5,10,20,50];
+
+  const eng = await (await fetch('/data/trajectories/pillar_engine_v57.json')).json();
+
+  // Load scenario (V56)
+  let scenario = null;
+  try{ scenario = JSON.parse(localStorage.getItem("wmr_scenario_v56")||"null"); }catch(e){}
+  if(!scenario || !scenario.params){
+    scenario = { preset:"moderate", params: (await (await fetch('/data/trajectories/trajectory_engine_v56.json')).json()).scenarios.moderate.params };
+  }
+
+  // Proxies (V54 export)
+  let proxy = null;
+  try{ proxy = JSON.parse(localStorage.getItem("wmr_qol_proxies_v54")||"null"); }catch(e){}
+
+  const pillarSelect = document.getElementById('pillarSelect');
+  const scenarioLabel = document.getElementById('scenarioLabel');
+  const tableEl = document.getElementById('pillarTable');
+  const driversEl = document.getElementById('pillarDrivers');
+
+  function clamp(x,a,b){ return Math.max(a, Math.min(b, x)); }
+
+  function fractionFromAnchors(anchors, h){
+    const a = anchors.slice().sort((x,y)=>x.h-y.h);
+    if(h <= a[0].h) return a[0].f;
+    if(h >= a[a.length-1].h) return a[a.length-1].f;
+    for(let i=0;i<a.length-1;i++){
+      const lo=a[i], hi=a[i+1];
+      if(h>=lo.h && h<=hi.h){
+        const t=(h-lo.h)/(hi.h-lo.h);
+        return lo.f + t*(hi.f - lo.f);
+      }
+    }
+    return 1.0;
+  }
+
+  function fmt(x){ return (Math.round(Number(x)*10)/10).toFixed(1); }
+  function pct(x){ return (Number(x)*100).toFixed(0)+'%'; }
+
+  function getPillar(key){
+    return eng.pillars.find(p=>p.key===key);
+  }
+
+  function observedValue(obsPath){
+    // obsPath like "wmr_qol_proxies_v54.rent_burden_30_plus"
+    if(!obsPath) return null;
+    const parts = obsPath.split('.');
+    const root = parts.shift();
+    let obj = null;
+    if(root === "wmr_qol_proxies_v54") obj = proxy;
+    // could add baselines snapshot later
+    if(!obj) return null;
+    for(const p of parts){
+      if(obj && Object.prototype.hasOwnProperty.call(obj,p)){
+        obj = obj[p];
+      } else return null;
+    }
+    return obj;
+  }
+
+  function computeStatusQuoScore(pillar, h){
+    // conservative placeholder: mild trend by pillar type
+    const t = Math.log(1+h)/Math.log(51);
+    if(pillar.key==="housing" || pillar.key==="mobility"){
+      // if observed, compute from observed burdens
+      if(pillar.key==="housing" && proxy){
+        const rb30 = proxy.rent_burden_30_plus;
+        const rb50 = proxy.rent_burden_50_plus;
+        if(rb30!=null && rb50!=null){
+          return clamp(90 - rb30*80 - rb50*40, 10, 90);
+        }
+      }
+      if(pillar.key==="mobility" && proxy){
+        const cm30 = proxy.commute_over_30;
+        const cm60 = proxy.commute_over_60;
+        if(cm30!=null && cm60!=null){
+          return clamp(92 - cm30*70 - cm60*55, 15, 92);
+        }
+      }
+      return 45 + 10*t;
+    }
+    if(pillar.key==="health") return 40 + 8*t;
+    if(pillar.key==="education") return 45 + 7*t;
+    if(pillar.key==="democracy") return 35 + 6*t;
+    if(pillar.key==="economy") return 42 + 9*t;
+    if(pillar.key==="safety") return 38 + 8*t;
+    if(pillar.key==="ai") return 44 + 6*t;
+    return 45 + 8*t;
+  }
+
+  function computeWMRScore(pillar, h){
+    const f = fractionFromAnchors(pillar.phase_curve.anchors, h);
+
+    if(pillar.key==="housing"){
+      let rb30 = proxy ? proxy.rent_burden_30_plus : null;
+      let rb50 = proxy ? proxy.rent_burden_50_plus : null;
+      // If we have observed burdens, reduce them with scenario rent reduction target
+      if(rb30!=null && rb50!=null){
+        const target = scenario.params.rent_burden_reduction_50y ?? 0.55;
+        const reduced30 = rb30*(1 - target*f);
+        const reduced50 = rb50*(1 - target*f*0.8);
+        return clamp((90 - reduced30*80 - reduced50*40) + 10, 0, 100);
+      }
+      // fallback: generic improvement curve + homeownership access
+      const base = 55 + 28*f;
+      const ho = (pillar.scenario_params.homeownership_access_gain_50y?.default ?? 0.35) * 100 * f;
+      return clamp(base + ho*0.15, 0, 100);
+    }
+
+    if(pillar.key==="mobility"){
+      let cm30 = proxy ? proxy.commute_over_30 : null;
+      let cm60 = proxy ? proxy.commute_over_60 : null;
+      if(cm30!=null && cm60!=null){
+        const target = scenario.params.commute_burden_reduction_50y ?? 0.45;
+        const reduced30 = cm30*(1 - target*f);
+        const reduced60 = cm60*(1 - target*f*0.85);
+        return clamp((92 - reduced30*70 - reduced60*55) + 8, 0, 100);
+      }
+      const base = 58 + 30*f;
+      const cov = (pillar.scenario_params.universal_transport_coverage_50y?.default ?? 0.45) * 100 * f;
+      return clamp(base + cov*0.12, 0, 100);
+    }
+
+    if(pillar.key==="health"){
+      const gain = scenario.params.health_access_gain_50y ?? 0.55;
+      return clamp(55 + gain*100*f, 0, 100);
+    }
+    if(pillar.key==="education"){
+      const gain = scenario.params.education_gain_50y ?? 0.48;
+      return clamp(52 + gain*100*f, 0, 100);
+    }
+    if(pillar.key==="democracy"){
+      const gain = scenario.params.democracy_trust_gain_50y ?? 0.35;
+      return clamp(50 + gain*100*f, 0, 100);
+    }
+    if(pillar.key==="economy"){
+      return clamp(55 + 30*f, 0, 100);
+    }
+    if(pillar.key==="safety"){
+      return clamp(50 + 35*f, 0, 100);
+    }
+    if(pillar.key==="ai"){
+      return clamp(48 + 38*f, 0, 100);
+    }
+    return clamp(55 + 30*f, 0, 100);
+  }
+
+  function render(){
+    const pillar = getPillar(pillarSelect.value);
+    scenarioLabel.innerHTML = `<b>${scenario.preset}</b> (stored)`;
+
+    const rows = horizons.map(h=>{
+      const sq = computeStatusQuoScore(pillar, h);
+      const w = computeWMRScore(pillar, h);
+      return {h, sq, w, delta: w - sq};
+    });
+
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Horizon</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Status quo</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ</th>'
+      + '</tr></thead><tbody>';
+
+    for(const r of rows){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${r.h}y</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(r.sq)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(r.w)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmt(r.delta)}</b></td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+    tableEl.innerHTML = html;
+
+    // Drivers
+    let d = `<div class="note"><b>Pillar:</b> ${pillar.name}<br>`;
+    d += `<b>Dimension links:</b> ${pillar.dimension_links.join(', ')}<br>`;
+    d += `<b>Observed grounding:</b> ${(pillar.key==="housing"||pillar.key==="mobility") && proxy ? "Yes (ACS-derived proxies)" : "No (placeholder)" }<br>`;
+    d += `<b>Phase curve:</b> anchors at 1/5/10/20/50 years</div>`;
+
+    d += '<div class="callout"><b>Indicators</b><br>';
+    for(const ind of pillar.indicators){
+      const val = observedValue(ind.observed_from);
+      d += `<b>${ind.label}</b>: ${val==null ? "<span class='muted'>n/a</span>" : fmt(val)} <span class="muted">(${ind.source})</span><br>`;
+    }
+    d += '</div>';
+
+    d += '<div class="callout"><b>Transform</b><br><span class="muted">'+pillar.transforms.pillar_score.notes+'</span><br><code>'+pillar.transforms.pillar_score.formula+'</code></div>';
+
+    // Scenario levers summary
+    d += '<div class="callout"><b>Scenario levers</b><br>';
+    const p = scenario.params;
+    if(pillar.key==="housing"){
+      d += `Rent burden reduction target (50y): <b>${pct(p.rent_burden_reduction_50y ?? 0.55)}</b><br>`;
+      d += `Homeownership access gain (50y): <b>${pct(pillar.scenario_params.homeownership_access_gain_50y.default)}</b> <span class="muted">(pillar default)</span><br>`;
+    } else if(pillar.key==="mobility"){
+      d += `Commute reduction target (50y): <b>${pct(p.commute_burden_reduction_50y ?? 0.45)}</b><br>`;
+      d += `Universal transport coverage (50y): <b>${pct(pillar.scenario_params.universal_transport_coverage_50y.default)}</b> <span class="muted">(pillar default)</span><br>`;
+    } else if(pillar.key==="health"){
+      d += `Health access gain (50y): <b>${pct(p.health_access_gain_50y ?? 0.55)}</b><br>`;
+    } else if(pillar.key==="education"){
+      d += `Education gain (50y): <b>${pct(p.education_gain_50y ?? 0.48)}</b><br>`;
+    } else if(pillar.key==="democracy"){
+      d += `Democracy trust gain (50y): <b>${pct(p.democracy_trust_gain_50y ?? 0.35)}</b><br>`;
+    } else {
+      d += `<span class="muted">This pillar uses internal placeholder parameters for now.</span>`;
+    }
+    d += '</div>';
+
+    driversEl.innerHTML = d;
+  }
+
+  pillarSelect.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>

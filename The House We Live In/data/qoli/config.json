@@ -1,0 +1,67 @@
+{
+  "index_name": "Quality of Life Index (QoLI)",
+  "timepoints_years": [
+    1,
+    5,
+    10,
+    20,
+    50
+  ],
+  "domains": [
+    {
+      "key": "income_work",
+      "name": "Income & Work Security",
+      "weight": 1.0
+    },
+    {
+      "key": "affordability",
+      "name": "Cost of Living & Affordability",
+      "weight": 1.0
+    },
+    {
+      "key": "housing",
+      "name": "Housing Stability & Ownership Path",
+      "weight": 1.0
+    },
+    {
+      "key": "health",
+      "name": "Health & Longevity",
+      "weight": 1.0
+    },
+    {
+      "key": "education",
+      "name": "Education & Mobility",
+      "weight": 1.0
+    },
+    {
+      "key": "safety_justice",
+      "name": "Safety, Justice & Community Trust",
+      "weight": 1.0
+    },
+    {
+      "key": "time_stress",
+      "name": "Time & Stress",
+      "weight": 1.0
+    },
+    {
+      "key": "infrastructure_access",
+      "name": "Infrastructure Access",
+      "weight": 1.0
+    },
+    {
+      "key": "democratic_agency",
+      "name": "Democratic Agency",
+      "weight": 1.0
+    }
+  ],
+  "scoring": {
+    "scale_min": 0,
+    "scale_max": 100,
+    "aggregation": "weighted_average"
+  },
+  "transparency_standard": [
+    "Every estimate must include: assumption, mechanism, directionality, range, and rationale.",
+    "Every output must show status quo vs WMR side-by-side at each timepoint.",
+    "Every domain score must cite its component indicators and their normalization."
+  ]
+}

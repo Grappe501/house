@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "version": "0.1",
+    "notes": [
+      "This is a client-visible snapshot format. In later versions we can generate it at build time or via admin tooling.",
+      "For now the UI writes a temporary snapshot to localStorage and displays it."
+    ]
+  },
+  "last_pull": null,
+  "geography": null,
+  "acs": {},
+  "bls": {}
+}

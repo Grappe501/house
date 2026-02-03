@@ -1,0 +1,10 @@
+{
+  "name": "guard-plan-assembler-kernel",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "plan:guard": "node scripts/plan_guard.js",
+    "plan:assemble": "node scripts/assemble.js",
+    "manifest": "node scripts/generate_manifest.js"
+  }
+}

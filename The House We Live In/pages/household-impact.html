@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Household Impact Simulator — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>Household Impact Simulator</h1>
+          <div class="muted">Home / Impact Lab / Household impact</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="household-impact">
+
+<div class="card">
+  <div class="kicker">Golden Circle</div>
+  <h2>WHY: show the working family impact—not just national totals</h2>
+  
+<p>National totals matter, but legitimacy comes from one question:</p>
+<div class="callout"><b>“What does this change for a working family—this year, and over time?”</b></div>
+<p>This simulator is a placeholder translation layer. It will improve as we replace each assumption with sourced estimates.</p>
+<p>
+Data: <a href="/data/finance/household_translation_scaffold.json"><b>household_translation_scaffold.json</b></a> •
+<a href="/pages/model-sources.html"><b>Sources & Methods</b></a>
+</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Inputs</div>
+  <h2>Household settings</h2>
+  
+<div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;">
+  <div>
+    <label class="muted"><b>Band</b></label><br>
+    <select id="band" style="padding:8px;">
+      <option value="low">low</option>
+      <option value="base" selected>base</option>
+      <option value="high">high</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Income</b></label><br>
+    <input id="income" type="range" min="20000" max="250000" step="1000" value="65000" style="width:260px;">
+    <div class="muted" id="incomeVal">$65,000</div>
+  </div>
+  <div>
+    <label class="muted"><b>Household size</b></label><br>
+    <select id="hh" style="padding:8px;">
+      <option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Location</b></label><br>
+    <select id="loc" style="padding:8px;">
+      <option value="urban">urban</option>
+      <option value="suburban">suburban</option>
+      <option value="rural" selected>rural</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Housing</b></label><br>
+    <select id="housing" style="padding:8px;">
+      <option value="renter" selected>renter</option>
+      <option value="owner">owner</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Student debt</b></label><br>
+    <select id="sdebt" style="padding:8px;">
+      <option value="none">none</option>
+      <option value="some" selected>some</option>
+      <option value="heavy">heavy</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Medical debt</b></label><br>
+    <select id="mdebt" style="padding:8px;">
+      <option value="none">none</option>
+      <option value="some" selected>some</option>
+      <option value="heavy">heavy</option>
+    </select>
+  </div>
+</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Results</div>
+  <h2>Side-by-side household impact by horizon</h2>
+  
+<div id="results" class="note">Loading…</div>
+<div class="note" style="margin-top:10px;">
+<b>Interpretation:</b> “Status quo” means today’s burden continuing with growth. “WMR” includes relief plus a future People’s Dividend.
+This is a <b>placeholder translation layer</b> until we source each component.
+</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Next upgrades</div>
+  <h2>How we make this defensible</h2>
+  
+<ul>
+  <li>Replace baselines with sourced household burden distributions (by income/region).</li>
+  <li>Connect dividend to the People’s Wealth Fund accumulation (from surplus projection).</li>
+  <li>Add demographic presets (single parent, elder household, rural worker, etc.).</li>
+  <li>Publish confidence bounds and sensitivity analysis per component.</li>
+</ul>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="household-impact" />
+    <input type="hidden" name="page_title" value="Household Impact Simulator" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const incomeEl = document.getElementById('income');
+  const incomeVal = document.getElementById('incomeVal');
+  const hhEl = document.getElementById('hh');
+  const locEl = document.getElementById('loc');
+  const housingEl = document.getElementById('housing');
+  const sdebtEl = document.getElementById('sdebt');
+  const mdebtEl = document.getElementById('mdebt');
+  const results = document.getElementById('results');
+
+  const j = await (await fetch('/data/finance/household_translation_scaffold.json')).json();
+
+  function fmt(n){
+    const x = Math.round(Number(n));
+    return '$' + x.toLocaleString();
+  }
+
+  function rampFactor(ramp, y){
+    if(!ramp) return 1;
+    if(ramp.kind === 's_curve'){
+      const m = ramp.midpoint_year || 10;
+      const k = ramp.steepness || 0.5;
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    return 1;
+  }
+
+  function studentDebtScale(level){
+    if(level==='none') return 0;
+    if(level==='some') return 1;
+    return 2.0;
+  }
+  function medicalDebtScale(level){
+    if(level==='none') return 0;
+    if(level==='some') return 1;
+    return 2.0;
+  }
+  function locationScale(loc){
+    if(loc==='urban') return {transport:0.7, broadband:1.0, housing:1.2};
+    if(loc==='suburban') return {transport:1.0, broadband:1.0, housing:1.0};
+    return {transport:1.3, broadband:1.0, housing:0.9}; // rural
+  }
+
+  function compute(){
+    const band = bandEl.value;
+    const income = Number(incomeEl.value);
+    const hh = Number(hhEl.value);
+    const loc = locEl.value;
+    const housing = housingEl.value;
+    const sd = sdebtEl.value;
+    const md = mdebtEl.value;
+
+    incomeVal.textContent = '$' + income.toLocaleString();
+
+    const scale = locationScale(loc);
+
+    // Status quo annual burdens (scaled)
+    const sq = j.status_quo.annual_burdens_usd;
+    const sqGrowth = j.status_quo.growth_rates_annual[band];
+
+    // WMR relief
+    const w = j.wmr.annual_relief_usd;
+    const div = j.wmr.people_dividend_usd;
+    const tax = j.wmr.transition_taxes_net_usd;
+
+    // Convert baseline components
+    function annualSQ(year){
+      const g = Math.pow(1+sqGrowth, year-1);
+      const hc = sq.healthcare_premiums_out_of_pocket[band] * g;
+      const sl = sq.student_loan_payments[band] * studentDebtScale(sd) * g;
+      const mdp = sq.medical_debt_payments[band] * medicalDebtScale(md) * g;
+      const hpress = sq.housing_cost_pressure[band] * (housing==='renter' ? 1.0 : 0.6) * scale.housing * g;
+      const tpress = sq.transport_cost_pressure[band] * scale.transport * g;
+      const bb = sq.broadband_cost[band] * scale.broadband * g;
+      return hc + sl + mdp + hpress + tpress + bb;
+    }
+
+    function annualWMR(year){
+      // Relief: assume ramps: healthcare and education relief phase in over 3 years; dividend ramps over time
+      const hcRel = w.healthcare_relief[band] * Math.min(1, year/3);
+      const eduRel = w.education_relief[band] * Math.min(1, year/3) * studentDebtScale(sd);
+      const medRel = w.medical_debt_relief[band] * Math.min(1, year/2) * medicalDebtScale(md);
+      const bbRel = w.broadband_relief[band] * Math.min(1, year/4) * scale.broadband;
+      const trRel = w.transport_relief[band] * Math.min(1, year/6) * scale.transport;
+      const hoRel = w.housing_relief[band] * Math.min(1, year/6) * (housing==='renter' ? 1.0 : 0.6) * scale.housing;
+
+      const dividend = div.steady_state[band] * rampFactor(div.ramp, year) * (0.6 + 0.2*Math.min(2,hh)); // household size modifier
+
+      // Tax change: mild income effect (progressive in placeholder)
+      const taxBase = tax[band][band]; // pick diagonal default; placeholder
+      const taxAdj = (income > 120000 ? (taxBase*0.5) : (income < 50000 ? (taxBase*1.2) : taxBase));
+
+      // Net: status quo burden minus relief minus dividend plus tax adjustment
+      return annualSQ(year) - (hcRel + eduRel + medRel + bbRel + trRel + hoRel) - dividend + taxAdj;
+    }
+
+    const horizons = j.meta.horizons;
+    const rows = horizons.map(H => {
+      let cumSQ=0, cumW=0;
+      for(let y=1;y<=H;y++){
+        cumSQ += annualSQ(y);
+        cumW += annualWMR(y);
+      }
+      return {H, cumSQ, cumW, delta: cumW - cumSQ};
+    });
+
+    // render table
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Horizon</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Status quo (cumulative burden)</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR (cumulative burden)</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ (WMR − SQ)</th>'
+      + '</tr></thead><tbody>';
+
+    for(const r of rows){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${r.H}y</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(r.cumSQ)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(r.cumW)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmt(r.delta)}</b></td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+
+    // Quick headline
+    const r10 = rows.find(x=>x.H===10);
+    const r50 = rows.find(x=>x.H===50);
+    html = `<div class="callout"><b>Headline (placeholder)</b><br>`
+      + `10y Δ: <b>${fmt(r10.delta)}</b> • 50y Δ: <b>${fmt(r50.delta)}</b>`
+      + `</div>` + html;
+
+    results.innerHTML = html;
+  }
+
+  [bandEl,incomeEl,hhEl,locEl,housingEl,sdebtEl,mdebtEl].forEach(el=>{
+    el.addEventListener(el===incomeEl?'input':'change', compute);
+  });
+  compute();
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const incomeEl = document.getElementById('income');
+  const incomeVal = document.getElementById('incomeVal');
+  const hhEl = document.getElementById('hh');
+  const locEl = document.getElementById('loc');
+  const housingEl = document.getElementById('housing');
+  const sdebtEl = document.getElementById('sdebt');
+  const mdebtEl = document.getElementById('mdebt');
+  const results = document.getElementById('results');
+
+  const j = await (await fetch('/data/finance/household_translation_scaffold.json')).json();
+
+  function fmt(n){
+    const x = Math.round(Number(n));
+    return '$' + x.toLocaleString();
+  }
+
+  function rampFactor(ramp, y){
+    if(!ramp) return 1;
+    if(ramp.kind === 's_curve'){
+      const m = ramp.midpoint_year || 10;
+      const k = ramp.steepness || 0.5;
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    return 1;
+  }
+
+  function studentDebtScale(level){
+    if(level==='none') return 0;
+    if(level==='some') return 1;
+    return 2.0;
+  }
+  function medicalDebtScale(level){
+    if(level==='none') return 0;
+    if(level==='some') return 1;
+    return 2.0;
+  }
+  function locationScale(loc){
+    if(loc==='urban') return {transport:0.7, broadband:1.0, housing:1.2};
+    if(loc==='suburban') return {transport:1.0, broadband:1.0, housing:1.0};
+    return {transport:1.3, broadband:1.0, housing:0.9}; // rural
+  }
+
+  function compute(){
+    const band = bandEl.value;
+    const income = Number(incomeEl.value);
+    const hh = Number(hhEl.value);
+    const loc = locEl.value;
+    const housing = housingEl.value;
+    const sd = sdebtEl.value;
+    const md = mdebtEl.value;
+
+    incomeVal.textContent = '$' + income.toLocaleString();
+
+    const scale = locationScale(loc);
+
+    // Status quo annual burdens (scaled)
+    const sq = j.status_quo.annual_burdens_usd;
+    const sqGrowth = j.status_quo.growth_rates_annual[band];
+
+    // WMR relief
+    const w = j.wmr.annual_relief_usd;
+    const div = j.wmr.people_dividend_usd;
+    const tax = j.wmr.transition_taxes_net_usd;
+
+    // Convert baseline components
+    function annualSQ(year){
+      const g = Math.pow(1+sqGrowth, year-1);
+      const hc = sq.healthcare_premiums_out_of_pocket[band] * g;
+      const sl = sq.student_loan_payments[band] * studentDebtScale(sd) * g;
+      const mdp = sq.medical_debt_payments[band] * medicalDebtScale(md) * g;
+      const hpress = sq.housing_cost_pressure[band] * (housing==='renter' ? 1.0 : 0.6) * scale.housing * g;
+      const tpress = sq.transport_cost_pressure[band] * scale.transport * g;
+      const bb = sq.broadband_cost[band] * scale.broadband * g;
+      return hc + sl + mdp + hpress + tpress + bb;
+    }
+
+    function annualWMR(year){
+      // Relief: assume ramps: healthcare and education relief phase in over 3 years; dividend ramps over time
+      const hcRel = w.healthcare_relief[band] * Math.min(1, year/3);
+      const eduRel = w.education_relief[band] * Math.min(1, year/3) * studentDebtScale(sd);
+      const medRel = w.medical_debt_relief[band] * Math.min(1, year/2) * medicalDebtScale(md);
+      const bbRel = w.broadband_relief[band] * Math.min(1, year/4) * scale.broadband;
+      const trRel = w.transport_relief[band] * Math.min(1, year/6) * scale.transport;
+      const hoRel = w.housing_relief[band] * Math.min(1, year/6) * (housing==='renter' ? 1.0 : 0.6) * scale.housing;
+
+      const dividend = div.steady_state[band] * rampFactor(div.ramp, year) * (0.6 + 0.2*Math.min(2,hh)); // household size modifier
+
+      // Tax change: mild income effect (progressive in placeholder)
+      const taxBase = tax[band][band]; // pick diagonal default; placeholder
+      const taxAdj = (income > 120000 ? (taxBase*0.5) : (income < 50000 ? (taxBase*1.2) : taxBase));
+
+      // Net: status quo burden minus relief minus dividend plus tax adjustment
+      return annualSQ(year) - (hcRel + eduRel + medRel + bbRel + trRel + hoRel) - dividend + taxAdj;
+    }
+
+    const horizons = j.meta.horizons;
+    const rows = horizons.map(H => {
+      let cumSQ=0, cumW=0;
+      for(let y=1;y<=H;y++){
+        cumSQ += annualSQ(y);
+        cumW += annualWMR(y);
+      }
+      return {H, cumSQ, cumW, delta: cumW - cumSQ};
+    });
+
+    // render table
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Horizon</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Status quo (cumulative burden)</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR (cumulative burden)</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ (WMR − SQ)</th>'
+      + '</tr></thead><tbody>';
+
+    for(const r of rows){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${r.H}y</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(r.cumSQ)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(r.cumW)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmt(r.delta)}</b></td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+
+    // Quick headline
+    const r10 = rows.find(x=>x.H===10);
+    const r50 = rows.find(x=>x.H===50);
+    html = `<div class="callout"><b>Headline (placeholder)</b><br>`
+      + `10y Δ: <b>${fmt(r10.delta)}</b> • 50y Δ: <b>${fmt(r50.delta)}</b>`
+      + `</div>` + html;
+
+    results.innerHTML = html;
+  }
+
+  [bandEl,incomeEl,hhEl,locEl,housingEl,sdebtEl,mdebtEl].forEach(el=>{
+    el.addEventListener(el===incomeEl?'input':'change', compute);
+  });
+  compute();
+})();
+</script>
+
+</body>
+</html>

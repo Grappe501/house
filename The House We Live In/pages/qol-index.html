@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quality of Life Index — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>Quality of Life Index</h1>
+          <div class="muted">Home / Impact Lab / QoL index</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="qol-index">
+
+<div class="card">
+  <div class="kicker">Golden Circle</div>
+  <h2>WHY: a single score that can’t hide trade-offs</h2>
+  
+<p>Readers need a way to see whether the system actually improves life for the working majority.
+The <b>Quality of Life (QoL) Index</b> is a <b>composite score (0–100)</b> that rolls up multiple dimensions.</p>
+<div class="callout"><b>Rule:</b> every point in the index must be traceable to a proxy and a data file.</div>
+<p>
+Data: <a href="/data/qol/quality_of_life_index_scaffold.json"><b>quality_of_life_index_scaffold.json</b></a> •
+<a href="/pages/household-impact.html"><b>Household Impact Simulator</b></a> •
+<a href="/pages/surplus-projection.html"><b>Surplus Projection</b></a>
+</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Inputs</div>
+  <h2>Scenario settings</h2>
+  
+<div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;">
+  <div>
+    <label class="muted"><b>Band</b></label><br>
+    <select id="band" style="padding:8px;">
+      <option value="low">low</option>
+      <option value="base" selected>base</option>
+      <option value="high">high</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Horizon</b></label><br>
+    <select id="H" style="padding:8px;">
+      <option value="1">1 year</option>
+      <option value="5">5 years</option>
+      <option value="10" selected>10 years</option>
+      <option value="20">20 years</option>
+      <option value="50">50 years</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Household preset</b></label><br>
+    <select id="preset" style="padding:8px;">
+      <option value="working_family" selected>working family (rural renter)</option>
+      <option value="urban_single">urban single</option>
+      <option value="suburban_owner">suburban owner</option>
+      <option value="elder_fixed">elder household (fixed income)</option>
+    </select>
+  </div>
+</div>
+<p class="note">Presets are placeholders; V51 will add editable controls and more demographic presets.</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Result</div>
+  <h2>QoL Index (0–100) + dimension breakdown</h2>
+  
+<div id="qolHeadline" class="callout">Loading…</div>
+<div id="qolTable" class="note" style="margin-top:12px;">Loading…</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">How scoring works</div>
+  <h2>Transparent, auditable logic (scaffold)</h2>
+  
+<ul>
+  <li>Each dimension has a proxy and a weight (weights differ by band).</li>
+  <li>Scores are normalized between <b>Status Quo</b> and <b>WMR</b> for the selected horizon.</li>
+  <li>This first version uses simple, explainable proxies. Later versions will use validated indicators.</li>
+</ul>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Next</div>
+  <h2>What makes this publishable</h2>
+  
+<ul>
+  <li>Replace placeholders with sourced indicators (CDC, CMS, BLS, DOT, FCC, Census, etc.).</li>
+  <li>Publish uncertainty bounds and sensitivity analysis.</li>
+  <li>Add state/county overlays and rural/urban comparison panels.</li>
+  <li>Connect QoL to each policy page (“this reform adds +X over 10y”).</li>
+</ul>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="qol-index" />
+    <input type="hidden" name="page_title" value="Quality of Life Index" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const hEl = document.getElementById('H');
+  const presetEl = document.getElementById('preset');
+  const headline = document.getElementById('qolHeadline');
+  const table = document.getElementById('qolTable');
+
+  const qol = await (await fetch('/data/qol/quality_of_life_index_scaffold.json')).json();
+  const hh = await (await fetch('/data/finance/household_translation_scaffold.json')).json();
+  const fiscal = await (await fetch('/data/finance/fiscal_and_debt_model_scaffold.json')).json();
+  const li = await (await fetch('/data/finance/budget_line_items_scaffold.json')).json();
+
+  function pct(x){ return (x*100).toFixed(0) + '%'; }
+
+  function rampFactorItem(item, y){
+    const r = item.ramp || {};
+    if(r.kind === 'linear'){
+      const s = r.start_year || 1;
+      const e = r.end_year || s;
+      if(y <= s) return 0;
+      if(y >= e) return 1;
+      return (y - s) / (e - s);
+    }
+    if(r.kind === 's_curve'){
+      const m = r.midpoint_year || 8;
+      const k = r.steepness || 0.6;
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    if(r.kind === 'front_load'){
+      const years = (r.years || []);
+      if(years.length === 0) return 0;
+      const maxY = Math.max(...years);
+      if(y <= 1) return 0;
+      if(y >= maxY) return 1;
+      return Math.min(1, y / maxY);
+    }
+    return 1;
+  }
+  function lineItemEffect(band, year){
+    let sum = 0;
+    for(const item of li.wmr.items){
+      const steady = item.annual_steady_state_usd[band];
+      sum += steady * rampFactorItem(item, year);
+    }
+    return sum;
+  }
+
+  function presetConfig(p){
+    // Keep aligned with household-impact scaffolding defaults.
+    if(p==='urban_single') return {income:52000, hh:1, loc:'urban', housing:'renter', sdebt:'some', mdebt:'some'};
+    if(p==='suburban_owner') return {income:98000, hh:4, loc:'suburban', housing:'owner', sdebt:'some', mdebt:'none'};
+    if(p==='elder_fixed') return {income:42000, hh:2, loc:'rural', housing:'owner', sdebt:'none', mdebt:'heavy'};
+    return {income:65000, hh:3, loc:'rural', housing:'renter', sdebt:'some', mdebt:'some'};
+  }
+
+  function studentDebtScale(level){ if(level==='none') return 0; if(level==='some') return 1; return 2.0; }
+  function medicalDebtScale(level){ if(level==='none') return 0; if(level==='some') return 1; return 2.0; }
+  function locationScale(loc){
+    if(loc==='urban') return {transport:0.7, broadband:1.0, housing:1.2};
+    if(loc==='suburban') return {transport:1.0, broadband:1.0, housing:1.0};
+    return {transport:1.3, broadband:1.0, housing:0.9};
+  }
+
+  function rampFactor(ramp, y){
+    if(!ramp) return 1;
+    if(ramp.kind === 's_curve'){
+      const m = ramp.midpoint_year || 10;
+      const k = ramp.steepness || 0.5;
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    return 1;
+  }
+
+  // Compute household cumulative burdens for SQ and WMR at horizon H (based on same logic as household-impact, simplified)
+  function householdBurden(band, H, conf){
+    const scale = locationScale(conf.loc);
+    const sq = hh.status_quo.annual_burdens_usd;
+    const sqGrowth = hh.status_quo.growth_rates_annual[band];
+    const w = hh.wmr.annual_relief_usd;
+
+    // Dividend derived from PWF (reuse approach from household-impact)
+    const div = hh.wmr.people_dividend_usd;
+    const payoutRate = div.payout_rate_annual[band];
+    const households = div.estimated_households.value;
+    const divRamp = div.phase_in_ramp;
+    const divCap = div.cap_per_household_usd[band];
+
+    const tax = hh.wmr.transition_taxes_net_usd;
+    const taxBase = tax[band][band];
+    const income = conf.income;
+    const hhSize = conf.hh;
+    const sd = conf.sdebt;
+    const md = conf.mdebt;
+    const housing = conf.housing;
+
+    const sp = fiscal.starting_point_placeholders || {};
+    const debt0 = sp.gross_federal_debt_usd_sep30_2025 || 27_000_000_000_000;
+    const gdp0 = sp.nominal_gdp_usd_saar_q3_2025 || 27_000_000_000_000;
+    const shares = (fiscal.wmr.rules.surplus_allocation_framework && fiscal.wmr.rules.surplus_allocation_framework.default_shares)
+      ? fiscal.wmr.rules.surplus_allocation_framework.default_shares[band]
+      : (li.wmr.surplus_allocation_defaults ? li.wmr.surplus_allocation_defaults[band] : {debt_paydown:0.6,peoples_wealth_fund:0.25,reinvestment:0.15});
+    const r = sp.interest_rate_effective[band];
+    const r_w = Math.max(0, r - fiscal.wmr.mechanisms.interest_rate_risk_premium_reduction[band]);
+    const sq_real = fiscal.status_quo.assumptions.real_gdp_growth[band];
+    const sq_inf = fiscal.status_quo.assumptions.inflation[band];
+    const w_uplift = fiscal.wmr.mechanisms.net_growth_uplift_from_infrastructure[band];
+    const w_real = sq_real + w_uplift;
+    const w_inf = sq_inf;
+    const prim0 = sp.primary_deficit_status_quo_usd[band];
+
+    // Build PWF series up to H (simplified)
+    let debt = debt0, gdp = gdp0, pwf=0;
+    const pwfSeries=[0];
+    for(let t=1;t<=H;t++){
+      const interest = debt * r_w;
+      const improvement = lineItemEffect(band, t);
+      const prim = prim0 * (1 + 0.01*(t-1)) - improvement;
+      let pay=0, pwfAdd=0;
+      if(prim < 0){
+        const surplus = -prim;
+        pay = surplus * shares.debt_paydown;
+        pwfAdd = surplus * shares.peoples_wealth_fund;
+      }
+      debt = debt + prim + interest;
+      if(pay>0) debt -= pay;
+      gdp = gdp * (1 + w_real + w_inf);
+      pwf += pwfAdd;
+      pwfSeries.push(pwf);
+    }
+
+    function annualSQ(y){
+      const g = Math.pow(1+sqGrowth, y-1);
+      const hc = sq.healthcare_premiums_out_of_pocket[band] * g;
+      const sl = sq.student_loan_payments[band] * studentDebtScale(sd) * g;
+      const mdp = sq.medical_debt_payments[band] * medicalDebtScale(md) * g;
+      const hpress = sq.housing_cost_pressure[band] * (housing==='renter' ? 1.0 : 0.6) * scale.housing * g;
+      const tpress = sq.transport_cost_pressure[band] * scale.transport * g;
+      const bb = sq.broadband_cost[band] * scale.broadband * g;
+      return hc + sl + mdp + hpress + tpress + bb;
+    }
+    function annualDividend(y){
+      const pwfTot = pwfSeries[y] || pwfSeries[pwfSeries.length-1];
+      const raw = (payoutRate * pwfTot) / households;
+      const phased = raw * rampFactor(divRamp, y);
+      const capped = Math.min(phased, divCap);
+      const hhMod = (0.75 + 0.1*Math.min(4, hhSize));
+      return capped * hhMod;
+    }
+    function annualWMR(y){
+      const hcRel = w.healthcare_relief[band] * Math.min(1, y/3);
+      const eduRel = w.education_relief[band] * Math.min(1, y/3) * studentDebtScale(sd);
+      const medRel = w.medical_debt_relief[band] * Math.min(1, y/2) * medicalDebtScale(md);
+      const bbRel = w.broadband_relief[band] * Math.min(1, y/4) * scale.broadband;
+      const trRel = w.transport_relief[band] * Math.min(1, y/6) * scale.transport;
+      const hoRel = w.housing_relief[band] * Math.min(1, y/6) * (housing==='renter' ? 1.0 : 0.6) * scale.housing;
+      const dividend = annualDividend(y);
+      const taxAdj = (income > 120000 ? (taxBase*0.5) : (income < 50000 ? (taxBase*1.2) : taxBase));
+      return annualSQ(y) - (hcRel + eduRel + medRel + bbRel + trRel + hoRel) - dividend + taxAdj;
+    }
+
+    let cumSQ=0, cumW=0;
+    for(let y=1;y<=H;y++){
+      cumSQ += annualSQ(y);
+      cumW += annualWMR(y);
+    }
+    return {cumSQ, cumW};
+  }
+
+  // Normalize between SQ and WMR such that SQ=0 and WMR=100 if WMR is better, else reversed.
+  function normScore(sqVal, wmrVal, higherIsBetter){
+    // For burdens, lower is better.
+    let a = sqVal, b = wmrVal;
+    if(!higherIsBetter){
+      // invert: better means lower
+      a = -sqVal;
+      b = -wmrVal;
+    }
+    if(a===b) return {sq:50, wmr:50};
+    // set SQ to 0, WMR to 100 in direction of improvement
+    const wBetter = b > a;
+    return wBetter ? {sq:0, wmr:100} : {sq:100, wmr:0};
+  }
+
+  function render(){
+    const band = bandEl.value;
+    const H = Number(hEl.value);
+    const conf = presetConfig(presetEl.value);
+
+    // Dimension proxy computations (simple scaffolds)
+    const hb = householdBurden(band, H, conf);
+    const econScores = normScore(hb.cumSQ, hb.cumW, false);
+
+    // Placeholder proxy scores for other dimensions derived from related relief intensity + horizon
+    const horizonFactor = Math.min(1, H/20);
+    const healthScores = {sq: 40 + 10*horizonFactor, wmr: 60 + 20*horizonFactor}; // placeholder
+    const housingScores = {sq: 45 + 10*horizonFactor, wmr: 60 + 15*horizonFactor}; // placeholder
+    const mobilityScores = {sq: 45 + 10*horizonFactor, wmr: 62 + 12*horizonFactor}; // placeholder
+    const eduScores = {sq: 50 + 8*horizonFactor, wmr: 70 + 12*horizonFactor}; // placeholder
+    const civicScores = {sq: 45 + 6*horizonFactor, wmr: 65 + 10*horizonFactor}; // placeholder
+    const futureScores = {sq: 42 + 8*horizonFactor, wmr: 66 + 14*horizonFactor}; // placeholder
+
+    const map = {
+      household_economic_burden: econScores,
+      health_and_stress: healthScores,
+      housing_security: housingScores,
+      mobility_and_time: mobilityScores,
+      education_opportunity: eduScores,
+      civic_power_and_trust: civicScores,
+      future_resilience: futureScores
+    };
+
+    // Composite index
+    const dims = qol.dimensions;
+    let sq=0, wmr=0, wsum=0;
+    let rows='';
+    for(const d of dims){
+      const w = d.weight[band];
+      wsum += w;
+      const s = map[d.key];
+      const sqPart = s.sq * w;
+      const wPart = s.wmr * w;
+      sq += sqPart;
+      wmr += wPart;
+      rows += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${d.name}</b><br><span class="muted">${d.proxy}</span></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${d.weight[band].toFixed(2)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${Math.round(s.sq)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${Math.round(s.wmr)}</b></td>`
+        + '</tr>';
+    }
+    sq = sq/wsum;
+    wmr = wmr/wsum;
+
+    headline.innerHTML =
+      `<b>QoL Index (scaffold)</b><br>`
+      + `Band: <b>${band}</b> • Horizon: <b>${H} years</b> • Preset: <b>${presetEl.options[presetEl.selectedIndex].text}</b><br>`
+      + `Status Quo: <b>${Math.round(sq)}</b> / 100 • WMR: <b>${Math.round(wmr)}</b> / 100 • Δ: <b>${Math.round(wmr - sq)}</b>`;
+
+    table.innerHTML =
+      '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Dimension</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Weight</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">SQ score</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR score</th>'
+      + '</tr></thead><tbody>'
+      + rows
+      + '</tbody></table>'
+      + `<div class="note" style="margin-top:10px;">
+        <b>Economic burden proxy:</b> cumulative household burden (from simulator logic). SQ: ${Math.round(hb.cumSQ).toLocaleString()} • WMR: ${Math.round(hb.cumW).toLocaleString()} (lower is better).
+        Other dimensions are placeholder score curves until sourced indicators are added.
+      </div>`;
+  }
+
+  bandEl.addEventListener('change', render);
+  hEl.addEventListener('change', render);
+  presetEl.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const hEl = document.getElementById('H');
+  const presetEl = document.getElementById('preset');
+  const headline = document.getElementById('qolHeadline');
+  const table = document.getElementById('qolTable');
+
+  const qol = await (await fetch('/data/qol/quality_of_life_index_scaffold.json')).json();
+  const hh = await (await fetch('/data/finance/household_translation_scaffold.json')).json();
+  const fiscal = await (await fetch('/data/finance/fiscal_and_debt_model_scaffold.json')).json();
+  const li = await (await fetch('/data/finance/budget_line_items_scaffold.json')).json();
+
+  function pct(x){ return (x*100).toFixed(0) + '%'; }
+
+  function rampFactorItem(item, y){
+    const r = item.ramp || {};
+    if(r.kind === 'linear'){
+      const s = r.start_year || 1;
+      const e = r.end_year || s;
+      if(y <= s) return 0;
+      if(y >= e) return 1;
+      return (y - s) / (e - s);
+    }
+    if(r.kind === 's_curve'){
+      const m = r.midpoint_year || 8;
+      const k = r.steepness || 0.6;
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    if(r.kind === 'front_load'){
+      const years = (r.years || []);
+      if(years.length === 0) return 0;
+      const maxY = Math.max(...years);
+      if(y <= 1) return 0;
+      if(y >= maxY) return 1;
+      return Math.min(1, y / maxY);
+    }
+    return 1;
+  }
+  function lineItemEffect(band, year){
+    let sum = 0;
+    for(const item of li.wmr.items){
+      const steady = item.annual_steady_state_usd[band];
+      sum += steady * rampFactorItem(item, year);
+    }
+    return sum;
+  }
+
+  function presetConfig(p){
+    // Keep aligned with household-impact scaffolding defaults.
+    if(p==='urban_single') return {income:52000, hh:1, loc:'urban', housing:'renter', sdebt:'some', mdebt:'some'};
+    if(p==='suburban_owner') return {income:98000, hh:4, loc:'suburban', housing:'owner', sdebt:'some', mdebt:'none'};
+    if(p==='elder_fixed') return {income:42000, hh:2, loc:'rural', housing:'owner', sdebt:'none', mdebt:'heavy'};
+    return {income:65000, hh:3, loc:'rural', housing:'renter', sdebt:'some', mdebt:'some'};
+  }
+
+  function studentDebtScale(level){ if(level==='none') return 0; if(level==='some') return 1; return 2.0; }
+  function medicalDebtScale(level){ if(level==='none') return 0; if(level==='some') return 1; return 2.0; }
+  function locationScale(loc){
+    if(loc==='urban') return {transport:0.7, broadband:1.0, housing:1.2};
+    if(loc==='suburban') return {transport:1.0, broadband:1.0, housing:1.0};
+    return {transport:1.3, broadband:1.0, housing:0.9};
+  }
+
+  function rampFactor(ramp, y){
+    if(!ramp) return 1;
+    if(ramp.kind === 's_curve'){
+      const m = ramp.midpoint_year || 10;
+      const k = ramp.steepness || 0.5;
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    return 1;
+  }
+
+  // Compute household cumulative burdens for SQ and WMR at horizon H (based on same logic as household-impact, simplified)
+  function householdBurden(band, H, conf){
+    const scale = locationScale(conf.loc);
+    const sq = hh.status_quo.annual_burdens_usd;
+    const sqGrowth = hh.status_quo.growth_rates_annual[band];
+    const w = hh.wmr.annual_relief_usd;
+
+    // Dividend derived from PWF (reuse approach from household-impact)
+    const div = hh.wmr.people_dividend_usd;
+    const payoutRate = div.payout_rate_annual[band];
+    const households = div.estimated_households.value;
+    const divRamp = div.phase_in_ramp;
+    const divCap = div.cap_per_household_usd[band];
+
+    const tax = hh.wmr.transition_taxes_net_usd;
+    const taxBase = tax[band][band];
+    const income = conf.income;
+    const hhSize = conf.hh;
+    const sd = conf.sdebt;
+    const md = conf.mdebt;
+    const housing = conf.housing;
+
+    const sp = fiscal.starting_point_placeholders || {};
+    const debt0 = sp.gross_federal_debt_usd_sep30_2025 || 27_000_000_000_000;
+    const gdp0 = sp.nominal_gdp_usd_saar_q3_2025 || 27_000_000_000_000;
+    const shares = (fiscal.wmr.rules.surplus_allocation_framework && fiscal.wmr.rules.surplus_allocation_framework.default_shares)
+      ? fiscal.wmr.rules.surplus_allocation_framework.default_shares[band]
+      : (li.wmr.surplus_allocation_defaults ? li.wmr.surplus_allocation_defaults[band] : {debt_paydown:0.6,peoples_wealth_fund:0.25,reinvestment:0.15});
+    const r = sp.interest_rate_effective[band];
+    const r_w = Math.max(0, r - fiscal.wmr.mechanisms.interest_rate_risk_premium_reduction[band]);
+    const sq_real = fiscal.status_quo.assumptions.real_gdp_growth[band];
+    const sq_inf = fiscal.status_quo.assumptions.inflation[band];
+    const w_uplift = fiscal.wmr.mechanisms.net_growth_uplift_from_infrastructure[band];
+    const w_real = sq_real + w_uplift;
+    const w_inf = sq_inf;
+    const prim0 = sp.primary_deficit_status_quo_usd[band];
+
+    // Build PWF series up to H (simplified)
+    let debt = debt0, gdp = gdp0, pwf=0;
+    const pwfSeries=[0];
+    for(let t=1;t<=H;t++){
+      const interest = debt * r_w;
+      const improvement = lineItemEffect(band, t);
+      const prim = prim0 * (1 + 0.01*(t-1)) - improvement;
+      let pay=0, pwfAdd=0;
+      if(prim < 0){
+        const surplus = -prim;
+        pay = surplus * shares.debt_paydown;
+        pwfAdd = surplus * shares.peoples_wealth_fund;
+      }
+      debt = debt + prim + interest;
+      if(pay>0) debt -= pay;
+      gdp = gdp * (1 + w_real + w_inf);
+      pwf += pwfAdd;
+      pwfSeries.push(pwf);
+    }
+
+    function annualSQ(y){
+      const g = Math.pow(1+sqGrowth, y-1);
+      const hc = sq.healthcare_premiums_out_of_pocket[band] * g;
+      const sl = sq.student_loan_payments[band] * studentDebtScale(sd) * g;
+      const mdp = sq.medical_debt_payments[band] * medicalDebtScale(md) * g;
+      const hpress = sq.housing_cost_pressure[band] * (housing==='renter' ? 1.0 : 0.6) * scale.housing * g;
+      const tpress = sq.transport_cost_pressure[band] * scale.transport * g;
+      const bb = sq.broadband_cost[band] * scale.broadband * g;
+      return hc + sl + mdp + hpress + tpress + bb;
+    }
+    function annualDividend(y){
+      const pwfTot = pwfSeries[y] || pwfSeries[pwfSeries.length-1];
+      const raw = (payoutRate * pwfTot) / households;
+      const phased = raw * rampFactor(divRamp, y);
+      const capped = Math.min(phased, divCap);
+      const hhMod = (0.75 + 0.1*Math.min(4, hhSize));
+      return capped * hhMod;
+    }
+    function annualWMR(y){
+      const hcRel = w.healthcare_relief[band] * Math.min(1, y/3);
+      const eduRel = w.education_relief[band] * Math.min(1, y/3) * studentDebtScale(sd);
+      const medRel = w.medical_debt_relief[band] * Math.min(1, y/2) * medicalDebtScale(md);
+      const bbRel = w.broadband_relief[band] * Math.min(1, y/4) * scale.broadband;
+      const trRel = w.transport_relief[band] * Math.min(1, y/6) * scale.transport;
+      const hoRel = w.housing_relief[band] * Math.min(1, y/6) * (housing==='renter' ? 1.0 : 0.6) * scale.housing;
+      const dividend = annualDividend(y);
+      const taxAdj = (income > 120000 ? (taxBase*0.5) : (income < 50000 ? (taxBase*1.2) : taxBase));
+      return annualSQ(y) - (hcRel + eduRel + medRel + bbRel + trRel + hoRel) - dividend + taxAdj;
+    }
+
+    let cumSQ=0, cumW=0;
+    for(let y=1;y<=H;y++){
+      cumSQ += annualSQ(y);
+      cumW += annualWMR(y);
+    }
+    return {cumSQ, cumW};
+  }
+
+  // Normalize between SQ and WMR such that SQ=0 and WMR=100 if WMR is better, else reversed.
+  function normScore(sqVal, wmrVal, higherIsBetter){
+    // For burdens, lower is better.
+    let a = sqVal, b = wmrVal;
+    if(!higherIsBetter){
+      // invert: better means lower
+      a = -sqVal;
+      b = -wmrVal;
+    }
+    if(a===b) return {sq:50, wmr:50};
+    // set SQ to 0, WMR to 100 in direction of improvement
+    const wBetter = b > a;
+    return wBetter ? {sq:0, wmr:100} : {sq:100, wmr:0};
+  }
+
+  function render(){
+    const band = bandEl.value;
+    const H = Number(hEl.value);
+    const conf = presetConfig(presetEl.value);
+
+    // Dimension proxy computations (simple scaffolds)
+    const hb = householdBurden(band, H, conf);
+    const econScores = normScore(hb.cumSQ, hb.cumW, false);
+
+    // Placeholder proxy scores for other dimensions derived from related relief intensity + horizon
+    const horizonFactor = Math.min(1, H/20);
+    const healthScores = {sq: 40 + 10*horizonFactor, wmr: 60 + 20*horizonFactor}; // placeholder
+    const housingScores = {sq: 45 + 10*horizonFactor, wmr: 60 + 15*horizonFactor}; // placeholder
+    const mobilityScores = {sq: 45 + 10*horizonFactor, wmr: 62 + 12*horizonFactor}; // placeholder
+    const eduScores = {sq: 50 + 8*horizonFactor, wmr: 70 + 12*horizonFactor}; // placeholder
+    const civicScores = {sq: 45 + 6*horizonFactor, wmr: 65 + 10*horizonFactor}; // placeholder
+    const futureScores = {sq: 42 + 8*horizonFactor, wmr: 66 + 14*horizonFactor}; // placeholder
+
+    const map = {
+      household_economic_burden: econScores,
+      health_and_stress: healthScores,
+      housing_security: housingScores,
+      mobility_and_time: mobilityScores,
+      education_opportunity: eduScores,
+      civic_power_and_trust: civicScores,
+      future_resilience: futureScores
+    };
+
+    // Composite index
+    const dims = qol.dimensions;
+    let sq=0, wmr=0, wsum=0;
+    let rows='';
+    for(const d of dims){
+      const w = d.weight[band];
+      wsum += w;
+      const s = map[d.key];
+      const sqPart = s.sq * w;
+      const wPart = s.wmr * w;
+      sq += sqPart;
+      wmr += wPart;
+      rows += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${d.name}</b><br><span class="muted">${d.proxy}</span></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${d.weight[band].toFixed(2)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${Math.round(s.sq)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${Math.round(s.wmr)}</b></td>`
+        + '</tr>';
+    }
+    sq = sq/wsum;
+    wmr = wmr/wsum;
+
+    headline.innerHTML =
+      `<b>QoL Index (scaffold)</b><br>`
+      + `Band: <b>${band}</b> • Horizon: <b>${H} years</b> • Preset: <b>${presetEl.options[presetEl.selectedIndex].text}</b><br>`
+      + `Status Quo: <b>${Math.round(sq)}</b> / 100 • WMR: <b>${Math.round(wmr)}</b> / 100 • Δ: <b>${Math.round(wmr - sq)}</b>`;
+
+    table.innerHTML =
+      '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Dimension</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Weight</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">SQ score</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR score</th>'
+      + '</tr></thead><tbody>'
+      + rows
+      + '</tbody></table>'
+      + `<div class="note" style="margin-top:10px;">
+        <b>Economic burden proxy:</b> cumulative household burden (from simulator logic). SQ: ${Math.round(hb.cumSQ).toLocaleString()} • WMR: ${Math.round(hb.cumW).toLocaleString()} (lower is better).
+        Other dimensions are placeholder score curves until sourced indicators are added.
+      </div>`;
+  }
+
+  bandEl.addEventListener('change', render);
+  hEl.addEventListener('change', render);
+  presetEl.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>

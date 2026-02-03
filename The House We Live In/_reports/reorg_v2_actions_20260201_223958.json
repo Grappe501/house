@@ -1,0 +1,27 @@
+[
+  {
+    "from": "C:\\Users\\User\\Desktop\\The House We Live In\\WMR_MASTER_BUILD.md",
+    "action": "MOVE",
+    "to": "C:\\Users\\User\\Desktop\\The House We Live In\\docs\\spine\\WMR_MASTER_BUILD.md"
+  },
+  {
+    "from": "C:\\Users\\User\\Desktop\\The House We Live In\\README_OVERLAY.md",
+    "action": "MOVE",
+    "to": "C:\\Users\\User\\Desktop\\The House We Live In\\_archive\\overlays\\README_OVERLAY.md"
+  },
+  {
+    "from": "C:\\Users\\User\\Desktop\\The House We Live In\\inventory_only.ps1",
+    "action": "MOVE",
+    "to": "C:\\Users\\User\\Desktop\\The House We Live In\\tools\\reorg\\inventory_only.ps1"
+  },
+  {
+    "from": "C:\\Users\\User\\Desktop\\The House We Live In\\reorg_house.ps1",
+    "action": "MOVE",
+    "to": "C:\\Users\\User\\Desktop\\The House We Live In\\tools\\reorg\\reorg_house.ps1"
+  },
+  {
+    "from": "C:\\Users\\User\\Desktop\\The House We Live In\\reorg_house_v2.ps1",
+    "action": "MOVE",
+    "to": "C:\\Users\\User\\Desktop\\The House We Live In\\tools\\reorg\\reorg_house_v2.ps1"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "version": "0.1",
+    "notes": [
+      "In future versions, Netlify functions can append pull logs here at build time or via admin tooling."
+    ]
+  },
+  "pulls": []
+}

@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "generated_from": "base_working_family.json",
+    "ai_rules_version": "0.1-scaffold"
+  },
+  "scenarios": {
+    "status_quo": {
+      "description": "High capture: productivity gains concentrate; displacement shocks households; weak protections.",
+      "horizons": {
+        "1": {
+          "ai_inputs": {
+            "capability_index": 45,
+            "automation_pressure": 30
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        },
+        "5": {
+          "ai_inputs": {
+            "capability_index": 65,
+            "automation_pressure": 50
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        },
+        "10": {
+          "ai_inputs": {
+            "capability_index": 80,
+            "automation_pressure": 70
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        },
+        "20": {
+          "ai_inputs": {
+            "capability_index": 90,
+            "automation_pressure": 85
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        },
+        "50": {
+          "ai_inputs": {
+            "capability_index": 95,
+            "automation_pressure": 92
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        }
+      }
+    },
+    "wmr": {
+      "description": "Shared gains: productivity dividend + retraining + anti-monopoly + strong privacy.",
+      "horizons": {
+        "1": {
+          "ai_inputs": {
+            "capability_index": 45,
+            "automation_pressure": 30
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        },
+        "5": {
+          "ai_inputs": {
+            "capability_index": 65,
+            "automation_pressure": 50
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        },
+        "10": {
+          "ai_inputs": {
+            "capability_index": 80,
+            "automation_pressure": 70
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        },
+        "20": {
+          "ai_inputs": {
+            "capability_index": 90,
+            "automation_pressure": 85
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        },
+        "50": {
+          "ai_inputs": {
+            "capability_index": 95,
+            "automation_pressure": 92
+          },
+          "domains_adjusted": {},
+          "qoli_adjusted": 0,
+          "delta_vs_base": 0
+        }
+      }
+    }
+  }
+}

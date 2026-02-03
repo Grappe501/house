@@ -1,0 +1,39 @@
+{
+  "name": "ai_multiplier_rules",
+  "version": "0.1-scaffold",
+  "purpose": "Best-guess transparent rules that map AI capability/automation pressure to QoLI domain adjustments by horizon and scenario.",
+  "inputs": {
+    "capability_index": "0-100 (from /data/ai/ai_capability_scenarios.json)",
+    "automation_pressure": "0-100 (from same file)"
+  },
+  "scenarios": {
+    "status_quo": {
+      "description": "High capture: productivity gains concentrate; displacement shocks households; weak protections.",
+      "domain_adjustments": {
+        "income_work": "-0.35 * automation_pressure",
+        "time_stress": "-0.25 * automation_pressure",
+        "affordability": "-0.12 * automation_pressure",
+        "democratic_agency": "-0.08 * capability_index",
+        "safety_justice": "-0.05 * automation_pressure"
+      }
+    },
+    "wmr": {
+      "description": "Shared gains: productivity dividend + retraining + anti-monopoly + strong privacy.",
+      "domain_adjustments": {
+        "income_work": "+0.22 * automation_pressure",
+        "time_stress": "+0.20 * automation_pressure",
+        "affordability": "+0.14 * automation_pressure",
+        "democratic_agency": "+0.06 * capability_index",
+        "safety_justice": "+0.05 * automation_pressure"
+      },
+      "caps": {
+        "max_domain_bonus": 15,
+        "max_domain_penalty": 20
+      }
+    }
+  },
+  "notes": [
+    "Adjustments are in QoLI points (0-100 domain score), capped to avoid unrealistic leaps.",
+    "These are scaffolds for later evidence-backed modeling."
+  ]
+}

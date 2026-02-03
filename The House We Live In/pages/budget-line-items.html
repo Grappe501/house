@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Budget Line Items — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>Budget Line Items</h1>
+          <div class="muted">Home / Impact Lab / Fiscal model / Line items</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="budget-line-items">
+
+<div class="card">
+  <div class="kicker">What this is</div>
+  <h2>Budget Line Items (the engine behind “positive year”)</h2>
+  
+<p>This page breaks the WMR fiscal model into <b>explicit line items</b>. Each item has:</p>
+<ul>
+  <li>a yearly ramp (how fast it phases in),</li>
+  <li>a low/base/high steady-state value,</li>
+  <li>and a note explaining what it represents.</li>
+</ul>
+<div class="callout"><b>Design rule:</b> no hidden “magic savings.” If it affects the budget, it must appear here.</div>
+<p>
+Data: <a href="/data/finance/budget_line_items_scaffold.json"><b>budget_line_items_scaffold.json</b></a> •
+<a href="/pages/model-sources.html"><b>Sources & Methods</b></a>
+</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Interactive view</div>
+  <h2>Annual primary-balance effect by year</h2>
+  
+<div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;">
+  <div>
+    <label class="muted"><b>Band</b></label><br>
+    <select id="band" style="padding:8px;">
+      <option value="low">low</option>
+      <option value="base" selected>base</option>
+      <option value="high">high</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Year</b></label><br>
+    <input id="yr" type="range" min="1" max="50" step="1" value="5" style="width:260px;">
+    <div class="muted" id="yrVal">Year 5</div>
+  </div>
+</div>
+
+<div id="totals" class="callout" style="margin-top:12px;">Loading…</div>
+<div id="table" class="note" style="margin-top:12px;">Loading…</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">How this connects</div>
+  <h2>From line items → surplus → allocation → debt paydown</h2>
+  
+<ul>
+  <li>Line items compute the <b>primary balance improvement</b> each year.</li>
+  <li>If the primary balance crosses into surplus, we allocate it by rule:
+    <a href="/pages/surplus-allocation.html"><b>Surplus Allocation Rules</b></a>.</li>
+  <li>Debt paydown becomes mechanical and auditable:
+    <a href="/pages/national-debt-paydown.html"><b>National Debt Paydown</b></a>.</li>
+</ul>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="budget-line-items" />
+    <input type="hidden" name="page_title" value="Budget Line Items" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const yrEl = document.getElementById('yr');
+  const yrVal = document.getElementById('yrVal');
+  const totals = document.getElementById('totals');
+  const table = document.getElementById('table');
+
+  function fmtB(n){
+    const x = Number(n);
+    const sign = x < 0 ? '-' : '';
+    const a = Math.abs(x);
+    return sign + '$' + (a/1e9).toFixed(0) + 'B';
+  }
+
+  const j = await (await fetch('/data/finance/budget_line_items_scaffold.json')).json();
+
+  function rampFactor(item, y){
+    const r = item.ramp || {};
+    if(r.kind === 'linear'){
+      const s = r.start_year || 1;
+      const e = r.end_year || s;
+      if(y <= s) return 0;
+      if(y >= e) return 1;
+      return (y - s) / (e - s);
+    }
+    if(r.kind === 's_curve'){
+      const m = r.midpoint_year || 8;
+      const k = r.steepness || 0.6;
+      // logistic scaled 0..1
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    if(r.kind === 'front_load'){
+      const years = r.years || [];
+      // ramp to 1 quickly across provided years
+      if(years.length === 0) return 0;
+      const maxY = Math.max(...years);
+      if(y <= 1) return 0;
+      if(y >= maxY) return 1;
+      return Math.min(1, y / maxY);
+    }
+    return 1;
+  }
+
+  function render(){
+    const band = bandEl.value;
+    const y = Number(yrEl.value);
+    yrVal.textContent = 'Year ' + y;
+
+    let sum = 0;
+    let rows = '';
+
+    for(const item of j.wmr.items){
+      const steady = item.annual_steady_state_usd[band];
+      const f = rampFactor(item, y);
+      const val = steady * f;
+      sum += val;
+      rows += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${item.name}</b><br><span class="muted">${item.type}</span></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(steady)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${(f*100).toFixed(0)}%</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmtB(val)}</b></td>`
+        + '</tr>';
+    }
+
+    totals.innerHTML =
+      `<b>Total primary-balance effect (WMR line items)</b><br>`
+      + `<span class="muted">Band: ${band} • Year: ${y}</span><br>`
+      + `Net effect: <b>${fmtB(sum)}</b> (positive improves primary balance; negative worsens)`;
+
+
+    table.innerHTML =
+      '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Item</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Steady-state</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Ramp</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Year effect</th>'
+      + '</tr></thead><tbody>'
+      + rows
+      + '</tbody></table>';
+  }
+
+  bandEl.addEventListener('change', render);
+  yrEl.addEventListener('input', render);
+  render();
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const yrEl = document.getElementById('yr');
+  const yrVal = document.getElementById('yrVal');
+  const totals = document.getElementById('totals');
+  const table = document.getElementById('table');
+
+  function fmtB(n){
+    const x = Number(n);
+    const sign = x < 0 ? '-' : '';
+    const a = Math.abs(x);
+    return sign + '$' + (a/1e9).toFixed(0) + 'B';
+  }
+
+  const j = await (await fetch('/data/finance/budget_line_items_scaffold.json')).json();
+
+  function rampFactor(item, y){
+    const r = item.ramp || {};
+    if(r.kind === 'linear'){
+      const s = r.start_year || 1;
+      const e = r.end_year || s;
+      if(y <= s) return 0;
+      if(y >= e) return 1;
+      return (y - s) / (e - s);
+    }
+    if(r.kind === 's_curve'){
+      const m = r.midpoint_year || 8;
+      const k = r.steepness || 0.6;
+      // logistic scaled 0..1
+      return 1/(1+Math.exp(-k*(y-m)));
+    }
+    if(r.kind === 'front_load'){
+      const years = r.years || [];
+      // ramp to 1 quickly across provided years
+      if(years.length === 0) return 0;
+      const maxY = Math.max(...years);
+      if(y <= 1) return 0;
+      if(y >= maxY) return 1;
+      return Math.min(1, y / maxY);
+    }
+    return 1;
+  }
+
+  function render(){
+    const band = bandEl.value;
+    const y = Number(yrEl.value);
+    yrVal.textContent = 'Year ' + y;
+
+    let sum = 0;
+    let rows = '';
+
+    for(const item of j.wmr.items){
+      const steady = item.annual_steady_state_usd[band];
+      const f = rampFactor(item, y);
+      const val = steady * f;
+      sum += val;
+      rows += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${item.name}</b><br><span class="muted">${item.type}</span></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtB(steady)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${(f*100).toFixed(0)}%</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmtB(val)}</b></td>`
+        + '</tr>';
+    }
+
+    totals.innerHTML =
+      `<b>Total primary-balance effect (WMR line items)</b><br>`
+      + `<span class="muted">Band: ${band} • Year: ${y}</span><br>`
+      + `Net effect: <b>${fmtB(sum)}</b> (positive improves primary balance; negative worsens)`;
+
+
+    table.innerHTML =
+      '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Item</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Steady-state</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Ramp</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Year effect</th>'
+      + '</tr></thead><tbody>'
+      + rows
+      + '</tbody></table>';
+  }
+
+  bandEl.addEventListener('change', render);
+  yrEl.addEventListener('input', render);
+  render();
+})();
+</script>
+
+</body>
+</html>

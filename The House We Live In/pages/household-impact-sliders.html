@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Household Impact Sliders — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>Household Impact Sliders</h1>
+          <div class="muted">Home / Impact Lab / Household sliders</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="household-impact-sliders">
+
+<div class="card">
+  <div class="kicker">What this is</div>
+  <h2>Household impact sliders (members, region, housing, AI band)</h2>
+  
+<p>Test household outcomes by tuning core parameters.</p>
+<div class="callout">
+This uses <b>AI low/base/high bands</b> and published heuristic rules. It’s a scaffold built for transparency and iteration.
+</div>
+<p>
+  Baseline: <a href="/data/qoli/outputs/baseline.json"><b>baseline.json</b></a> •
+  AI bands: <a href="/data/qoli/outputs/baseline_ai_adjusted_bands.json"><b>baseline_ai_adjusted_bands.json</b></a>
+</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Controls</div>
+  <h2>Set your household parameters</h2>
+  
+<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end;">
+  <div>
+    <label class="muted"><b>Members</b></label><br>
+    <input id="members" type="range" min="1" max="6" value="4" />
+    <div class="note"><span id="membersVal">4</span> members</div>
+  </div>
+  <div>
+    <label class="muted"><b>Region</b></label><br>
+    <select id="region" style="padding:8px;">
+      <option value="metro">metro</option>
+      <option value="suburban" selected>suburban</option>
+      <option value="rural">rural</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Housing</b></label><br>
+    <select id="housing" style="padding:8px;">
+      <option value="renter" selected>renter</option>
+      <option value="owner">owner</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>AI band</b></label><br>
+    <select id="band" style="padding:8px;">
+      <option value="low">low</option>
+      <option value="base" selected>base</option>
+      <option value="high">high</option>
+    </select>
+  </div>
+</div>
+<div id="out" class="note" style="margin-top:14px;">Loading…</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Interpretation</div>
+  <h2>What this is measuring</h2>
+  
+<ul>
+  <li><b>Estimated household value</b> is a proxy for stability and reduced extraction.</li>
+  <li><b>Hours gained</b> is a proxy for reduced churn as productivity is shared.</li>
+  <li><b>Stress reduction</b> is a proxy for health and wellbeing improvements.</li>
+</ul>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="household-impact-sliders" />
+    <input type="hidden" name="page_title" value="Household Impact Sliders" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const membersEl = document.getElementById('members');
+  const membersVal = document.getElementById('membersVal');
+  const regionEl = document.getElementById('region');
+  const housingEl = document.getElementById('housing');
+  const bandEl = document.getElementById('band');
+  const out = document.getElementById('out');
+
+  function fmtMoney(x){
+    const n = Number(x);
+    const sign = n < 0 ? '-' : '';
+    return sign + '$' + Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:0});
+  }
+  function fmt(x){ return (Math.round(Number(x)*100)/100).toFixed(2); }
+
+  const horizons = ['1','5','10','20','50'];
+
+  const rules = await (await fetch('/data/qoli/metrics/household_impact_rules.json')).json();
+  const bands = await (await fetch('/data/qoli/outputs/baseline_ai_adjusted_bands.json')).json();
+  const baseline = await (await fetch('/data/qoli/outputs/baseline.json')).json();
+
+  function multiplier(housing, region){
+    let m = 1.0;
+    if(housing === 'renter') m *= rules.cashflow.renters_multiplier;
+    if(housing === 'owner') m *= rules.cashflow.owners_multiplier;
+    if(region === 'rural') m *= rules.cashflow.rural_transport_penalty;
+    if(region === 'metro') m *= rules.cashflow.metro_cost_penalty;
+    return m;
+  }
+
+  function compute(scenKey, hz, bandKey, members, housing, region){
+    const q = bands.scenarios[scenKey].horizons[hz][bandKey].qoli_adjusted;
+    const delta = q - baseline.qoli;
+    const perPoint = rules.estimated_savings_per_qoli_point_per_member_usd_per_year[scenKey];
+    const annual = delta * perPoint * members * multiplier(housing, region);
+
+    const timeProxy = delta * 0.4;
+    const hoursPer10 = rules.time.hours_gained_per_10_time_stress_points[scenKey];
+    const weeklyHours = (timeProxy/10.0) * hoursPer10;
+
+    const healthProxy = delta * 0.3;
+    const stressPer10 = rules.health.stress_reduction_per_10_health_points[scenKey];
+    const stress = (healthProxy/10.0) * stressPer10;
+
+    return {annual, weeklyHours, stress, q};
+  }
+
+  function render(){
+    const members = Number(membersEl.value);
+    const region = regionEl.value;
+    const housing = housingEl.value;
+    const band = bandEl.value;
+
+    membersVal.textContent = members;
+
+    let html = `<div class="callout"><b>Parameters</b><br>`
+      + `<span class="muted">Members: ${members} • Region: ${region} • Housing: ${housing} • AI band: ${band} • Multiplier: ${multiplier(housing,region).toFixed(3)}</span>`
+      + `</div>`;
+
+    html += '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Horizon</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Status quo value/yr</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR value/yr</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ value/yr</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ hours/week</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ stress</th>'
+      + '</tr></thead><tbody>';
+
+    for(const h of horizons){
+      const a = compute('status_quo', h, band, members, housing, region);
+      const b = compute('wmr', h, band, members, housing, region);
+      const dv = b.annual - a.annual;
+      const dh = b.weeklyHours - a.weeklyHours;
+      const ds = b.stress - a.stress;
+
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${h}y</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtMoney(a.annual)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtMoney(b.annual)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmtMoney(dv)}</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(dh)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(ds)}</td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+
+    html += '<div class="note" style="margin-top:10px;">'
+      + 'Baseline is the 1-year renter/base status quo snapshot. Change that baseline later if desired.'
+      + '</div>';
+
+    out.innerHTML = html;
+  }
+
+  membersEl.addEventListener('input', render);
+  regionEl.addEventListener('change', render);
+  housingEl.addEventListener('change', render);
+  bandEl.addEventListener('change', render);
+
+  render();
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const membersEl = document.getElementById('members');
+  const membersVal = document.getElementById('membersVal');
+  const regionEl = document.getElementById('region');
+  const housingEl = document.getElementById('housing');
+  const bandEl = document.getElementById('band');
+  const out = document.getElementById('out');
+
+  function fmtMoney(x){
+    const n = Number(x);
+    const sign = n < 0 ? '-' : '';
+    return sign + '$' + Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:0});
+  }
+  function fmt(x){ return (Math.round(Number(x)*100)/100).toFixed(2); }
+
+  const horizons = ['1','5','10','20','50'];
+
+  const rules = await (await fetch('/data/qoli/metrics/household_impact_rules.json')).json();
+  const bands = await (await fetch('/data/qoli/outputs/baseline_ai_adjusted_bands.json')).json();
+  const baseline = await (await fetch('/data/qoli/outputs/baseline.json')).json();
+
+  function multiplier(housing, region){
+    let m = 1.0;
+    if(housing === 'renter') m *= rules.cashflow.renters_multiplier;
+    if(housing === 'owner') m *= rules.cashflow.owners_multiplier;
+    if(region === 'rural') m *= rules.cashflow.rural_transport_penalty;
+    if(region === 'metro') m *= rules.cashflow.metro_cost_penalty;
+    return m;
+  }
+
+  function compute(scenKey, hz, bandKey, members, housing, region){
+    const q = bands.scenarios[scenKey].horizons[hz][bandKey].qoli_adjusted;
+    const delta = q - baseline.qoli;
+    const perPoint = rules.estimated_savings_per_qoli_point_per_member_usd_per_year[scenKey];
+    const annual = delta * perPoint * members * multiplier(housing, region);
+
+    const timeProxy = delta * 0.4;
+    const hoursPer10 = rules.time.hours_gained_per_10_time_stress_points[scenKey];
+    const weeklyHours = (timeProxy/10.0) * hoursPer10;
+
+    const healthProxy = delta * 0.3;
+    const stressPer10 = rules.health.stress_reduction_per_10_health_points[scenKey];
+    const stress = (healthProxy/10.0) * stressPer10;
+
+    return {annual, weeklyHours, stress, q};
+  }
+
+  function render(){
+    const members = Number(membersEl.value);
+    const region = regionEl.value;
+    const housing = housingEl.value;
+    const band = bandEl.value;
+
+    membersVal.textContent = members;
+
+    let html = `<div class="callout"><b>Parameters</b><br>`
+      + `<span class="muted">Members: ${members} • Region: ${region} • Housing: ${housing} • AI band: ${band} • Multiplier: ${multiplier(housing,region).toFixed(3)}</span>`
+      + `</div>`;
+
+    html += '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Horizon</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Status quo value/yr</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR value/yr</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ value/yr</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ hours/week</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ stress</th>'
+      + '</tr></thead><tbody>';
+
+    for(const h of horizons){
+      const a = compute('status_quo', h, band, members, housing, region);
+      const b = compute('wmr', h, band, members, housing, region);
+      const dv = b.annual - a.annual;
+      const dh = b.weeklyHours - a.weeklyHours;
+      const ds = b.stress - a.stress;
+
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${h}y</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtMoney(a.annual)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtMoney(b.annual)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmtMoney(dv)}</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(dh)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmt(ds)}</td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+
+    html += '<div class="note" style="margin-top:10px;">'
+      + 'Baseline is the 1-year renter/base status quo snapshot. Change that baseline later if desired.'
+      + '</div>';
+
+    out.innerHTML = html;
+  }
+
+  membersEl.addEventListener('input', render);
+  regionEl.addEventListener('change', render);
+  housingEl.addEventListener('change', render);
+  bandEl.addEventListener('change', render);
+
+  render();
+})();
+</script>
+
+</body>
+</html>

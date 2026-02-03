@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mechanics — Quality of Life Index (v1)</title>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .meta { opacity: .8; font-size: .95rem; }
+    .card { border: 1px solid rgba(0,0,0,.15); border-radius: 12px; padding: 14px; margin: 12px 0; }
+    code { padding: 2px 6px; border-radius: 6px; background: rgba(0,0,0,.06); }
+    a { text-decoration: underline; }
+    ul { margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="meta">
+        <a href="/pages/tools/qol-index.html">← Tool: QOL Index</a>
+        &nbsp;|&nbsp;
+        <a href="/pages/book/house-reader/">House Reader</a>
+      </p>
+      <h1>Mechanics — Quality of Life Index (v1)</h1>
+      <p class="meta">Last updated: 2026-02-01. Act III anchor: Room 072 (Beam).</p>
+    </header>
+
+    <section class="card">
+      <h2>Purpose</h2>
+      <p>
+        Provide a single, inspectable score (0–100) that summarizes what Act III claims:
+        quality of life rises when <strong>cost pressure falls</strong>, <strong>time returns</strong>,
+        <strong>stability increases</strong>, and <strong>fear decreases</strong>.
+      </p>
+      <p class="meta">
+        This is a v1 scaffold: simple on purpose, upgradeable when measured data is wired.
+      </p>
+    </section>
+
+    <section class="card" id="inputs">
+      <h2>Inputs</h2>
+      <ul>
+        <li><code>cost_strain_pct</code> — percent of income under strain (10–70 in v1 UI)</li>
+        <li><code>time_recovered_hours_per_week</code> — hours regained (0–20 in v1 UI)</li>
+        <li><code>stability_score</code> — 0–100</li>
+        <li><code>fear_score</code> — 0–100 (higher means more fear/uncertainty)</li>
+      </ul>
+    </section>
+
+    <section class="card" id="normalization">
+      <h2>Normalization (explicit choices)</h2>
+      <p>
+        Inputs are converted to component scores (0–100).
+        These curves are simple placeholders—chosen for legibility, not as claims of empirical truth.
+      </p>
+      <ul>
+        <li><strong>Cost relief score:</strong> 10% strain → 100, 70% strain → 0 (linear)</li>
+        <li><strong>Time regained score:</strong> 0h/wk → 0, 20h/wk → 100 (linear)</li>
+        <li><strong>Stability score:</strong> passed through as-is</li>
+        <li><strong>Fear reduction score:</strong> 0 fear → 100, 100 fear → 0 (inverse)</li>
+      </ul>
+      <p class="meta">
+        Upgrade path: replace these with empirically calibrated curves once baseline distributions exist.
+      </p>
+    </section>
+
+    <section class="card" id="formula">
+      <h2>Formula</h2>
+      <p>
+        QOL is a weighted sum of component scores:
+      </p>
+      <p><code>QOL = 0.35·CostRelief + 0.25·TimeRegained + 0.25·Stability + 0.15·FearReduction</code></p>
+      <p class="meta">
+        The weights are fixed in v1 to keep comparisons consistent across pages.
+      </p>
+    </section>
+
+    <section class="card" id="uncertainty">
+      <h2>Uncertainty (v1 honesty band)</h2>
+      <p>
+        The tool shows a simple band by shifting the cost weight by ±5 points and redistributing the remainder
+        proportionally to other components. This is <strong>not statistical error</strong>. It is a transparency placeholder.
+      </p>
+      <p class="meta">
+        Upgrade path: empirical uncertainty using measurement error + scenario variance.
+      </p>
+    </section>
+
+    <section class="card" id="assumptions">
+      <h2>Assumptions</h2>
+      <ul>
+        <li><strong>Act III B5:</strong> quality of life is measurable enough to track meaningfully.</li>
+        <li><strong>Normalization choice:</strong> linear curves are acceptable as a v1 placeholder.</li>
+        <li><strong>Weight choice:</strong> the weights reflect Act III’s narrative emphasis (cost/time/stability/fear).</li>
+      </ul>
+    </section>
+
+    <section class="card" id="links">
+      <h2>Links</h2>
+      <ul>
+        <li><a href="/pages/tools/qol-index.html">Tool — QOL Index (v1)</a></li>
+        <li><a href="/pages/trajectories.html">Level 2 — Trajectories Hub</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

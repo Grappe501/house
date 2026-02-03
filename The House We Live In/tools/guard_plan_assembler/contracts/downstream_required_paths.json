@@ -1,0 +1,41 @@
+{
+  "schema_version": "downstream_required_paths_v1",
+  "profiles": {
+    "docs-only": {
+      "description": "Downstream repo must include the canonical user-facing docs and beta checklist.",
+      "required_paths": [
+        "docs/env.example.md",
+        "docs/data_model.md",
+        "docs/export_format.md",
+        "docs/import_workflow.md",
+        "docs/dashboard_actions.md",
+        "docs/segments.md",
+        "docs/compose.md",
+        "docs/ai_import_assist.md",
+        "docs/ai_dedupe_assist.md",
+        "docs/ai_message_assist.md",
+        "docs/security.md",
+        "docs/privacy.md",
+        "docs/data_ownership.md",
+        "tests/beta_checklist.md"
+      ]
+    },
+    "hybrid-app": {
+      "description": "Downstream repo is the hybrid implementation (Next.js web + Go executor + DB migrations).",
+      "required_paths": [
+        "apps/web/package.json",
+        "apps/web/src/app/page.tsx",
+        "apps/web/src/app/api/build/route.ts",
+        "apps/web/src/app/api/executions/[id]/route.ts",
+        "services/executor/go.mod",
+        "services/executor/cmd/executor/main.go",
+        "services/executor/cmd/worker/main.go",
+        "services/executor/internal/engine/runner.go",
+        "infra/db/migrations/0001_init.sql",
+        "packages/contracts/request_schema.v1.json",
+        "packages/contracts/execution.schema.json",
+        "packages/contracts/artifacts.schema.json"
+      ]
+    }
+  }
+}

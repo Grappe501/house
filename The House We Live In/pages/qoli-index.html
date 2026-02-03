@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quality of Life Index — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+
+<style>
+  .qoli-grid{display:grid;grid-template-columns:1fr;gap:10px}
+  .qoli-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .qoli-table{width:100%;border-collapse:collapse}
+  .qoli-table th,.qoli-table td{border-bottom:1px solid rgba(0,0,0,.12);padding:8px 6px;text-align:left}
+  .pill{display:inline-block;border:1px solid rgba(0,0,0,.15);padding:2px 8px;border-radius:999px;font-size:.85rem}
+</style>
+
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>Quality of Life Index</h1>
+          <div class="muted">Home / Impact Lab / QoLI</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="qoli-index">
+
+<div class="card">
+  <div class="kicker">Purpose</div>
+  <h2>Quality of Life Index (QoLI)</h2>
+  
+<p>This is the capstone measurement that ties every pillar together into one transparent, auditable picture:
+what life feels like for a working family over time.</p>
+<div class="callout"><b>Always shown side-by-side:</b> Status Quo Trajectory vs Working Majority Republic.</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Controls</div>
+  <h2>Pick a timepoint</h2>
+  
+<div class="qoli-controls">
+  <label for="qoli-time"><b>Time horizon</b></label>
+  <select id="qoli-time">
+    <option value="1">1 year</option>
+    <option value="5">5 years</option>
+    <option value="10">10 years</option>
+    <option value="20">20 years</option>
+    <option value="50">50 years</option>
+  </select>
+  <span class="note">These values start as placeholders to prove the engine. We replace them with computed results as assumptions are filled in.</span>
+</div>
+<div id="qoli-output" style="margin-top:12px"></div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Golden Circle</div>
+  <h2>WHY • HOW • WHAT</h2>
+  
+<ul>
+  <li><b>WHY:</b> Make prosperity measurable for the 90%, not the 10%.</li>
+  <li><b>HOW:</b> Composite index built from domain scores (health, housing, affordability, time, safety, agency, etc.).</li>
+  <li><b>WHAT:</b> A public scoreboard at 1/5/10/20/50 years, with assumptions, ranges, and costs.</li>
+</ul>
+<p class="note">Methodology, weights, and assumptions are public and adjustable. No black box.</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Next build layers</div>
+  <h2>What we add next</h2>
+  
+<ul>
+  <li>Domain breakdown radar/stacked bars</li>
+  <li>Household budget “before/after” (true costs)</li>
+  <li>System cost summary (public + private + hidden)</li>
+  <li>Confidence ranges (low/base/high) and sensitivity analysis</li>
+</ul>
+<p><a href="/pages/qoli-methodology.html"><b>Read the methodology</b></a></p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="qoli-index" />
+    <input type="hidden" name="page_title" value="Quality of Life Index" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const select = document.getElementById('qoli-time');
+  const outEl = document.getElementById('qoli-output');
+  if(!select || !outEl) return;
+
+  const dataUrl = '/data/qoli/outputs/base_working_family.json';
+  let payload = null;
+  try{
+    const res = await fetch(dataUrl, {cache:'no-store'});
+    payload = await res.json();
+  }catch(e){
+    outEl.innerHTML = '<p class="note">Could not load QoLI data yet. (Data file missing or blocked.)</p>';
+    return;
+  }
+
+  function render(){
+    const t = select.value;
+    const row = payload.timepoints[t];
+    if(!row){ outEl.innerHTML = '<p class="note">No data for this timepoint.</p>'; return; }
+    const sq = row.status_quo.qoli;
+    const wmr = row.wmr.qoli;
+    const delta = (wmr - sq);
+    outEl.innerHTML = `
+      <div class="callout">
+        <b>QoLI score at ${t} year(s)</b><br>
+        Status quo: <span class="pill">${sq}</span> &nbsp; | &nbsp;
+        Working Majority Republic: <span class="pill">${wmr}</span> &nbsp; | &nbsp;
+        Difference: <span class="pill">${delta >= 0 ? '+'+delta : delta}</span>
+        <div class="note" style="margin-top:8px">${payload.disclaimer || ''}</div>
+      </div>
+      <table class="qoli-table">
+        <thead><tr><th>What this means</th><th>Next layer</th></tr></thead>
+        <tbody>
+          <tr><td>One number that summarizes working-family stability, affordability, health, opportunity, time, and agency.</td><td>Domain breakdown + household budget + system costs (coming next).</td></tr>
+          <tr><td>Side-by-side trajectories: “stay on this path” vs “new system path.”</td><td>Assumptions and ranges published for every estimate.</td></tr>
+        </tbody>
+      </table>
+    `;
+  }
+
+  select.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const select = document.getElementById('qoli-time');
+  const outEl = document.getElementById('qoli-output');
+  if(!select || !outEl) return;
+
+  const dataUrl = '/data/qoli/outputs/base_working_family.json';
+  let payload = null;
+  try{
+    const res = await fetch(dataUrl, {cache:'no-store'});
+    payload = await res.json();
+  }catch(e){
+    outEl.innerHTML = '<p class="note">Could not load QoLI data yet. (Data file missing or blocked.)</p>';
+    return;
+  }
+
+  function render(){
+    const t = select.value;
+    const row = payload.timepoints[t];
+    if(!row){ outEl.innerHTML = '<p class="note">No data for this timepoint.</p>'; return; }
+    const sq = row.status_quo.qoli;
+    const wmr = row.wmr.qoli;
+    const delta = (wmr - sq);
+    outEl.innerHTML = `
+      <div class="callout">
+        <b>QoLI score at ${t} year(s)</b><br>
+        Status quo: <span class="pill">${sq}</span> &nbsp; | &nbsp;
+        Working Majority Republic: <span class="pill">${wmr}</span> &nbsp; | &nbsp;
+        Difference: <span class="pill">${delta >= 0 ? '+'+delta : delta}</span>
+        <div class="note" style="margin-top:8px">${payload.disclaimer || ''}</div>
+      </div>
+      <table class="qoli-table">
+        <thead><tr><th>What this means</th><th>Next layer</th></tr></thead>
+        <tbody>
+          <tr><td>One number that summarizes working-family stability, affordability, health, opportunity, time, and agency.</td><td>Domain breakdown + household budget + system costs (coming next).</td></tr>
+          <tr><td>Side-by-side trajectories: “stay on this path” vs “new system path.”</td><td>Assumptions and ranges published for every estimate.</td></tr>
+        </tbody>
+      </table>
+    `;
+  }
+
+  select.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>

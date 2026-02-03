@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tool — Quality of Life Index (v1)</title>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .meta { opacity: .8; font-size: .95rem; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media(min-width: 920px){ .grid { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid rgba(0,0,0,.15); border-radius: 12px; padding: 14px; }
+    .big { font-size: 2.2rem; font-weight: 800; line-height: 1; margin: 6px 0 10px; }
+    .pill { display:inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(0,0,0,.2); font-size: .85rem; opacity:.9; }
+    label { display:block; margin: 10px 0 6px; font-weight: 650; }
+    input[type="range"]{ width: 100%; }
+    .row { display:flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    code { padding: 2px 6px; border-radius: 6px; background: rgba(0,0,0,.06); }
+    a { text-decoration: underline; }
+    .muted { opacity: .85; }
+    .tiny { font-size: .9rem; }
+    .divider { height:1px; background:rgba(0,0,0,.12); margin: 14px 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="meta">
+        <a href="/pages/book/house-reader/">← House Reader</a>
+        &nbsp;|&nbsp;
+        <a href="/pages/mechanics-qol-index.html">Mechanics: QOL Index</a>
+        &nbsp;|&nbsp;
+        <a href="/pages/trajectories.html">Trajectories Hub</a>
+      </p>
+      <h1>Tool — Quality of Life Index (v1)</h1>
+      <p class="meta">
+        Act III anchor: Room 072 (Beam). This tool is intentionally transparent and simple.
+        It is a <span class="pill">modeled v1</span> until measured inputs are wired.
+      </p>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Inputs (household scale)</h2>
+        <p class="muted tiny">
+          Move the sliders to explore what changes when costs fall, time returns, stability rises, and fear decreases.
+          Each input is normalized to a 0–100 score in a way described in the mechanics page.
+        </p>
+
+        <label for="cost">Cost pressure (share of income under strain)</label>
+        <div class="row tiny muted"><span>Low strain</span><span id="costLabel"><strong>35%</strong></span><span>High strain</span></div>
+        <input id="cost" type="range" min="10" max="70" step="1" value="35" />
+
+        <label for="time">Time recovered (hours per week regained)</label>
+        <div class="row tiny muted"><span>0</span><span id="timeLabel"><strong>6h/wk</strong></span><span>20</span></div>
+        <input id="time" type="range" min="0" max="20" step="1" value="6" />
+
+        <label for="stability">Stability (ability to absorb shocks)</label>
+        <div class="row tiny muted"><span>Fragile</span><span id="stabLabel"><strong>55/100</strong></span><span>Robust</span></div>
+        <input id="stability" type="range" min="0" max="100" step="1" value="55" />
+
+        <label for="fear">Fear / uncertainty (how often life feels unsafe)</label>
+        <div class="row tiny muted"><span>Rare</span><span id="fearLabel"><strong>40/100</strong></span><span>Frequent</span></div>
+        <input id="fear" type="range" min="0" max="100" step="1" value="40" />
+
+        <div class="divider"></div>
+
+        <h3>Weights (transparent)</h3>
+        <p class="muted tiny">
+          Default weights reflect Act III’s Beam line: costs, time, and fear matter because they determine what remains.
+          Adjusting weights is allowed later, but v1 ships with a stable default for consistency.
+        </p>
+        <ul class="tiny">
+          <li><strong>Cost relief:</strong> 35%</li>
+          <li><strong>Time regained:</strong> 25%</li>
+          <li><strong>Stability:</strong> 25%</li>
+          <li><strong>Fear reduction:</strong> 15%</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Outputs</h2>
+        <p class="muted tiny">QOL Index is a 0–100 score. Higher is better.</p>
+
+        <div class="big" id="qolScore">—</div>
+        <div class="row tiny muted">
+          <span>Band (simple uncertainty):</span>
+          <span id="qolBand"><strong>—</strong></span>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>Component scores (0–100)</h3>
+        <ul class="tiny">
+          <li>Cost relief score: <strong id="costScore">—</strong></li>
+          <li>Time regained score: <strong id="timeScore">—</strong></li>
+          <li>Stability score: <strong id="stabScore">—</strong></li>
+          <li>Fear reduction score: <strong id="fearScore">—</strong></li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <h3>Model notes (honesty rules)</h3>
+        <ul class="tiny">
+          <li><strong>Modeled:</strong> normalization curves + weights</li>
+          <li><strong>Measured later:</strong> baseline distributions, validation against real outcomes</li>
+          <li><strong>Assumptions:</strong> Act III B5 (QOL is trackable), plus explicit normalization choices</li>
+        </ul>
+
+        <p class="meta">
+          To audit the math and assumptions, see
+          <a href="/pages/mechanics-qol-index.html#formula">Mechanics — QOL Index</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:12px;">
+      <h2>How to use this in the book</h2>
+      <p class="muted tiny">
+        Room 072 is the anchor: “Quality of life is what remains after costs, time, and fear are subtracted.”
+        This tool makes that sentence inspectable.
+      </p>
+      <ul class="tiny">
+        <li>Use this tool as the default “future score” on trajectory pages.</li>
+        <li>Keep v1 simple; complexity arrives only when measured data arrives.</li>
+        <li>Every slider should eventually point to a data source or survey method.</li>
+      </ul>
+    </section>
+
+<script>
+  // --- Inputs ---
+  const cost = document.getElementById('cost');       // percent 10..70 (higher worse)
+  const time = document.getElementById('time');       // hours/week 0..20 (higher better)
+  const stability = document.getElementById('stability'); // 0..100 (higher better)
+  const fear = document.getElementById('fear');       // 0..100 (higher worse)
+
+  // --- Labels ---
+  const costLabel = document.getElementById('costLabel');
+  const timeLabel = document.getElementById('timeLabel');
+  const stabLabel = document.getElementById('stabLabel');
+  const fearLabel = document.getElementById('fearLabel');
+
+  // --- Outputs ---
+  const qolScore = document.getElementById('qolScore');
+  const qolBand = document.getElementById('qolBand');
+  const costScoreEl = document.getElementById('costScore');
+  const timeScoreEl = document.getElementById('timeScore');
+  const stabScoreEl = document.getElementById('stabScore');
+  const fearScoreEl = document.getElementById('fearScore');
+
+  // --- Normalization (explicit, simple) ---
+  // Cost strain: 10% -> 100 score (best), 70% -> 0 score (worst)
+  function normCost(pct){
+    const clamped = Math.max(10, Math.min(70, pct));
+    return Math.round(100 * (70 - clamped) / (70 - 10));
+  }
+  // Time regained: 0 -> 0, 20 -> 100 (linear)
+  function normTime(hours){
+    const clamped = Math.max(0, Math.min(20, hours));
+    return Math.round(100 * clamped / 20);
+  }
+  // Stability already 0..100
+  function normStability(v){
+    const clamped = Math.max(0, Math.min(100, v));
+    return Math.round(clamped);
+  }
+  // Fear: 0 (rare) -> 100 score, 100 (frequent) -> 0 score
+  function normFear(v){
+    const clamped = Math.max(0, Math.min(100, v));
+    return Math.round(100 - clamped);
+  }
+
+  // Weights (v1 fixed)
+  const W_COST = 0.35;
+  const W_TIME = 0.25;
+  const W_STAB = 0.25;
+  const W_FEAR = 0.15;
+
+  function score(cS, tS, sS, fS){
+    return (W_COST*cS + W_TIME*tS + W_STAB*sS + W_FEAR*fS);
+  }
+
+  function fmt(n){
+    return n.toLocaleString(undefined, {maximumFractionDigits:0});
+  }
+
+  function calc(){
+    const c = Number(cost.value);
+    const t = Number(time.value);
+    const s = Number(stability.value);
+    const f = Number(fear.value);
+
+    costLabel.innerHTML = `<strong>${c}%</strong>`;
+    timeLabel.innerHTML = `<strong>${t}h/wk</strong>`;
+    stabLabel.innerHTML = `<strong>${s}/100</strong>`;
+    fearLabel.innerHTML = `<strong>${f}/100</strong>`;
+
+    const cS = normCost(c);
+    const tS = normTime(t);
+    const sS = normStability(s);
+    const fS = normFear(f);
+
+    costScoreEl.textContent = `${cS}`;
+    timeScoreEl.textContent = `${tS}`;
+    stabScoreEl.textContent = `${sS}`;
+    fearScoreEl.textContent = `${fS}`;
+
+    const q = Math.round(score(cS,tS,sS,fS));
+    qolScore.textContent = `${q} / 100`;
+
+    // Simple uncertainty band: vary weights +/- 5 percentage points redistributed to others proportionally.
+    // This is NOT statistical error; it’s a transparency placeholder.
+    function bandWithWeightShift(delta){
+      const wc = Math.max(0.15, Math.min(0.55, W_COST + delta));
+      const remaining = 1 - wc;
+      const baseOther = (W_TIME + W_STAB + W_FEAR);
+      const wt = remaining * (W_TIME / baseOther);
+      const ws = remaining * (W_STAB / baseOther);
+      const wf = remaining * (W_FEAR / baseOther);
+      return Math.round(wc*cS + wt*tS + ws*sS + wf*fS);
+    }
+    const low = Math.min(bandWithWeightShift(-0.05), bandWithWeightShift(+0.05));
+    const high = Math.max(bandWithWeightShift(-0.05), bandWithWeightShift(+0.05));
+    qolBand.innerHTML = `<strong>${low}–${high}</strong>`;
+  }
+
+  cost.addEventListener('input', calc);
+  time.addEventListener('input', calc);
+  stability.addEventListener('input', calc);
+  fear.addEventListener('input', calc);
+  calc();
+</script>
+</body>
+</html>

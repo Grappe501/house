@@ -1,0 +1,13 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Netlify local folder
+.netlify/
+
+# Env files
+.env
+.env.*

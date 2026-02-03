@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Room 1 — The Door</title>
+  <link rel="stylesheet" href="../../assets/css/house-reader.css">
+<script defer src="../../assets/js/room-progress.js"></script>
+\1
+<body class="house-reader room-01" data-room-id="room001">
+  <div class="ambient-overlay" aria-hidden="true"></div>
+
+  <article class="prose">
+
+<section class="audio-panel page-fade" aria-label="Room audio options">
+  <div class="audio-panel__inner">
+    <div class="audio-panel__title">Audio Options</div>
+    <div class="audio-panel__desc">
+      Optional ambience and narration for this room. Use quick start to begin the hum and jump to the first paragraph.
+    </div>
+
+    <div class="audio-controls" role="group" aria-label="Audio controls">
+      <button class="btn-audio btn-audio--primary" type="button" data-audio-action="start">
+        Start ambience &amp; begin reading
+      </button>
+      <button class="btn-audio" type="button" data-audio-action="talk" aria-pressed="false">
+        Play narration
+      </button>
+      <button class="btn-audio" type="button" data-audio-action="mute" aria-pressed="false">
+        Mute
+      </button>
+      <div class="audio-controls__meta">
+        Volume preset: <span data-audio-volume>35%</span>
+        <span class="audio-controls__status" data-talktrack-status></span>
+      </div>
+      <div class="audio-controls__meta">Narrator voice: <span data-voice-name>Device default</span></div>
+      <div class="audio-controls__meta" data-voice-picker></div>
+    </div>
+
+    <audio class="audio-panel__player" data-role="ambience" controls preload="none" loop>
+      <source src="/assets/audio/room001_hum.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+
+    <div class="audio-panel__divider" role="separator" aria-hidden="true"></div>
+
+    <div class="audio-panel__title audio-panel__title--small">Narration track</div>
+    <div class="audio-panel__desc">
+      If <code>/assets/audio/room001_talktrack.mp3</code> exists, it will play here. If not, the site will fall back to a device voice using the transcript.
+    </div>
+
+    <audio class="audio-panel__player" data-role="talktrack" controls preload="none">
+      <source>
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+</section>
+
+    <header class="room-header">
+      <h1>Room 1 — The Door</h1>
+      <p class="room-sub">You are only at the door.</p>
+    </header>
+
+    
+
+    <p class="lead dropcap">The house doesn’t announce itself.</p>
+
+    <p>It doesn’t sit at the end of anything important. There’s no sign, no marker, no sense that you were meant to arrive here. If you weren’t already nearby, you would never think to look for it.</p>
+
+    <p>From the outside, it looks ordinary in the quiet way ordinary things often do. It keeps to itself. It doesn’t ask questions. It doesn’t try to be understood.</p>
+
+    <p>The door is unlocked.</p>
+
+    <p>Not because someone is waiting. Not because you were expected. It’s unlocked the way many things are—because no one felt the need to secure it.</p>
+
+    <p>You can stop here.</p>
+
+    <p>Nothing happens if you do. The house won’t follow you. There’s no consequence for turning away. Most people would.</p>
+
+    <p>But standing this close, there’s a small, almost unnoticeable feeling that settles in—not recognition exactly, not memory, just the sense that this place isn’t entirely unfamiliar.</p>
+
+    <p>Like a thought you’ve brushed against before.</p>
+
+    <p>You don’t have to decide anything yet.</p>
+
+    <p class="final-line">You’re only at the door.</p>
+
+
+
+    <footer class="room-footer">
+      <p class="small-note">Room ambience: a low “hum” + subtle lighting drift. Use the Audio Options panel above.</p>
+    </footer>
+  </article>
+
+  <script src="/assets/js/narration.js"></script>
+</body>
+</html>

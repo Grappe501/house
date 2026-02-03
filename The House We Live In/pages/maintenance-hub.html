@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Level 2 — Maintenance Hub</title>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .meta { opacity: .8; font-size: .95rem; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media(min-width: 920px){ .grid { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid rgba(0,0,0,.15); border-radius: 12px; padding: 14px; }
+    a { text-decoration: underline; }
+    code { padding: 2px 6px; border-radius: 6px; background: rgba(0,0,0,.06); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="meta">
+        <a href="/pages/book/house-reader/">← House Reader</a>
+        &nbsp;|&nbsp;
+        <a href="/pages/trajectories.html">Trajectories</a>
+        &nbsp;|&nbsp;
+        <a href="/pages/tools/qol-index.html">QOL Index</a>
+      </p>
+      <h1>Level 2 — Maintenance Hub</h1>
+      <p class="meta">
+        Act IV front door: drift detection, scheduled reviews, stewardship rotation, training pipelines, and playbooks.
+        This hub links the “calm competence” layer of the system.
+      </p>
+    </header>
+
+    <section class="card">
+      <h2>Today view</h2>
+      <ul>
+        <li><a href="/pages/maintenance-dashboard.html">Maintenance Dashboard (v1)</a></li>
+      </ul>
+      <p class="meta">Dashboard v1 runs on static JSON and becomes live in Phase 3.</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Start</h2>
+        <ul>
+          <li><a href="/pages/maintenance-governance-model.html">Maintenance Governance Model</a></li>
+          <li><a href="/pages/drift-review-cadence.html">Drift Review Cadence</a></li>
+          <li><a href="/pages/stewardship-model.html">Stewardship Model (Keys & Rotation)</a></li>
+          <li><a href="/pages/training-maintainers.html">Training the Maintainers</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Operate</h2>
+        <ul>
+          <li><a href="/pages/maintenance-playbooks.html">Maintenance Playbooks</a></li>
+          <li><a href="/pages/maintenance-audit-log.html">Audit Log & Patch Notes</a></li>
+          <li><a href="/pages/trust-trajectory.html">Trust Trajectory</a></li>
+        </ul>
+        <p class="meta">Rule: every claim here must be inspectable (tools, logs, cadence).</p>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:12px;">
+      <h2>Beam anchors (Act IV)</h2>
+      <ul>
+        <li><strong>079 — Drift Test:</strong> alarms and thresholds</li>
+        <li><strong>084 — New Default:</strong> maintenance becomes normal</li>
+        <li><strong>087 — Loophole Hunt:</strong> patch workflow</li>
+        <li><strong>094 — Trust Dividend:</strong> trust compounds</li>
+        <li><strong>098 — Shared Manual:</strong> nothing essential is secret</li>
+      </ul>
+      <p class="meta">See also: <code>docs/book/06_ACT_OUTLINES/Act_IV_Beam_Rooms_Locked.md</code></p>
+    </section>
+  </main>
+</body>
+</html>

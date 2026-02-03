@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>True Costs Ledger — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>True Costs Ledger</h1>
+          <div class="muted">Home / Impact Lab / True costs ledger</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="true-costs-ledger">
+
+<div class="card">
+  <div class="kicker">What this is</div>
+  <h2>True Costs Ledger (auditable + horizon-aware)</h2>
+  
+<p>This ledger is designed to stay <b>symmetrical and auditable</b>: same categories, same horizons, both scenarios.
+v0.2 adds <b>horizon-aware paths</b> and <b>cumulative totals</b> with an explicit <b>break-even year</b> calculation.</p>
+<div class="callout">
+<b>Rules:</b> (1) publish assumptions, (2) publish confidence bands, (3) allow criticism in the open, (4) update transparently.
+</div>
+<p>
+Data: <a href="/data/finance/true_costs_ledger_scaffold.json"><b>true_costs_ledger_scaffold.json</b></a>
+</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Compare scenarios</div>
+  <h2>Annual paths + cumulative totals</h2>
+  
+<div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;">
+  <div>
+    <label class="muted"><b>Band</b></label><br>
+    <select id="band" style="padding:8px;">
+      <option value="low">low</option>
+      <option value="base" selected>base</option>
+      <option value="high">high</option>
+    </select>
+  </div>
+  <div>
+    <label class="muted"><b>Horizon</b></label><br>
+    <select id="hz" style="padding:8px;">
+      <option value="1">1 year</option>
+      <option value="5">5 years</option>
+      <option value="10" selected>10 years</option>
+      <option value="20">20 years</option>
+      <option value="50">50 years</option>
+    </select>
+  </div>
+</div>
+
+<div id="summary" class="callout" style="margin-top:12px;">Loading…</div>
+
+<div id="ledgerOut" class="note" style="margin-top:12px;">Loading…</div>
+
+<div class="note" style="margin-top:10px;">
+<b>Interpretation tip:</b> WMR can cost more in years 1–5 because it is investing to cut recurring burdens (outages, congestion, preventable illness).
+The break-even year tells you when cumulative WMR total becomes lower than cumulative status quo (under the selected band and assumptions).
+</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">How this stays unbiased</div>
+  <h2>Guardrails built into the model</h2>
+  
+<ul>
+  <li>Same categories in both scenarios (no moving the goalposts).</li>
+  <li>Growth rates and ramp costs are explicit and editable.</li>
+  <li>Low/base/high bands show uncertainty.</li>
+  <li>Break-even is calculated mechanically from the same ledger.</li>
+</ul>
+<p class="note">Next: connect these national totals to household sliders (per-family translation) and publish a Sources & Methods page.</p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="true-costs-ledger" />
+    <input type="hidden" name="page_title" value="True Costs Ledger" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const hzEl = document.getElementById('hz');
+  const out = document.getElementById('ledgerOut');
+  const summary = document.getElementById('summary');
+
+  function fmtT(n){
+    const x = Number(n);
+    const sign = x < 0 ? '-' : '';
+    const a = Math.abs(x);
+    return sign + '$' + (a/1e12).toFixed(2) + 'T';
+  }
+
+  const j = await (await fetch('/data/finance/true_costs_ledger_scaffold.json')).json();
+
+  function rampAdd(key, year, band){
+    const ramps = (j.wmr && j.wmr.investment_ramps_usd) ? j.wmr.investment_ramps_usd : null;
+    if(!ramps || !ramps[key]) return 0;
+    const years = ramps[key].years || [];
+    if(years.indexOf(year) === -1) return 0;
+    return (ramps[key].annual_additional && ramps[key].annual_additional[band]) ? ramps[key].annual_additional[band] : 0;
+  }
+
+  function annualCostPath(scnKey, band, years){
+    // base annual cost levels are from annual_cost_usd_by_category (treated as year-0 / current baseline)
+    const base = (scnKey === 'status_quo') ? j.status_quo.annual_cost_usd_by_category : j.wmr.annual_cost_usd_by_category;
+    const growth = (j.growth_rates_annual && j.growth_rates_annual[scnKey]) ? j.growth_rates_annual[scnKey] : {};
+    const series = []; // [{year, byCat, total}]
+    for(let y=1; y<=years; y++){
+      let total=0;
+      const byCat={};
+      for(const c of j.categories){
+        const g = (growth[c.key] && typeof growth[c.key][band] === 'number') ? growth[c.key][band] : 0.03;
+        const b = base[c.key][band];
+        // simplistic: compound from baseline b for y-1 periods
+        let val = b * Math.pow(1+g, y-1);
+        if(scnKey === 'wmr'){
+          val += rampAdd(c.key, y, band);
+        }
+        byCat[c.key]=val;
+        total += val;
+      }
+      series.push({year:y, byCat, total});
+    }
+    return series;
+  }
+
+  function findBreakEven(cumSQ, cumW){
+    // returns year when cumW <= cumSQ (first time), else null
+    for(let i=0;i<cumSQ.length;i++){
+      if(cumW[i] <= cumSQ[i]) return i+1;
+    }
+    return null;
+  }
+
+  function render(){
+    const band = bandEl.value;
+    const H = Number(hzEl.value);
+
+    const sq = annualCostPath('status_quo', band, H);
+    const w = annualCostPath('wmr', band, H);
+
+    // cumulative totals
+    const cumSQ=[], cumW=[];
+    let a=0,b=0;
+    for(let i=0;i<H;i++){
+      a += sq[i].total;
+      b += w[i].total;
+      cumSQ.push(a);
+      cumW.push(b);
+    }
+    const breakEven = findBreakEven(cumSQ, cumW);
+
+    const deltaAnnual = w[H-1].total - sq[H-1].total;
+    const deltaCum = cumW[H-1] - cumSQ[H-1];
+
+    summary.innerHTML =
+      `<b>${H}-year view</b> (band: <b>${band}</b>)<br>` +
+      `Annual total in year ${H}: Status quo <b>${fmtT(sq[H-1].total)}</b> • WMR <b>${fmtT(w[H-1].total)}</b> • Δ <b>${fmtT(deltaAnnual)}</b><br>` +
+      `Cumulative ${H}y: Status quo <b>${fmtT(cumSQ[H-1])}</b> • WMR <b>${fmtT(cumW[H-1])}</b> • Δ <b>${fmtT(deltaCum)}</b><br>` +
+      (breakEven ? `Break-even year (cumulative): <b>${breakEven}</b>` : `Break-even year (cumulative): <b>not reached</b> (under current assumptions)`);
+
+    // Category table at year H
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Category</th>'
+      + `<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">SQ (year ${H})</th>`
+      + `<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR (year ${H})</th>`
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ</th>'
+      + '</tr></thead><tbody>';
+
+    for(const c of j.categories){
+      const sqv = sq[H-1].byCat[c.key];
+      const wv = w[H-1].byCat[c.key];
+      const d = wv - sqv;
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${c.name}</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtT(sqv)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtT(wv)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmtT(d)}</b></td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+
+    // show first 10 years of cumulative deltas as a simple list
+    const showN = Math.min(10, H);
+    html += '<div class="note" style="margin-top:10px;"><b>Cumulative Δ (WMR - SQ) by year (first '+showN+' years)</b><br>'
+      + Array.from({length:showN}).map((_,i)=>`Year ${i+1}: <b>${fmtT(cumW[i]-cumSQ[i])}</b>`).join(' • ')
+      + '</div>';
+
+    out.innerHTML = html;
+  }
+
+  bandEl.addEventListener('change', render);
+  hzEl.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const bandEl = document.getElementById('band');
+  const hzEl = document.getElementById('hz');
+  const out = document.getElementById('ledgerOut');
+  const summary = document.getElementById('summary');
+
+  function fmtT(n){
+    const x = Number(n);
+    const sign = x < 0 ? '-' : '';
+    const a = Math.abs(x);
+    return sign + '$' + (a/1e12).toFixed(2) + 'T';
+  }
+
+  const j = await (await fetch('/data/finance/true_costs_ledger_scaffold.json')).json();
+
+  function rampAdd(key, year, band){
+    const ramps = (j.wmr && j.wmr.investment_ramps_usd) ? j.wmr.investment_ramps_usd : null;
+    if(!ramps || !ramps[key]) return 0;
+    const years = ramps[key].years || [];
+    if(years.indexOf(year) === -1) return 0;
+    return (ramps[key].annual_additional && ramps[key].annual_additional[band]) ? ramps[key].annual_additional[band] : 0;
+  }
+
+  function annualCostPath(scnKey, band, years){
+    // base annual cost levels are from annual_cost_usd_by_category (treated as year-0 / current baseline)
+    const base = (scnKey === 'status_quo') ? j.status_quo.annual_cost_usd_by_category : j.wmr.annual_cost_usd_by_category;
+    const growth = (j.growth_rates_annual && j.growth_rates_annual[scnKey]) ? j.growth_rates_annual[scnKey] : {};
+    const series = []; // [{year, byCat, total}]
+    for(let y=1; y<=years; y++){
+      let total=0;
+      const byCat={};
+      for(const c of j.categories){
+        const g = (growth[c.key] && typeof growth[c.key][band] === 'number') ? growth[c.key][band] : 0.03;
+        const b = base[c.key][band];
+        // simplistic: compound from baseline b for y-1 periods
+        let val = b * Math.pow(1+g, y-1);
+        if(scnKey === 'wmr'){
+          val += rampAdd(c.key, y, band);
+        }
+        byCat[c.key]=val;
+        total += val;
+      }
+      series.push({year:y, byCat, total});
+    }
+    return series;
+  }
+
+  function findBreakEven(cumSQ, cumW){
+    // returns year when cumW <= cumSQ (first time), else null
+    for(let i=0;i<cumSQ.length;i++){
+      if(cumW[i] <= cumSQ[i]) return i+1;
+    }
+    return null;
+  }
+
+  function render(){
+    const band = bandEl.value;
+    const H = Number(hzEl.value);
+
+    const sq = annualCostPath('status_quo', band, H);
+    const w = annualCostPath('wmr', band, H);
+
+    // cumulative totals
+    const cumSQ=[], cumW=[];
+    let a=0,b=0;
+    for(let i=0;i<H;i++){
+      a += sq[i].total;
+      b += w[i].total;
+      cumSQ.push(a);
+      cumW.push(b);
+    }
+    const breakEven = findBreakEven(cumSQ, cumW);
+
+    const deltaAnnual = w[H-1].total - sq[H-1].total;
+    const deltaCum = cumW[H-1] - cumSQ[H-1];
+
+    summary.innerHTML =
+      `<b>${H}-year view</b> (band: <b>${band}</b>)<br>` +
+      `Annual total in year ${H}: Status quo <b>${fmtT(sq[H-1].total)}</b> • WMR <b>${fmtT(w[H-1].total)}</b> • Δ <b>${fmtT(deltaAnnual)}</b><br>` +
+      `Cumulative ${H}y: Status quo <b>${fmtT(cumSQ[H-1])}</b> • WMR <b>${fmtT(cumW[H-1])}</b> • Δ <b>${fmtT(deltaCum)}</b><br>` +
+      (breakEven ? `Break-even year (cumulative): <b>${breakEven}</b>` : `Break-even year (cumulative): <b>not reached</b> (under current assumptions)`);
+
+    // Category table at year H
+    let html = '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Category</th>'
+      + `<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">SQ (year ${H})</th>`
+      + `<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">WMR (year ${H})</th>`
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Δ</th>'
+      + '</tr></thead><tbody>';
+
+    for(const c of j.categories){
+      const sqv = sq[H-1].byCat[c.key];
+      const wv = w[H-1].byCat[c.key];
+      const d = wv - sqv;
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${c.name}</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtT(sqv)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${fmtT(wv)}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${fmtT(d)}</b></td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+
+    // show first 10 years of cumulative deltas as a simple list
+    const showN = Math.min(10, H);
+    html += '<div class="note" style="margin-top:10px;"><b>Cumulative Δ (WMR - SQ) by year (first '+showN+' years)</b><br>'
+      + Array.from({length:showN}).map((_,i)=>`Year ${i+1}: <b>${fmtT(cumW[i]-cumSQ[i])}</b>`).join(' • ')
+      + '</div>';
+
+    out.innerHTML = html;
+  }
+
+  bandEl.addEventListener('change', render);
+  hzEl.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>

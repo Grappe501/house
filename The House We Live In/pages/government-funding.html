@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How We Pay for Government — Working Majority Republic</title>
+  <meta name="description" content="A people-first constitutional model: democracy without money-rule, capitalism without extraction." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <div class="kicker">Working Majority Republic</div>
+          <h1>How We Pay for Government</h1>
+          <div class="muted">Home / The Model / Funding</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" data-page-slug="government-funding">
+
+<div class="card">
+  <div class="kicker">Golden Circle</div>
+  <h2>WHY: government funding must be simple, fair, and non-punitive</h2>
+  
+<p>Working families experience government as a maze. Under WMR, funding is designed to be <b>transparent</b>, <b>predictable</b>, and
+built around the principle: <b>tax extraction more than work</b>.</p>
+<div class="callout"><b>Goal:</b> fund education, healthcare, infrastructure, and justice without allowing wealth to buy power.</div>
+<p>Data: <a href="/data/finance/government_funding_scaffold.json"><b>government_funding_scaffold.json</b></a></p>
+
+</div>
+
+<div class="card">
+  <div class="kicker">HOW</div>
+  <h2>Where money comes from (and why this is still capitalism)</h2>
+  
+<ul>
+  <li><b>Money is generated</b> by private production, services, entrepreneurship, and innovation.</li>
+  <li><b>The public role</b> is to set rules so the gains are not captured by monopolies.</li>
+  <li><b>Capitalism remains</b>: businesses compete and profit — but cannot extract unlimited rent from essentials.</li>
+  <li><b>Public infrastructure</b> lowers costs for everyone, including business, raising GDP productivity.</li>
+</ul>
+
+</div>
+
+<div class="card">
+  <div class="kicker">WHAT</div>
+  <h2>Revenue streams (scaffold) + institutional design</h2>
+  
+<div id="rev" class="note">Loading…</div>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Pragmatism</div>
+  <h2>How this phases in without breaking the system</h2>
+  
+<ul>
+  <li><b>Phase 1:</b> simplify collection, close obvious loopholes, publish transparent dashboards.</li>
+  <li><b>Phase 2:</b> shift burden from wages to extraction (monopoly rents, speculation, vacancy, externalities).</li>
+  <li><b>Phase 3:</b> expand People’s Wealth Fund mechanisms as automation rises.</li>
+  <li><b>Rule:</b> every new revenue mechanism must include a <b>household impact test</b> and published assumptions.</li>
+</ul>
+
+</div>
+
+<div class="card">
+  <div class="kicker">Thoughts & comments (moderated)</div>
+  <h3>Leave a comment on this page</h3>
+  <p class="note">Your message is submitted for review. We may publish it (with your name if provided) after approval.</p>
+
+  <form name="thoughts" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/pages/thanks.html">
+    <input type="hidden" name="form-name" value="thoughts" />
+    <p style="display:none;">
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="hidden" name="page_slug" value="government-funding" />
+    <input type="hidden" name="page_title" value="How We Pay for Government" />
+    <input type="hidden" name="submitted_at" value="" />
+
+    <div class="grid">
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Name (optional)</label>
+        <input name="name" placeholder="Your name" />
+      </div>
+      <div class="card compact half" style="background:transparent;border:none;padding:0;">
+        <label class="note">Email (optional, never published)</label>
+        <input name="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
+
+    <label class="note">Message</label>
+    <textarea name="message" required placeholder="What should we improve, clarify, or add?"></textarea>
+
+    <button type="submit">Submit for review</button>
+  </form>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const el = document.getElementById('rev');
+  try{
+    const res = await fetch('/data/finance/government_funding_scaffold.json');
+    const j = await res.json();
+    let html = '<div class="callout"><b>Core principles</b><ul>' + j.principles.map(x=>`<li>${x}</li>`).join('') + '</ul></div>';
+    html += '<h3 style="margin-top:8px;">Revenue streams (scaffold)</h3>';
+    html += '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Stream</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Type</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Who pays</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Why</th>'
+      + '</tr></thead><tbody>';
+    for(const r of j.revenue_streams){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${r.name}</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${r.type}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${r.who_pays}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${r.why}</td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+
+    html += '<div class="note" style="margin-top:10px;"><b>Institution scaffold:</b> '
+      + (j.collection_institutions_scaffold.replacement || '') + '</div>';
+
+    el.innerHTML = html;
+  }catch(e){
+    el.textContent = 'Unable to load funding scaffold.';
+  }
+})();
+</script>
+
+</body>
+</html>
+</main>
+
+  <footer>
+    <div class="wrap">
+      <div class="muted">© 2026 Working Majority Republic. Draft build for iterative expansion.</div>
+      <div class="note">Comments are collected via Netlify Forms and are not displayed publicly until approved.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+
+<script>
+(async function(){
+  const el = document.getElementById('rev');
+  try{
+    const res = await fetch('/data/finance/government_funding_scaffold.json');
+    const j = await res.json();
+    let html = '<div class="callout"><b>Core principles</b><ul>' + j.principles.map(x=>`<li>${x}</li>`).join('') + '</ul></div>';
+    html += '<h3 style="margin-top:8px;">Revenue streams (scaffold)</h3>';
+    html += '<table style="width:100%; border-collapse:collapse;">'
+      + '<thead><tr>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Stream</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Type</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Who pays</th>'
+      + '<th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Why</th>'
+      + '</tr></thead><tbody>';
+    for(const r of j.revenue_streams){
+      html += '<tr>'
+        + `<td style="padding:8px; border-bottom:1px solid #eee;"><b>${r.name}</b></td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${r.type}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${r.who_pays}</td>`
+        + `<td style="padding:8px; border-bottom:1px solid #eee;">${r.why}</td>`
+        + '</tr>';
+    }
+    html += '</tbody></table>';
+
+    html += '<div class="note" style="margin-top:10px;"><b>Institution scaffold:</b> '
+      + (j.collection_institutions_scaffold.replacement || '') + '</div>';
+
+    el.innerHTML = html;
+  }catch(e){
+    el.textContent = 'Unable to load funding scaffold.';
+  }
+})();
+</script>
+
+</body>
+</html>
