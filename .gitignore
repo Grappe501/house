@@ -11,3 +11,7 @@ node_modules/
 # Env files
 .env
 .env.*
+
+# local diagnostics
+/maps/
+
