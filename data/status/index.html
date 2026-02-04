@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Build Status — The House We Live In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --max: 1100px;
+      --pad: 18px;
+      --border: rgba(0,0,0,.10);
+      --muted: rgba(0,0,0,.65);
+      --chip: rgba(0,0,0,.06);
+    }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.5; }
+    header { padding: 26px var(--pad); border-bottom: 1px solid var(--border); }
+    main { max-width: var(--max); margin: 0 auto; padding: 22px var(--pad) 44px; }
+    h1 { font-size: 1.8rem; margin: 0 0 6px; }
+    .meta { color: var(--muted); font-size: .95rem; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 18px; }
+    .card { border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+    .row { display:flex; flex-wrap:wrap; gap: 10px; align-items:center; justify-content:space-between; }
+    .chips { display:flex; flex-wrap:wrap; gap: 8px; }
+    .chip { background: var(--chip); border: 1px solid var(--border); padding: 4px 10px; border-radius: 999px; font-size: .85rem; }
+    table { width:100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { text-align:left; padding: 10px 8px; border-top: 1px solid var(--border); vertical-align: top; }
+    th { font-size: .9rem; color: var(--muted); font-weight: 600; }
+    a { color: inherit; }
+    .btns a {
+      display:inline-block; text-decoration:none;
+      padding: 8px 12px; border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.03);
+      margin-right: 8px; margin-top: 8px;
+    }
+    .btns a:hover { background: rgba(0,0,0,.06); }
+    .small { font-size: .92rem; color: var(--muted); }
+    code { background: rgba(0,0,0,.05); padding: 2px 6px; border-radius: 8px; }
+    details { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 10px; }
+    summary { cursor:pointer; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Build Status</h1>
+    <div class="meta">Generated: 2026-02-03 • Live build tracker for proofreading on Netlify.</div>
+    <div class="btns" style="margin-top:10px;">
+      <a href="../rooms/room001.html">Read Ch01 — Room 001</a>
+      <a href="../rooms/room005.html">Read Ch01 — Room 005</a>
+      <a href="build_status.json">build_status.json</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="card">
+        <div class="row">
+          <div>
+            <h2 style="margin:0 0 6px;">Act I • Chapter 01 (Rooms 001–005)</h2>
+            <div class="small">MasterBuild ✅ • Prose ✅ • HTML ✅ • Audit ✅ • Patch ✅</div>
+          </div>
+          <div class="chips">
+            <span class="chip">Act I ceiling respected</span>
+            <span class="chip">No Act II leakage</span>
+            <span class="chip">Room 004 phrase patched</span>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="width:70px;">Room</th>
+              <th>Title</th>
+              <th style="width:120px;">MasterBuild</th>
+              <th style="width:90px;">Prose</th>
+              <th style="width:80px;">HTML</th>
+              <th style="width:120px;">Audit</th>
+              <th>Patches / Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>001</td><td>The Door</td><td>complete</td><td>complete</td><td>complete</td><td>chapter audit</td><td>canonical</td></tr>
+            <tr><td>002</td><td>The Entryway</td><td>complete</td><td>complete</td><td>complete</td><td>chapter audit</td><td>—</td></tr>
+            <tr><td>003</td><td>The Hall</td><td>complete</td><td>complete</td><td>complete</td><td>chapter audit</td><td>single procedural fracture</td></tr>
+            <tr><td>004</td><td>The Pause</td><td>complete</td><td>complete</td><td>complete</td><td>chapter audit</td><td>phrase internalized</td></tr>
+            <tr><td>005</td><td>The Carry</td><td>complete</td><td>complete</td><td>complete</td><td>chapter audit</td><td>residue anchor: baseboard scuff</td></tr>
+          </tbody>
+        </table>
+
+        <details>
+          <summary>Audit links</summary>
+          <div class="btns" style="margin-top:8px;">
+            <a href="../../docs/book/09_AUDITS/Act_I/Ch01/CH01_FULL_AUDIT.html">CH01 Full Audit (HTML)</a>
+            <a href="../../docs/book/09_AUDITS/Act_I/Ch01/CH01_FULL_AUDIT.md">CH01 Full Audit (MD)</a>
+          </div>
+          <p class="small">If these links 404 due to routing, we’ll mirror the audit under <code>/data/status/</code> in a follow-up overlay.</p>
+        </details>
+      </section>
+
+      <section class="card">
+        <h2 style="margin:0 0 8px;">Protocol (Locked)</h2>
+        <ol>
+          <li><strong>10× MasterBuild</strong> for a 5-room chapter (Rooms 006–010 next).</li>
+          <li><strong>Prose pass v1</strong> room-by-room (ship MD + HTML).</li>
+          <li><strong>Chapter audit</strong> after all 5 rooms are drafted.</li>
+          <li><strong>Micro patches</strong> only after audit (single-file overlays).</li>
+          <li>Repeat next 5-room chapter.</li>
+        </ol>
+        <p class="small"><strong>Overlay rule:</strong> only new files or the single explicitly requested replacement file at the correct path. No silent overwrites.</p>
+      </section>
+
+      <section class="card">
+        <h2 style="margin:0 0 8px;">Word Count Policy</h2>
+        <p>Yes — we keep strict, predetermined word-count caps per room to preserve pacing.</p>
+        <ul>
+          <li>Caps live in each room’s MasterBuild as an acceptance gate.</li>
+          <li>If we change a cap, we document the change and update the dashboard JSON.</li>
+        </ul>
+        <p class="small">Next step: define caps for Rooms 006–010 during Chapter 02 MasterBuild.</p>
+      </section>
+
+      <section class="card">
+        <h2 style="margin:0 0 8px;">Next Steps to Finish Act I</h2>
+        <ol>
+          <li>Build 10× MasterBuild for Chapter 02 (Rooms 006–010).</li>
+          <li>Draft prose for Rooms 006–010 (overlay per room).</li>
+          <li>Run Chapter 02 audit.</li>
+          <li>Repeat Chapters 03–05 (Rooms 011–025).</li>
+          <li>Run Act I full audit (001–025) and lock Act I.</li>
+        </ol>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,8 +1,0 @@
-# Generated outputs (always generated, never source)
-build/
-dist/
-out/
-
-# Node/Next artifacts (not part of kernel)
-node_modules/
-.next/

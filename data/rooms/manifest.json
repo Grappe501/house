@@ -5,7 +5,7 @@
     {
       "id": 1,
       "title": "Threshold / Invitation",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 260,
       "mood": {
@@ -19,7 +19,7 @@
     {
       "id": 2,
       "title": "Name the Weight",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 240,
       "mood": {
@@ -33,7 +33,7 @@
     {
       "id": 3,
       "title": "Shared Experience",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 240,
       "mood": {
@@ -47,7 +47,7 @@
     {
       "id": 4,
       "title": "Quiet Cost",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Compression",
       "word_target": 140,
       "mood": {
@@ -61,7 +61,7 @@
     {
       "id": 5,
       "title": "Breath",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Silence",
       "word_target": 90,
       "mood": {
@@ -74,8 +74,8 @@
     },
     {
       "id": 6,
-      "title": "Effort ≠ Outcome",
-      "act": "Act I — Recognition (WHY)",
+      "title": "Effort \u2260 Outcome",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 240,
       "mood": {
@@ -89,7 +89,7 @@
     {
       "id": 7,
       "title": "Time Scarcity",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Compression",
       "word_target": 160,
       "mood": {
@@ -103,7 +103,7 @@
     {
       "id": 8,
       "title": "Invisible Tradeoffs",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 230,
       "mood": {
@@ -117,7 +117,7 @@
     {
       "id": 9,
       "title": "Personalization Trap",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 220,
       "mood": {
@@ -131,7 +131,7 @@
     {
       "id": 10,
       "title": "Silence Reset",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Silence",
       "word_target": 80,
       "mood": {
@@ -145,7 +145,7 @@
     {
       "id": 11,
       "title": "Stress as Signal",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 240,
       "mood": {
@@ -159,7 +159,7 @@
     {
       "id": 12,
       "title": "Shared Load",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 230,
       "mood": {
@@ -173,7 +173,7 @@
     {
       "id": 13,
       "title": "Quiet Anger Validated",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Compression",
       "word_target": 150,
       "mood": {
@@ -187,7 +187,7 @@
     {
       "id": 14,
       "title": "No Villains",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 220,
       "mood": {
@@ -201,7 +201,7 @@
     {
       "id": 15,
       "title": "Breathing Space",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Expansion",
       "word_target": 280,
       "mood": {
@@ -215,7 +215,7 @@
     {
       "id": 16,
       "title": "Structure Exists",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 230,
       "mood": {
@@ -229,7 +229,7 @@
     {
       "id": 17,
       "title": "Rules Changed Quietly",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 220,
       "mood": {
@@ -243,7 +243,7 @@
     {
       "id": 18,
       "title": "Not a Conspiracy",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 210,
       "mood": {
@@ -257,7 +257,7 @@
     {
       "id": 19,
       "title": "Weight Is Shared",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 240,
       "mood": {
@@ -271,7 +271,7 @@
     {
       "id": 20,
       "title": "Pause Room",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Silence",
       "word_target": 90,
       "mood": {
@@ -285,7 +285,7 @@
     {
       "id": 21,
       "title": "Understanding Is Possible",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Expansion",
       "word_target": 280,
       "mood": {
@@ -299,7 +299,7 @@
     {
       "id": 22,
       "title": "We Can Learn This",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 240,
       "mood": {
@@ -313,7 +313,7 @@
     {
       "id": 23,
       "title": "No Rush",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Flow",
       "word_target": 220,
       "mood": {
@@ -327,7 +327,7 @@
     {
       "id": 24,
       "title": "House Is Ours",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Expansion",
       "word_target": 300,
       "mood": {
@@ -341,7 +341,7 @@
     {
       "id": 25,
       "title": "End-State Breath",
-      "act": "Act I — Recognition (WHY)",
+      "act": "Act I \u2014 Recognition (WHY)",
       "archetype": "Silence",
       "word_target": 100,
       "mood": {
@@ -353,9 +353,359 @@
       "audio": ""
     },
     {
+      "id": 26,
+      "title": "Orientation",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room026.html",
+      "audio": null
+    },
+    {
+      "id": 27,
+      "title": "Procedure",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room027.html",
+      "audio": null
+    },
+    {
+      "id": 28,
+      "title": "Rhythm",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room028.html",
+      "audio": null
+    },
+    {
+      "id": 29,
+      "title": "Paperwork",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room029.html",
+      "audio": null
+    },
+    {
+      "id": 30,
+      "title": "Threshold Tax",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room030.html",
+      "audio": null
+    },
+    {
+      "id": 31,
+      "title": "Scoreboard",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room031.html",
+      "audio": null
+    },
+    {
+      "id": 32,
+      "title": "Soft Threats",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room032.html",
+      "audio": null
+    },
+    {
+      "id": 33,
+      "title": "Scarcity Loop",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room033.html",
+      "audio": null
+    },
+    {
+      "id": 34,
+      "title": "Compliance Reward",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room034.html",
+      "audio": null
+    },
+    {
+      "id": 35,
+      "title": "Default Settings",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room035.html",
+      "audio": null
+    },
+    {
+      "id": 36,
+      "title": "Sorting Hat",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room036.html",
+      "audio": null
+    },
+    {
+      "id": 37,
+      "title": "Filtered Neighbors",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room037.html",
+      "audio": null
+    },
+    {
+      "id": 38,
+      "title": "Private Hallways",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room038.html",
+      "audio": null
+    },
+    {
+      "id": 39,
+      "title": "Group Identity",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room039.html",
+      "audio": null
+    },
+    {
+      "id": 40,
+      "title": "Door You Didn\u2019t Choose",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room040.html",
+      "audio": null
+    },
+    {
+      "id": 41,
+      "title": "Self-Blame Engine",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room041.html",
+      "audio": null
+    },
+    {
+      "id": 42,
+      "title": "Emotional Labor",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room042.html",
+      "audio": null
+    },
+    {
+      "id": 43,
+      "title": "Learned Helplessness",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room043.html",
+      "audio": null
+    },
+    {
+      "id": 44,
+      "title": "The Performance",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room044.html",
+      "audio": null
+    },
+    {
+      "id": 45,
+      "title": "Quiet Resignation",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room045.html",
+      "audio": null
+    },
+    {
+      "id": 46,
+      "title": "Contradictions",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room046.html",
+      "audio": null
+    },
+    {
+      "id": 47,
+      "title": "Legitimacy Gap",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room047.html",
+      "audio": null
+    },
+    {
+      "id": 48,
+      "title": "Stress Test",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room048.html",
+      "audio": null
+    },
+    {
+      "id": 49,
+      "title": "The Ask",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room049.html",
+      "audio": null
+    },
+    {
+      "id": 50,
+      "title": "Handoff to Act III",
+      "act": "ACT_II",
+      "archetype": "All",
+      "word_target": 220,
+      "mood": {
+        "light": "neutral",
+        "warmth": "neutral",
+        "geometry": "balanced"
+      },
+      "body": "room050.html",
+      "audio": null
+    },
+    {
       "id": 51,
       "title": "The Tool Belt",
-      "act": "Act III — Reconstruction (REBUILD)",
+      "act": "Act III \u2014 Reconstruction (REBUILD)",
       "archetype": "Flow",
       "word_target": 320,
       "mood": {
@@ -369,7 +719,7 @@
     {
       "id": 52,
       "title": "Constraints",
-      "act": "Act III — Reconstruction (REBUILD)",
+      "act": "Act III \u2014 Reconstruction (REBUILD)",
       "archetype": "Compression",
       "word_target": 300,
       "mood": {
@@ -383,7 +733,7 @@
     {
       "id": 53,
       "title": "The Ledger",
-      "act": "Act III — Reconstruction (REBUILD)",
+      "act": "Act III \u2014 Reconstruction (REBUILD)",
       "archetype": "Flow",
       "word_target": 340,
       "mood": {
@@ -397,7 +747,7 @@
     {
       "id": 54,
       "title": "The First Joint",
-      "act": "Act III — Reconstruction (REBUILD)",
+      "act": "Act III \u2014 Reconstruction (REBUILD)",
       "archetype": "Beam",
       "word_target": 280,
       "mood": {
@@ -411,7 +761,7 @@
     {
       "id": 55,
       "title": "Start Where the Stress Is Highest",
-      "act": "Act III — Reconstruction (REBUILD)",
+      "act": "Act III \u2014 Reconstruction (REBUILD)",
       "archetype": "Silence",
       "word_target": 180,
       "mood": {

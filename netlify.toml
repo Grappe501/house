@@ -1,11 +1,10 @@
 [build]
-  publish = "The House We Live In"
-  command = "echo 'no build'"
-
-[build.processing]
-  skip_processing = true
+  publish = "."
 
 [functions]
   directory = "netlify/functions"
-[plugins]
-  enabled = false
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

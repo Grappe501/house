@@ -1,3 +1,0 @@
-# Fixtures (MD-only)
-
-Placeholder.

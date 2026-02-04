@@ -1,0 +1,310 @@
+{
+  "generated": "2026-02-03",
+  "protocol": {
+    "overlay_rule": "Overlays contain ONLY new files or the single file being replaced, at its correct path. Never overwrite without explicit instruction.",
+    "sequence": [
+      "1) MasterBuild (10\u00d7) for a 5-room chapter",
+      "2) Prose pass v1 for each room (HTML + MD)",
+      "3) Full chapter audit (HTML + MD)",
+      "4) Patch overlays (surgical)",
+      "5) Repeat next 5-room chapter"
+    ],
+    "word_count": {
+      "policy": "Keep strict room-level word-count caps to preserve pacing; adjust only by issuing a new cap in the room MasterBuild and tracking it in this dashboard.",
+      "note": "Current Act I Ch01 prose is intentionally short/lean to maintain Act I ceiling."
+    }
+  },
+  "acts": [
+    {
+      "act": "Act I",
+      "range": "Rooms 001\u2013025",
+      "chapters": [
+        {
+          "chapter": "Chapter 01",
+          "rooms": [
+            {
+              "room": "001",
+              "title": "The Door",
+              "masterbuild": "complete",
+              "prose": "complete",
+              "html": "complete",
+              "audit": "complete",
+              "patches": "room004_phrase_patch_applied"
+            },
+            {
+              "room": "002",
+              "title": "The Entryway",
+              "masterbuild": "complete",
+              "prose": "complete",
+              "html": "complete",
+              "audit": "covered_by_ch01_audit",
+              "patches": "none"
+            },
+            {
+              "room": "003",
+              "title": "The Hall",
+              "masterbuild": "complete",
+              "prose": "complete",
+              "html": "complete",
+              "audit": "covered_by_ch01_audit",
+              "patches": "none"
+            },
+            {
+              "room": "004",
+              "title": "The Pause",
+              "masterbuild": "complete",
+              "prose": "complete",
+              "html": "complete",
+              "audit": "covered_by_ch01_audit",
+              "patches": "phrase_internalized"
+            },
+            {
+              "room": "005",
+              "title": "The Carry",
+              "masterbuild": "complete",
+              "prose": "complete",
+              "html": "complete",
+              "audit": "covered_by_ch01_audit",
+              "patches": "none"
+            }
+          ],
+          "chapter_masterbuild": "complete",
+          "chapter_prose": "complete",
+          "chapter_audit": "complete",
+          "netlify_readthrough": "enabled"
+        },
+        {
+          "chapter": "Chapter 02",
+          "rooms": [
+            {
+              "room": "006",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "007",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "008",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "009",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "010",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            }
+          ],
+          "chapter_masterbuild": "todo",
+          "chapter_prose": "todo",
+          "chapter_audit": "todo",
+          "netlify_readthrough": "pending"
+        },
+        {
+          "chapter": "Chapter 03",
+          "rooms": [
+            {
+              "room": "011",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "012",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "013",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "014",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "015",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            }
+          ],
+          "chapter_masterbuild": "todo",
+          "chapter_prose": "todo",
+          "chapter_audit": "todo",
+          "netlify_readthrough": "pending"
+        },
+        {
+          "chapter": "Chapter 04",
+          "rooms": [
+            {
+              "room": "016",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "017",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "018",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "019",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "020",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            }
+          ],
+          "chapter_masterbuild": "todo",
+          "chapter_prose": "todo",
+          "chapter_audit": "todo",
+          "netlify_readthrough": "pending"
+        },
+        {
+          "chapter": "Chapter 05",
+          "rooms": [
+            {
+              "room": "021",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "022",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "023",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "024",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            },
+            {
+              "room": "025",
+              "title": "",
+              "masterbuild": "todo",
+              "prose": "todo",
+              "html": "todo",
+              "audit": "todo",
+              "patches": ""
+            }
+          ],
+          "chapter_masterbuild": "todo",
+          "chapter_prose": "todo",
+          "chapter_audit": "todo",
+          "netlify_readthrough": "pending"
+        }
+      ]
+    },
+    {
+      "act": "Act II",
+      "range": "Rooms 026\u2013050",
+      "chapters": []
+    },
+    {
+      "act": "Act III",
+      "range": "Rooms 051\u2013075",
+      "chapters": []
+    },
+    {
+      "act": "Act IV",
+      "range": "Rooms 076\u2013100",
+      "chapters": []
+    }
+  ]
+}

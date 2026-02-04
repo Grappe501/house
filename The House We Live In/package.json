@@ -1,9 +1,0 @@
-{
-  "name": "wmr-site",
-  "private": true,
-  "description": "Working Majority Republic static site + Netlify Functions",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=18"
-  }
-}

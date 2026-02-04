@@ -1,19 +1,15 @@
-# ROOM_26_HANDOFF_SPEC
+# Room 26 — Handoff Spec (from Act I ending lock)
 
 Room 26 must assume:
-- The reader is awake but not activated.
-- Trust is cracked, not broken.
-- Curiosity is now **personal**.
+- The reader is awake but not activated
+- Trust is cracked, not broken
+- Curiosity is now personal
 
-## Do
-- Orient, don’t comfort.
-- Keep tone calm, precise, and observant.
-- Convert “place” language into “system” language subtly.
+## Constraints for Room 26
+- Must not comfort
+- Must orient
+- Must preserve Act I’s calm clarity (no spikes)
 
-## Don’t
-- No calls to action.
-- No villain reveal.
-- No emotional spike or fear beat.
-
-## Desired reader state at Room 26 exit
-A quiet readiness: *“I’m going to keep going, because now this is about me.”*
+## Reader task
+Give the reader a new way to *name* what they felt in Rooms 21–25,
+without “teaching” or declaring politics.

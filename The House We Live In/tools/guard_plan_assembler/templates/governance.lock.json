@@ -1,8 +1,0 @@
-{
-  "schema_version": "governance_lock_v2",
-  "governance_repo": "<REPLACE_WITH_GOVERNANCE_REPO_URL>",
-  "governance_ref": "gov-v0.1.0",
-  "profile": "hybrid-app",
-  "governance_snapshot_sha256": "<OPTIONAL_SHA256_OF_build/governance_snapshot.json>",
-  "notes": "Pin to tag/SHA; optionally pin snapshot hash for immutability."
-}

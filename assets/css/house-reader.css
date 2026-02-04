@@ -17,6 +17,144 @@ body{
   background:var(--bg);
   font: 17px/1.55 ui-serif, Georgia, "Times New Roman", serif;
 }
+
+/* ==========================================================
+   Global Reader Shell (applies to Room HTML in /data/rooms/*)
+   Goal: "Apple Books clean" — centered, calm, wide margins.
+   This is intentionally boring and consistent.
+   ========================================================== */
+
+body.house-reader{
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(203,214,255,.10), transparent 60%),
+    linear-gradient(180deg, var(--bg), #0b0d12);
+}
+
+/* Primary reading column */
+body.house-reader .prose{
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 40px) clamp(14px, 3vw, 32px);
+}
+
+/* Page surface */
+body.house-reader .prose{
+  background: linear-gradient(180deg, rgba(20,24,38,.92), rgba(26,31,43,.88));
+  border: 1px solid var(--edge);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: 0 24px 70px var(--shadow);
+}
+
+/* Give the page room to breathe on small screens */
+@media (max-width: 680px){
+  body.house-reader .prose{
+    border-radius: 16px;
+    padding: 18px 14px;
+  }
+}
+
+/* Room header */
+body.house-reader .room-header{
+  margin: 6px 0 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--edge);
+}
+body.house-reader .room-header h1{
+  margin: 0 0 6px;
+  font-size: clamp(26px, 3.2vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+body.house-reader .room-sub{
+  margin: 0;
+  color: var(--muted);
+  font: 14px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* Paragraph rhythm */
+body.house-reader .prose p{
+  margin: 0 0 14px;
+}
+
+/* Lead + dropcap */
+body.house-reader .lead{
+  font-size: 19px;
+}
+body.house-reader .dropcap:first-letter{
+  float:left;
+  font-size: 3.1em;
+  line-height: .9;
+  padding: 4px 10px 0 0;
+  color: var(--accent);
+}
+
+/* Scene end line */
+body.house-reader .final-line{
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--edge);
+  color: var(--accent);
+}
+
+/* Small notes */
+body.house-reader .small-note{
+  color: var(--muted);
+  font: 13px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* Audio panel styling (Room 001 uses this) */
+body.house-reader .audio-panel{
+  margin: 0 0 18px;
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+  background: rgba(14,19,32,.55);
+}
+body.house-reader .audio-panel__inner{
+  padding: 14px;
+}
+body.house-reader .audio-panel__title{
+  font: 12px/1 ui-sans-serif, system-ui;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+body.house-reader .audio-panel__title--small{margin-top: 14px;}
+body.house-reader .audio-panel__desc{
+  color: var(--muted);
+  font: 13px/1.5 ui-sans-serif, system-ui;
+  margin-bottom: 12px;
+}
+body.house-reader .audio-panel__divider{
+  height: 1px;
+  background: var(--edge);
+  margin: 12px 0;
+}
+body.house-reader .audio-controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+body.house-reader .btn-audio{
+  appearance:none;
+  border: 1px solid var(--edge);
+  background: rgba(20,24,38,.65);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font: 13px/1 ui-sans-serif, system-ui;
+  cursor:pointer;
+}
+body.house-reader .btn-audio:hover{background: rgba(20,24,38,.9)}
+body.house-reader .btn-audio--primary{border-color: rgba(203,214,255,.45);}
+body.house-reader .audio-controls__meta{
+  color: var(--muted);
+  font: 12px/1.45 ui-sans-serif, system-ui;
+}
+body.house-reader .audio-panel__player{width:100%; margin-top:10px;}
+
+/* Footer spacing */
+body.house-reader .room-footer{
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--edge);
+}
 .hr-header{
   position:sticky;
   top:0;

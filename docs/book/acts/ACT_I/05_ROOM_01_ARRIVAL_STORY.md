@@ -1,14 +1,14 @@
-# Room 1 — Arrival
+# ACT I — Room 1: Arrival
 
 The first thing you notice isn’t the size.
 
 It’s the quiet.
 
-Not the good quiet, either—the kind you earn after a long day, when the dishes are finally done and the last light in the kitchen clicks off. This quiet is pre-made. Manufactured. Like the air has been told to hold still.
+Not the good quiet, either—the kind you earn after a long day, when the dishes are finally done and the last light in the kitchen clicks off. This quiet is *pre-made*. Manufactured. Like the air has been told to hold still.
 
 I stand on the porch with my hand on the knob and the feeling that I’ve already been here. Not in a dream. Not in a story someone told. In the way your body recognizes a place before your mind can catch up—like muscle memory, like a hymn you haven’t sung in years that finds your throat anyway.
 
-The door is painted a patient color, the kind of color people choose when they want to seem calm. A color that says, Nothing happens here you can’t handle. The paint is clean, the trim is sharp, and the welcome mat is centered with the kind of precision that implies someone owns a ruler just for this purpose.
+The door is painted a patient color, the kind of color people choose when they want to seem calm. A color that says, *Nothing happens here you can’t handle.* The paint is clean, the trim is sharp, and the welcome mat is centered with the kind of precision that implies someone owns a ruler just for this purpose.
 
 I should feel grateful. Most folks would. A good door, solid wood, no draft. No busted steps. No sagging railing. The porch boards don’t creak when I shift my weight. Even the light fixture above me is polished, ready for company.
 
@@ -16,15 +16,15 @@ But I can’t shake the sense that the house has been waiting with its hands fol
 
 I turn the knob.
 
-The latch gives with a soft, obedient click that is almost too smooth—like it’s been oiled recently, like it’s practiced. The door swings inward as if it’s opening itself. Warm air spills out, not stale, not too sweet. Neutral. The house doesn’t greet me with smell the way real homes do—coffee, onions, damp dog, laundry soap. It greets me with nothing at all, like a room that’s been wiped down for inspection.
+The latch gives with a soft, obedient click that is almost too smooth—like it’s been oiled recently, like it’s practiced. The door swings inward as if it’s opening itself. Warm air spills out, not stale, not too sweet. Neutral. The house doesn’t greet me with smell the way real homes do—coffee, onions, damp dog, laundry soap. It greets me with *nothing at all*, like a room that’s been wiped down for inspection.
 
 Inside, the foyer is bigger than it needs to be. The ceiling rises high enough to make a person feel small without announcing the intention. The floor is wood, glossy but not gaudy. Somebody has cared for it, but not in a way that shows sweat. It looks like the kind of care you pay for.
 
 To my left is a coat rack with empty hooks and a small bench that looks decorative more than useful. On the bench sits a folded throw blanket, perfect edges, not a wrinkle. No one ever actually sat here and pulled it around their shoulders. Not once. It’s there to suggest comfort, like a promise made on letterhead.
 
-Straight ahead, a hallway runs deeper than the eye can measure at first glance. It doesn’t curve. It doesn’t invite. It just continues, like a rule.
+Straight ahead, a hallway runs deeper than the eye can measure at first glance. It doesn’t curve. It doesn’t invite. It just *continues*, like a rule.
 
-To my right, there’s an archway to a living room, and I can see a couch that has never known a nap. Pillows are arranged as if someone studied how to look relaxed. On the wall above the mantle is a framed image—too far away to make out clearly, but the frame is heavy, respectable. The kind of thing that says heritage without saying whose.
+To my right, there’s an archway to a living room, and I can see a couch that has never known a nap. Pillows are arranged as if someone studied how to look relaxed. On the wall above the mantle is a framed image—too far away to make out clearly, but the frame is heavy, respectable. The kind of thing that says *heritage* without saying *whose*.
 
 My shoes scuff the floor lightly. The sound should echo in a space like this. It doesn’t. The house absorbs it. Even my presence feels muffled, like the house is polite enough to pretend it hasn’t noticed me yet.
 
@@ -42,17 +42,17 @@ It isn’t addressed to anyone.
 
 It simply reads:
 
-WELCOME HOME.
+**WELCOME HOME.**
 
 Under it, in smaller print:
 
-PLEASE BEGIN WHERE YOU ARE.
+**PLEASE BEGIN WHERE YOU ARE.**
 
 I pick it up. The paper is heavier than it should be, like a certificate. My thumb runs along the edge and finds no roughness, no tear. The corners are sharp enough to remind you that someone chose them that way. Under the instruction, there’s a list of three lines:
 
-Be reasonable.
-Be grateful.
-Be quiet.
+1. **Be reasonable.**  
+2. **Be grateful.**  
+3. **Be quiet.**
 
 I feel my mouth twitch, almost a laugh, almost a cough. It’s the kind of list that would sound silly if it didn’t feel like it had teeth.
 
@@ -72,11 +72,11 @@ Not a person behind me. Not a shadow in the hallway. Something smaller. A detail
 
 On the left edge of the mirror glass, etched so faintly I might have missed it if the light hadn’t caught it right, are tiny marks like a ruler. Tick marks. Measurements. Numbers so small I have to lean in.
 
-1/8
-1/4
-1/2
-3/4
-1
+**1 / 8**  
+**1 / 4**  
+**1 / 2**  
+**3 / 4**  
+**1**
 
 A measurement scale.
 
@@ -98,7 +98,7 @@ It’s acting like it knows what I should accept.
 
 I turn toward the hallway—the straight one. The rule one. The one that goes deeper than it should. At the start of it, fixed to the wall at shoulder height, is a plaque. Brass. Polished. The letters are engraved, neat as a courthouse.
 
-THIS HOUSE IS FOR EVERYONE.
+**THIS HOUSE IS FOR EVERYONE.**
 
 I stare at it.
 
@@ -120,11 +120,11 @@ I pause and look back toward the foyer. The door is shut. The mirror is still. T
 
 A thought arrives, quiet and unwelcome:
 
-You could leave.
+*You could leave.*
 
 And then another thought, even quieter:
 
-Could you?
+*Could you?*
 
 I walk back to the door, almost to prove something to myself. My hand grips the knob. It turns easily—still too easy—and I pull.
 
@@ -138,7 +138,7 @@ I blink, hard, as if my eyes have lied to me. I pull again. The hinge moves, the
 
 But there is no outside.
 
-Just the same warm, clean air. The same glossy floor. The same staged stillness. The same table with the same sheet of paper that says WELCOME HOME like it’s pleased with itself.
+Just the same warm, clean air. The same glossy floor. The same staged stillness. The same table with the same sheet of paper that says **WELCOME HOME** like it’s pleased with itself.
 
 I let the door swing shut.
 
@@ -162,7 +162,7 @@ Something in control.
 
 I breathe in slowly and realize there is only one instruction the house gave me that makes sense now:
 
-PLEASE BEGIN WHERE YOU ARE.
+**PLEASE BEGIN WHERE YOU ARE.**
 
 So I do.
 
